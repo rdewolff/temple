@@ -15,6 +15,9 @@
   "bugs": {
     "url": "https://github.com/rdewolff/temple2/issues"
   },
+  "script": {
+      "start": "node server.js"
+  },
   "dependencies": {
     "derby": "git://github.com/codeparty/derby#0.6",
     "derby-templates": "git://github.com/vmakhaev/derby-templates#master",
