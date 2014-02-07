@@ -1,0 +1,30 @@
+{
+  "name": "Temple2",
+  "version": "0.0.1",
+  "description": "Temple Prototype with Derby 0.6",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rdewolff/temple2.git"
+  },
+  "keywords": [
+    "derby", "temple", "eMuseumPlus", "zetcom"
+  ],
+  "author": "Romain de Wolff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rdewolff/temple2/issues"
+  },
+  "dependencies": {
+    "derby": "git://github.com/codeparty/derby#0.6",
+    "derby-templates": "git://github.com/vmakhaev/derby-templates#master",
+    "racer": "git://github.com/codeparty/racer#master",
+    "express": "~3.4.7",
+    "coffeeify": "~0.5.2",
+    "redis": "~0.10.0",
+    "connect-redis": "~1.4.6",
+    "racer-browserchannel": "~0.1.1",
+    "livedb-mongo": "~0.3.0",
+    "derby-ui-boot" : "git://github.com/codeparty/derby-ui-boot.git#0.6"
+  }
+}
