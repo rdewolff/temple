@@ -1,0 +1,331 @@
+<Body:>
+
+  <boot:modal bind="create: createModal, close: closeModal" close="Cancel" primary="Confirm">
+    <@title>Add artist</@title>
+    Select the artist that participated to this work
+    <select multiple id="selectbasic3" class="input-xxlarge">
+      {#each parent._page.artists}
+      <option>{{.name}} {{.lastname}}</option>
+      {/}
+    </select>
+    {log("modal")}
+  </boot:modal>
+  
+  <link rel="stylesheet" type="text/css" href="/js/typeahead.css">
+
+  <script src="/js/jquery.js" type="text/javascript"></script>
+  <script src="/js/typeahead.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('.typeahead').typeahead({                                
+        name: 'countries',
+        prefetch: '/countries.json',
+        limit: 10                                                              
+      });    
+    }); 
+  </script>
+
+  <script src="/js/bootstrap.tab.min.js" type="text/javascript"></script>
+
+  <h4>{{#if _page.collection.id}}Editing object{{else}}Creating object{{/}}</h4>
+
+  <form class="form-horizontal" class="well" x-bind="submit: collectionSubmit" enctype="multipart/form-data" action="/upload" method="post">
+    <!--
+    <div class="row-fluid">
+      <div class="span8">
+        Select
+          <select2:select autofocus="false" name="testSelect2" disabled="false" form="derbyForm" multiple="true" required="true" size="10">
+            <option>Test 1</option>
+            <option>Test 2</option>
+            <option>Test 3</option>
+            <option>Test 4</option>
+        derby-ui-photo-upload : 
+        <photo:upload>
+          <canvas></canvas>
+        </photo:upload>
+      </div>
+    </div>
+    -->
+    <div class="row-fluid">
+      <div class="span4">
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="input01">Accession #</label>
+            <div class="controls">
+              <input type="text" class="typeahead" id="input01" value="{_page.collection.accession}">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="span4">
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="input02">Other number</label>
+            <div class="controls">
+              <input type="text" class="input-sm" id="input02" value="{_page.collection.otherNumber}">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="span4">
+        <fieldset>
+          <div class="control-group">
+            <label class="control-label" for="selectbasic1">Domain</label>
+            <boot:dropdown value="{_page.collection.domain}" options='[
+              {"text": "(unknown)", "value": null},
+              {"text": "Collection 1"},
+              {"text": "Collection 2"},
+              {"text": "Other"}
+            ]'>
+            </boot:dropdown>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span8">
+        <div>
+          <fieldset>
+            <div class="control-group">
+              <label class="control-label" for="selectbasic2">Category</label>
+              <boot:dropdown value="{_page.collection.category}" options='[
+                {"text": "(unknown)", "value": null},
+                {"text": "Painting"},
+                {"text": "Drawing"},
+                {"text": "Other"}
+              ]'>
+              </boot:dropdown>
+            </div>
+          </fieldset>  
+        </div>
+        <div>
+          <fieldset>
+            <div class="control-group">
+              <label class="control-label" for="selectbasic3">Artists</label>
+              <div class="controls">
+                <select multiple id="selectbasic3" class="input-xxlarge">
+                  {{#each _page.artists}}
+                  <option>{{.name}} {{.lastname}}</option>
+                  {{/}}
+                </select>
+                {log("_page.collection.artists = ", _page.collection.artists)}
+                {log("_session.userId = ", _session.userId)}
+                {log("_page.artists = ", _page.artists)}
+                <div>
+                  <a href="#" class="btn btn-small" x-bind="click: showModal">Add</a>
+                  <a href="#" class="btn btn-small">Remove</a>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div>
+          <fieldset>
+            <div class="control-group">
+              <label class="control-label" for="input04">Title</label>
+              <div class="controls">
+                <textarea rows="3" id="input04" class="input-xxlarge">{_page.collection.title}</textarea>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="row-fluid">
+          <div class="span6">
+            <fieldset>
+              <div class="control-group">
+                <label class="control-label" for="input05">Year from</label>
+                <div class="controls">
+                  <input type="text" class="input-medium" id="input05" value="{_page.collection.yearFrom}">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="span6">
+            <fieldset>
+              <div class="control-group">
+                <label class="control-label" for="input06">Year to</label>
+                <div class="controls">
+                  <input type="text" class="input-medium" id="input06" value="{_page.collection.yearTo}">
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div>
+          <fieldset>
+            <div class="control-group">
+              <label class="control-label" for="selectbasic4">Period</label>
+              <div class="controls">
+                <select id="selectbasic4" name="selectbasic4" class="input-xxlarge">
+                  <option>1911</option>
+                  <option>1912-1924</option>
+                  <option>1924-1950</option>
+                  <option>1950-1990</option>
+                  <option selected>1990-2014</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>  
+        </div>
+      </div>
+      <div class="span4">
+        <img src="http://wpcontent.answcdn.com/wikipedia/en/thumb/9/9c/Gar%C3%A7on_%C3%A0_la_pipe.jpg/300px-Gar%C3%A7on_%C3%A0_la_pipe.jpg" width="60%">
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a class="btn">Edit</a><a class="btn">Permalink</a><a class="btn">Crop</a><a class="btn">Remove</a>
+          </div>
+          <input type="file" name="media">
+        </div>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="bs-example bs-example-tabs">
+          <ul id="myTab" class="nav nav-tabs">
+            <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+            <li class=""><a href="#acquisition-documentation" data-toggle="tab">Acquisition/Documentation</a></li>
+            <li class=""><a href="#references" data-toggle="tab">References</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="details">
+              
+              <div class="row-fluid">
+                <div class="span8">
+                  <div>
+                    <fieldset>
+                      <div class="control-group">
+                        <label class="control-label" for="selectbasic5">Mat./Tech.</label>
+                        <div class="controls">
+                          <select id="selectbasic5" name="selectbasic5" class="input-xxlarge">
+                            <option>Oil on canvas</option>
+                            <option>Pen on paper</option>
+                            <option>Pen on papyrus</option>
+                          </select>
+                        </div>
+                      </div>
+                    </fieldset>  
+                  </div>
+                  <div>
+                    <fieldset>
+                      <div class="control-group">
+                        <label class="control-label" for="selectbasic6">Dimension</label>
+                        <div class="controls">
+                          <select multiple id="selectbasic6" class="input-xxlarge">
+                            <option>70,5 x 76.5 cm</option>
+                          </select>
+                          <div>
+                            <a href="#" class="btn btn-small">Add</a>
+                            <a href="#" class="btn btn-small">Remove</a>
+                          </div>
+                        </div>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+                <div class="span4">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label" for="input07">Title</label>
+                      <div class="controls">
+                        <textarea rows="3" id="input07" class="input-large">{_page.collection.title}</textarea>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+
+              <div class="row-fluid">
+                <div class="span8">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label" for="input08">Signature / Inscription</label>
+                      <div class="controls">
+                        <textarea rows="3" id="input08" class="input-xxlarge" value="{_page.collection.signatureInscription}"></textarea>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="span4">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label" for="input09">Edition / Series</label>
+                      <div class="controls">
+                        <textarea rows="3" id="input09" class="input-large"></textarea>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+              <div class="row-fluid">
+                <div class="span8">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label" for="input08">Location</label>
+                      <div class="controls">
+                        <textarea rows="3" id="input08" class="input-xxlarge"></textarea>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+                <div class="span4">
+                  <fieldset>
+                    <div class="control-group">
+                      <label class="control-label" for="input09">Condition / Rest.</label>
+                      <div class="controls">
+                        <textarea rows="3" id="input09" class="input-large"></textarea>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="acquisition-documentation">
+              <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+            </div>
+            <div class="tab-pane fade" id="references">
+              <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="row12">
+        <boot:dropdown value={_page.person.gender} options='[
+            {"text": "(Alien?)", "value": null},
+            {"text": "Female"},
+            {"text": "Male"},
+            {"text": "Other"}
+          ]'>
+        </boot:dropdown>
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span4">
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a class="btn btn-primary" title="Add object" x-bind="collectionNew">+ Add</a><a class="btn btn-danger" x-bind="click: deleteObject">Remove -</a>
+          </div>
+        </div>
+      </div>
+      <div class="span4">
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <!-- <a class="btn">undo</a><a class="btn">redo</a>-->
+            <a class="btn" x-bind="click: collectionCancel">cancel</a>
+            <button class="btn btn-success" type="submit">
+            {{#if _page.collection.id}}save{{else}}add object{{/}}
+            </button>
+
+          </div>
+        </div>
+      </div>
+      <div class="span4">
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a class="btn">&lt;</a><a class="btn">&gt;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

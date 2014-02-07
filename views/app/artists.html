@@ -1,0 +1,59 @@
+<Body:>
+  <form class="form-horizontal" class="well" x-bind="submit: artistSubmit" enctype="multipart/form-data">
+
+    <div class="row-fluid">
+      <div class="span4">
+        <forms:input label="Name" value="{_page.artist.name}" id="artistName">
+      </div>
+      <div class="span4">
+        <forms:input label="Lastname" value="{_page.artist.lastname}" id="artistLastname">
+      </div>
+      <div class="span4">
+        <forms:input label="Sexe" value="{_page.artist.sexe}" id="artistSex">
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span4">
+        <!-- should be a textarea -->
+        <forms:input label="Bio" id="artistBio" value="{_page.artist.bio}">
+      </div>
+      <div class="span4">
+        asd
+      </div>
+      <div class="span4">
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <div class="btn-group">
+            <a class="btn btn-primary" href="/artists" title="Add object">Add new artist</a>
+            <a class="btn btn-danger" x-bind="click: artistDelete">Remove this artist</a>
+            <button class="btn" type="reset">Reset</button>
+            <button class="btn btn-success" type="submit">{{#if _page.artist.id}}Save{{else}}Add this artist{{/}}</button>
+          </div>
+      </div>  
+    </div>
+  </form>
+
+<!-- Components : 
+
+<fieldText:>
+  <fieldset>
+    <div class="control-group">
+      <label class="control-label" for="{@id}">{@label}</label>
+      <div class="controls">
+        <input type="text" class="input-large" value="{@field}" id="{@id}">
+      </div>
+    </div>
+  </fieldset>
+
+<fieldTextArea:>
+  <fieldset>
+    <div class="control-group">
+      <label class="control-label" for="{@id}">{@label}</label>
+      <div class="controls">
+        <textarea rows="3" class="input-xxlarge" id="{@id}">{@field}</textarea>
+      </div>
+    </div>
+  </fieldset>
+-->

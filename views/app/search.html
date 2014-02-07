@@ -1,0 +1,30 @@
+<Body:>
+    <div class="well">
+        Filter title : <input name="collectionFilter" value="{_page.filter}" class="input-xxlarge" x-bind="keyup: search.filter">
+    </div>
+    <table class="table table-striped" style="{#unless _page.collection}display:none{/}">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Accession #</th>
+            <th>Other number</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Category</th>
+            <th>Domain</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each _page.collection}
+            <tr>
+              <td><a href="/collection/{.id}">{.id}</a></td>
+              <td><a href="/collection/{.id}">{.accession}</a></td>
+              <td>{.otherNumber}</td>
+              <td>{.title}</td>
+              <td>{.yearFrom} - {.yearTo}</td>
+              <td>{.category}</td>
+              <td>{.domain}</td>
+            </tr>
+          {/}
+        </tbody>
+      </table>

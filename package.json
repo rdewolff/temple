@@ -1,0 +1,29 @@
+{
+  "name": "Temple",
+  "description": "eMuseumPlus 2.0 Derby.js prototype",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "derby": "0.5.x",
+    "express": "~3.2.5",
+    "redis": "~0.8.3",
+    "livedb-mongo": "*",
+    "racer-browserchannel": "~0.1.0",
+    "connect-mongo": "~0.3.2",
+    "derby-ui-boot": "*",
+    "jquery": "1.8.x",
+    "derby-ui-typeahead": "*",
+    "derby-ui-select2": "*",
+    "derby-ui-photo-upload": "*"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "private": true
+}
