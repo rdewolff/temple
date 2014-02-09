@@ -3,22 +3,20 @@
 
     <div class="row-fluid">
       <div class="span4">
-        <forms:input label="Name" value="{_page.artist.name}" id="artistName">
+        <forms:input label="Name" value="{_page.artist.name}">
       </div>
       <div class="span4">
-        <forms:input label="Lastname" value="{_page.artist.lastname}" id="artistLastname">
+        <forms:input label="Lastname" value="{_page.artist.lastname}">
       </div>
       <div class="span4">
-        <forms:input label="Sexe" value="{_page.artist.sexe}" id="artistSex">
+        <forms:input label="Sexe" value="{_page.artist.sexe}">
       </div>
     </div>
     <div class="row-fluid">
       <div class="span4">
-        <!-- should be a textarea -->
-        <forms:input label="Bio" id="artistBio" value="{_page.artist.bio}">
+        <forms:textarea label="Bio" value="{_page.artist.bio}">
       </div>
       <div class="span4">
-        asd
       </div>
       <div class="span4">
       </div>
@@ -34,26 +32,3 @@
       </div>  
     </div>
   </form>
-
-<!-- Components : 
-
-<fieldText:>
-  <fieldset>
-    <div class="control-group">
-      <label class="control-label" for="{@id}">{@label}</label>
-      <div class="controls">
-        <input type="text" class="input-large" value="{@field}" id="{@id}">
-      </div>
-    </div>
-  </fieldset>
-
-<fieldTextArea:>
-  <fieldset>
-    <div class="control-group">
-      <label class="control-label" for="{@id}">{@label}</label>
-      <div class="controls">
-        <textarea rows="3" class="input-xxlarge" id="{@id}">{@field}</textarea>
-      </div>
-    </div>
-  </fieldset>
--->

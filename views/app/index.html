@@ -8,20 +8,27 @@
 
 <Header:>
   <body class="{{dash($ns)}}">
+
   <ui:connectionAlert>
+
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
+
         <a class="brand" href="/">ZetCom</a>
         <div class="nav-collapse">
           <ul class="nav">
-            <!-- Other templates are included like HTML elements -->
             <app:navLink title="Home" href="/">
             <app:navLink title="Search" href="/search">
             <app:navLink title="Collection" href="/collection">
             <app:navLink title="Artists" href="/artists">
           </ul>
         </div>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          <button type="submit" class="btn btn-default">Submit</button></div>
+        </form>
       </div>
     </div>
   </div>
