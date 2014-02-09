@@ -10,62 +10,16 @@
     </select>
     {log("modal")}
   </boot:modal>
-  
-  <link rel="stylesheet" type="text/css" href="/js/typeahead.css">
-
-  <script src="/js/jquery.js" type="text/javascript"></script>
-  <script src="/js/typeahead.js" type="text/javascript"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $('.typeahead').typeahead({                                
-        name: 'countries',
-        prefetch: '/countries.json',
-        limit: 10                                                              
-      });    
-    }); 
-  </script>
-
-  <script src="/js/bootstrap.tab.min.js" type="text/javascript"></script>
 
   <h4>{{#if _page.collection.id}}Editing object{{else}}Creating object{{/}}</h4>
 
   <form class="form-horizontal" class="well" x-bind="submit: collectionSubmit" enctype="multipart/form-data" action="/upload" method="post">
-    <!--
-    <div class="row-fluid">
-      <div class="span8">
-        Select
-          <select2:select autofocus="false" name="testSelect2" disabled="false" form="derbyForm" multiple="true" required="true" size="10">
-            <option>Test 1</option>
-            <option>Test 2</option>
-            <option>Test 3</option>
-            <option>Test 4</option>
-        derby-ui-photo-upload : 
-        <photo:upload>
-          <canvas></canvas>
-        </photo:upload>
-      </div>
-    </div>
-    -->
     <div class="row-fluid">
       <div class="span4">
-        <fieldset>
-          <div class="control-group">
-            <label class="control-label" for="input01">Accession #</label>
-            <div class="controls">
-              <input type="text" class="typeahead" id="input01" value="{_page.collection.accession}">
-            </div>
-          </div>
-        </fieldset>
+        <forms:input label="Accession #" value="{_page.collection.accession}">
       </div>
       <div class="span4">
-        <fieldset>
-          <div class="control-group">
-            <label class="control-label" for="input02">Other number</label>
-            <div class="controls">
-              <input type="text" class="input-sm" id="input02" value="{_page.collection.otherNumber}">
-            </div>
-          </div>
-        </fieldset>
+        <forms:input label="Other number" value="{_page.collection.otherNumber}">
       </div>
       <div class="span4">
         <fieldset>
@@ -104,51 +58,35 @@
               <label class="control-label" for="selectbasic3">Artists</label>
               <div class="controls">
                 <select multiple id="selectbasic3" class="input-xxlarge">
-                  {{#each _page.artists}}
-                  <option>{{.name}} {{.lastname}}</option>
+                  {{#each _page.collection.artists}}
+                  <option>{{.name}} {{.lastname}} ({{.sexe}})</option>
                   {{/}}
                 </select>
-                {log("_page.collection.artists = ", _page.collection.artists)}
-                {log("_session.userId = ", _session.userId)}
-                {log("_page.artists = ", _page.artists)}
+                  <!-- log on the view
+                  {log("_page.collection.artists = ", _page.collection.artists)}
+                  {log("_session.userId = ", _session.userId)}
+                  {log("_page.artists = ", _page.artists)} -->
+                  {log("_page.artists", _page.artists)}
                 <div>
-                  <a href="#" class="btn btn-small" x-bind="click: showModal">Add</a>
-                  <a href="#" class="btn btn-small">Remove</a>
+                <boot:dropdown value="{_page.collection.artists}" options='{_page.artists}' model="artist">
+              </boot:dropdown>
+              <a href="#" class="btn" x-bind="">Add</a>
+                <a href="#" class="btn" x-bind="click: showModal">Add via modal</a>
+                <a href="#" class="btn">Remove</a>
                 </div>
               </div>
             </div>
           </fieldset>
         </div>
         <div>
-          <fieldset>
-            <div class="control-group">
-              <label class="control-label" for="input04">Title</label>
-              <div class="controls">
-                <textarea rows="3" id="input04" class="input-xxlarge">{_page.collection.title}</textarea>
-              </div>
-            </div>
-          </fieldset>
+          <forms:textarea label="Title" value="{_page.collection.title}">
         </div>
         <div class="row-fluid">
           <div class="span6">
-            <fieldset>
-              <div class="control-group">
-                <label class="control-label" for="input05">Year from</label>
-                <div class="controls">
-                  <input type="text" class="input-medium" id="input05" value="{_page.collection.yearFrom}">
-                </div>
-              </div>
-            </fieldset>
+            <forms:input label="Year from" value="{_page.collection.yearFrom}">
           </div>
           <div class="span6">
-            <fieldset>
-              <div class="control-group">
-                <label class="control-label" for="input06">Year to</label>
-                <div class="controls">
-                  <input type="text" class="input-medium" id="input06" value="{_page.collection.yearTo}">
-                </div>
-              </div>
-            </fieldset>
+            <forms:input label="Year to" value="{_page.collection.yearTo}">
           </div>
         </div>
         <div>
