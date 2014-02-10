@@ -65,12 +65,13 @@
                   <!-- log on the view
                   {log("_page.collection.artists = ", _page.collection.artists)}
                   {log("_session.userId = ", _session.userId)}
-                  {log("_page.artists = ", _page.artists)} -->
-                  {log("_page.artists", _page.artists)}
+                  {log("_page.artist = ", _page.artist)}
+                  -->
                 <div>
-                <boot:dropdown value="{_page.collection.artists}" options='{_page.artists}' model="artist">
-              </boot:dropdown>
-              <a href="#" class="btn" x-bind="">Add</a>
+                {app.test}
+                <boot:dropdown value="{_page.collection.artists}" options='{_page.artist}' model="a">
+                </boot:dropdown>
+                <a href="#" class="btn" x-bind="">Add</a>
                 <a href="#" class="btn" x-bind="click: showModal">Add via modal</a>
                 <a href="#" class="btn">Remove</a>
                 </div>
