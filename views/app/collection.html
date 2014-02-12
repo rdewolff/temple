@@ -3,12 +3,12 @@
   <boot:modal bind="create: createModal, close: closeModal" close="Cancel" primary="Confirm">
     <@title>Add artist</@title>
     Select the artist that participated to this work
-    <select multiple id="selectbasic3" class="input-xxlarge">
-      {#each parent._page.artists}
-      <option>{{.name}} {{.lastname}}</option>
+    <select multiple id="selectbasic3" class="input-xxlarge" size="10">
+      <!-- {#each parent._page.artists} -->
+      {#each _page.artist}
+      <option>{{.text}} {{.lastname}}</option>
       {/}
     </select>
-    {log("modal")}
   </boot:modal>
 
   <h4>{{#if _page.collection.id}}Editing object{{else}}Creating object{{/}}</h4>
@@ -59,7 +59,7 @@
               <div class="controls">
                 <select multiple id="selectbasic3" class="input-xxlarge">
                   {{#each _page.collection.artists}}
-                  <option>{{.name}} {{.lastname}} ({{.sexe}})</option>
+                  <option>{{item}} {{.name}} {{.lastname}} ({{.sexe}})</option>
                   {{/}}
                 </select>
                   <!-- log on the view
@@ -68,9 +68,9 @@
                   {log("_page.artist = ", _page.artist)}
                   -->
                 <div>
-                <boot:dropdown value="{_page.collection.artists}" options='{_page.artist}' model="a">
-                </boot:dropdown>
-                <a href="#" class="btn" x-bind="">Add</a>
+                <!-- <boot:dropdown value="{_page.collection.artists}" options='{_page.artist}' model="a"> -->
+                <boot:dropdown options='{_page.artist}'></boot:dropdown>
+                <a href="#" class="btn" x-bind="click: collectionAddArtist">Add</a>
                 <a href="#" class="btn" x-bind="click: showModal">Add via modal</a>
                 <a href="#" class="btn">Remove</a>
                 </div>
