@@ -6,8 +6,16 @@
     <select multiple id="selectbasic3" class="input-xxlarge" size="10">
       <!-- {#each parent._page.artists} -->
       {#each _page.artist}
-      <option>{{.text}} {{.lastname}}</option>
+      <option>{{.name}} {{.lastname}} ({{.id}})</option>
       {/}
+    </select>
+    Filter : <input type="text" value="" class="input-xlarge">
+    <br />
+    Role : <select id="selectbasic4" name="selectbasic4" class="input-xlarge">
+      <option selected>Painter</option>
+      <option>Architect</option>
+      <option>Photographer</option>
+      <option>Other</option>
     </select>
   </boot:modal>
 
@@ -56,19 +64,18 @@
           <fieldset>
             <div class="control-group">
               <label class="control-label" for="selectbasic3">Artists</label>
-              <div class="controls">
+                <div class="controls">
                 <select multiple id="selectbasic3" class="input-xxlarge">
-                  {{#each _page.collection.artists}}
-                  <option>{{item}} {{.name}} {{.lastname}} ({{.sexe}})</option>
+                  {{#each _page.artistCollection}}
+                  <option>{{.name}} {{.lastname}}</option>
                   {{/}}
                 </select>
                   <!-- log on the view
                   {log("_page.collection.artists = ", _page.collection.artists)}
                   -->
                 <div>
-                <boot:dropdown value="{_page.collectionOption.selecteda}" options='{_page.artist}'></boot:dropdown>
-                <a href="#" class="btn" x-bind="click: collectionAddArtist">Add</a>
-                <a href="#" class="btn" x-bind="click: showModal">Add via modal</a>
+                <!-- <boot:dropdown value="{_page.collectionOption.selecteda}" options='{_page.artist}'></boot:dropdown> -->
+                <a href="#" class="btn" x-bind="click: showModal">Add</a>
                 <a href="#" class="btn">Remove</a>
                 </div>
               </div>
