@@ -3,10 +3,9 @@
   <boot:modal bind="create: createModal, close: closeModal" close="Cancel" primary="Confirm">
     <@title>Add artist</@title>
     Select the artist that participated to this work
-    <select multiple id="selectbasic3" class="input-xxlarge" size="10">
-      <!-- {#each parent._page.artists} -->
+    <select multiple id="selectCollectionArtist" class="input-xxlarge" size="10">
       {#each _page.artist}
-      <option>{{.name}} {{.lastname}} ({{.id}})</option>
+      <option value="{{.id}}">{{.name}} {{.lastname}}</option>
       {/}
     </select>
     Filter : <input type="text" value="" class="input-xlarge">
@@ -66,10 +65,15 @@
               <label class="control-label" for="selectbasic3">Artists</label>
                 <div class="controls">
                 <select multiple id="selectbasic3" class="input-xxlarge">
-                  {{#each _page.artistCollection}}
-                  <option>{{.name}} {{.lastname}}</option>
-                  {{/}}
+                  {#each _page.artistCollection}
+                  <option>{.name} {.lastname}</option>
+                  {/}
                 </select>
+                  <select multiple id="selectbasic4" class="input-xxlarge">
+                    {#each _page.collection.artists}
+                    <option>{item}</option>
+                    {/}
+                  </select>
                   <!-- log on the view
                   {log("_page.collection.artists = ", _page.collection.artists)}
                   -->
