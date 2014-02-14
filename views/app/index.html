@@ -27,9 +27,9 @@
             <app:navLink title="Artists" href="/artists">
           </ul>
         </div>
-        <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form navbar-left" role="search" x-bind="submit: indexSearch">
           <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" value="{_page.indexSearch}">
+            <input type="text" class="form-control" placeholder="Search" value="{_session.filter}" x-bind="change: indexSearch">
             <button type="button" class="btn btn-default" x-bind="click: indexSearch">Submit</button>
           </div>
         </form>
