@@ -3,6 +3,10 @@ Temple1
 
 Temple prototype with Derby 0.5.x
 
+## Goal
+
+Build a prototype with Derby that has similar features as MP-RIA.
+
 ## Folder node_modules
 
 The node_modules folder has been commited to the repo as we are having problem on some machine to run "npm install" correctly.
