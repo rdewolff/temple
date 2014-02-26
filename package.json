@@ -28,6 +28,6 @@
     "connect-redis": "~1.4.6",
     "racer-browserchannel": "~0.1.1",
     "livedb-mongo": "~0.3.0",
-    "derby-ui-boot" : "git://github.com/codeparty/derby-ui-boot.git#0.6"
+    "d-bootstrap" : "*"
   }
 }
