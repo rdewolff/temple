@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/rdewolff/temple2/issues"
   },
-  "script": {
+  "scripts": {
       "start": "node server.js"
   },
   "dependencies": {
