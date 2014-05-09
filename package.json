@@ -2,6 +2,7 @@
   "name": "Temple2",
   "version": "0.0.1",
   "description": "Temple Prototype with Derby 0.6",
+  "homepage": "http://www.zetcom.com",
   "main": "server.js",
   "repository": {
     "type": "git",
@@ -25,6 +26,16 @@
     "express": "~3.4.8",
     "d-connection-alert": "~0.1.0",
     "d-before-unload": "~0.1.0",
-    "d-bootstrap": "~0.1.0"
+    "d-bootstrap": "~0.1.0",
+    "d-barchart": "~0.1.0",
+    "d-barchart-vanilla": "~0.1.0",
+    "d-d3-barchart": "~0.1.0",
+    "d-codemirror": "git+https://github.com/codeparty/d-codemirror.git",
+    "d-showdown": "git+https://github.com/codeparty/d-showdown.git"
+  },
+  "optionalDependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": "0.10.x"
   }
 }

@@ -1,7 +1,7 @@
 var app = module.exports = require('derby').createApp('directory', __filename);
 app.use(require('d-bootstrap'));
 app.loadViews(__dirname + '/views');
-app.loadStyles(__dirname + '/style');
+app.loadStyles(__dirname);
 app.component(require('d-connection-alert'));
 app.component(require('d-before-unload'));
 
