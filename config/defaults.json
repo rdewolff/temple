@@ -1,0 +1,7 @@
+{
+  "NODE_ENV": "development",
+  "PORT": 3000,
+  "MONGO_URL": "mongodb://localhost:27017/temple",
+  "SESSION_SECRET": "ebe46d51c65c362958fd61fc77f6ff853ebb35ef",
+  "SESSION_COOKIE": "03a8328bb34c0109b17b57eabcea2b81b48ba96f"
+}

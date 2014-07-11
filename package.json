@@ -1,40 +1,34 @@
 {
-    "name": "derby-boilerplate",
-    "version": "0.0.6",
-    "description": "A generic server for use with Derby apps",
-    "main": "index.js",
-    "scripts": {
-        "start": "node index.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "dependencies": {
-        "derby": "0.6.0-alpha13",
-        "express": "~4.4.1",
-        "cookie-parser": "~1.1.0",
-        "express-session": "~1.2.1",
-        "serve-static": "~1.2.1",
-        "compression": "~1.0.3",        
-        "serve-favicon": "~2.0.0",
-        "racer-browserchannel": "~0.2.0",
-        "livedb-mongo": "~0.3.2",
-        "racer-bundle": "~0.1.1",        
-        "connect-mongo": "~0.4.1",
-        "nconf": "~0.6.9",
-        "redis": "~0.10.3",
-        "connect-redis": "~2.0.0",
-        "derby-stylus": "~0.1.0",
-        "coffee-script": "~1.7.1",
-        "coffeeify": "~0.6.0"
-    },
-    "author": "Artur Zayats",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/zag2art/derby-boilerplate.git"
-    },
-    "bugs": {
-        "url": "https://github.com/zag2art/derby-boilerplate/issues"
-    },
-    "readme": "derby boilerplate\n",
-    "readmeFilename": "README.md"
+  "name": "temple",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "derby": "0.6.0-alpha23",
+    "racer-highway": "~1.1.0",
+    "livedb-mongo": "^0.3",
+    "derby-stylus": "^0.1",
+    "racer-bundle": "^0.1",
+    "connect-mongo": "^0.4",
+    "coffeeify": "^0.6",
+    "coffee-script": "^1.7",
+    "chalk": "~0.5.0",
+    "express": "^4.4",
+    "cookie-parser": "^1.3",
+    "express-session": "^1.4",
+    "serve-static": "^1.2",
+    "compression": "^1.0",
+    "serve-favicon": "^2.0"
+  },
+  "author": {
+    "name": "Romain de Wolff",
+    "email": "rdewolff@gmail.com"
+  },
+  "license": "",
+  "readme": "temple\n",
+  "readmeFilename": "README.md"
 }

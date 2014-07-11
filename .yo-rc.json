@@ -1,0 +1,8 @@
+{
+  "generator-derby": {
+    "app": "temple",
+    "coffee": false,
+    "stylus": true,
+    "jade": false
+  }
+}
