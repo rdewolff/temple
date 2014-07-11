@@ -22,7 +22,8 @@
     "express-session": "^1.4",
     "serve-static": "^1.2",
     "compression": "^1.0",
-    "serve-favicon": "^2.0"
+    "serve-favicon": "^2.0",
+    "d-bootstrap": "~0.1.0"
   },
   "author": {
     "name": "Romain de Wolff",

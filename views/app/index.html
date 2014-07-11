@@ -1,15 +1,28 @@
 <import: src='./home'>
+<import: src='./menu'>
 
 <Title:>
   {{_page.title}}
 
 <Body:>
   <view name="header"/>
+
+  <view name="menu"/>
+
+  <!-- content goes here -->
   <view name="{{$render.ns}}"/>
+
   <view name="footer" year="2014" />
 
 <header:>
-  <h1>Header</h1>
+	<p class="spacer">
 
 <footer:>
-  <p>Footer {{@year}}</p>
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+				<hr />
+				Copyright © 2014
+			</div>
+		</div>
+	</div>

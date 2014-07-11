@@ -6,6 +6,8 @@ if (!derby.util.isProduction) global.app = app;
 
 app.serverUse(module, 'derby-stylus');
 
+app.use(require('d-bootstrap'));
+
 app.loadViews(__dirname + '/../../views/app');
 app.loadStyles(__dirname + '/../../styles/app');
 
