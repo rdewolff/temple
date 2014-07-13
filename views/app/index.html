@@ -10,7 +10,14 @@
   <view name="menu"/>
 
   <!-- content goes here -->
-  <view name="{{$render.ns}}"/>
+  <div class="container">
+    <div class="row clearfix">
+      <div class="col-md-12 column">
+        <!-- here the view get rendered -->
+        <view name="{{$render.ns}}"/>
+      </div>
+    </div>
+  </div>
 
   <view name="footer" year="2014" />
 
