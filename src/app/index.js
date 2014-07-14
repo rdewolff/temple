@@ -7,6 +7,7 @@ if (!derby.util.isProduction) global.app = app;
 app.serverUse(module, 'derby-stylus');
 
 app.use(require('d-bootstrap'));
+app.use(require('../../components/zetcom-derby-ui-forms'));
 
 app.loadViews(__dirname + '/../../views/app');
 app.loadStyles(__dirname + '/../../styles/app');
