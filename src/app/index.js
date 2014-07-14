@@ -14,3 +14,7 @@ app.loadStyles(__dirname + '/../../styles/app');
 app.get('/', function(page){
   page.render('home');
 });
+
+app.get('/p/artist', function(page) {
+  page.render('artistEdit');
+});
