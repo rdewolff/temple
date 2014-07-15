@@ -39,6 +39,13 @@ app.get('/p/artist/:id', function(page, model, params, next) {
   });
 });
 
+app.component('artistList', ArtistListForm);
+function ArtistListForm() {}
+
+ArtistListForm.prototype.artistNew = function () {
+  app.history.push('/p/artist/new');
+}
+
 app.component('artistEdit', ArtistEditForm);
 function ArtistEditForm() {}
 
@@ -60,4 +67,9 @@ ArtistEditForm.prototype.done = function() {
 		model.root.add('artist', model.get('_page.artist'));
 	}
 	app.history.push('/p/artist');
+}
+
+ArtistEditForm.prototype.artistDelete = function() {
+  this.model.silent().del('_page.artist');
+  app.history.back();
 }
