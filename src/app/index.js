@@ -27,15 +27,14 @@ app.get('/p/artist', function(page, model, params, next) {
 
 app.get('/p/artist/:id', function(page, model, params, next) {
   if (params.id === 'new') {
-  	console.log('new artist')
     return page.render('artistEdit');
   }
-  console.log('existing artist')
   var artist = model.at('artist.' + params.id);
   artist.subscribe(function(err) {
     if (err) return next(err);
-    if (!artist.get()) return next();
-    //model.ref('_page.artist', artist);
+    // if (!artist.get()) return next();
+    model.ref('_page.artist', artist)
+
     page.render('artistEdit');
   });
 });
@@ -58,7 +57,7 @@ ArtistEditForm.prototype.done = function() {
 	}
 	 */
 	if (!model.get('artist.id')) {
-		model.root.add('artist', model.get('artist'));
+		model.root.add('artist', model.get('_page.artist'));
 	}
 	app.history.push('/p/artist');
 }
