@@ -25,6 +25,11 @@ app.get('/p/artist', function(page, model, params, next) {
   });
 });
 
+// view helper to highlight correct menu even on sub page path (artist should be highlighted on /artist/ and on /artist/meuh)
+//view.fn('test', function(value) {
+//  return "meuh";
+//});
+
 app.get('/p/artist/:id', function(page, model, params, next) {
   if (params.id === 'new') {
     return page.render('artistEdit');

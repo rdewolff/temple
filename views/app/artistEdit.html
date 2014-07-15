@@ -81,12 +81,13 @@
         <div class="form-group">
             <label for="address" class="col-sm-2 control-label">Address</label>
             <div class="col-sm-6">
-            <textarea class="form-control" rows="3" id="address">{{_page.artist.address}}</textarea>
+                <textarea class="form-control" rows="3" id="address">{{_page.artist.address}}</textarea>
+                <a href="http://maps.google.co.in/maps?q={{_page.artist.address}}" target="_blank" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-map-marker"></span> Google Maps</a>
             </div>
 
             <label for="notes" class="col-sm-2 control-label">Notes</label>
             <div class="col-sm-2">
-            <textarea class="form-control" rows="3" id="notes">{{_page.artist.notes}}</textarea>
+                <textarea class="form-control" rows="3" id="notes">{{_page.artist.notes}}</textarea>
             </div>
         </div>
 
@@ -132,7 +133,8 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Save</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/p/artist" class="btn btn-default">Cancel</a>
                 <a on-click="artistDelete()" style="float:right;margin-top:3px" class="btn btn-danger">Delete</a>
             </div>
         </div>

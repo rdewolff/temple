@@ -1,7 +1,7 @@
 <index:>
-	<div class="container">
+	<!-- <div class="container"> -->
 		<view name="list"></view>
-	</div>
+	<!-- </div> -->
 
 <list:>
 	{{if _page.artist}}
@@ -25,7 +25,7 @@
 	    {{/}}
 	  </tbody>
 	</table>
-	<button class="btn btn-success" on-click="artistNew()">Create</button>
+	<button class="btn btn-primary" on-click="artistNew()">Create</button>
 	{{else}}
 	<h3>No artist added yet.</h3>
 	<p>How about <a href="/p/artist/new">adding someone</a>?</p>

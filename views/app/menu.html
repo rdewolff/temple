@@ -4,20 +4,14 @@
 			<div class="col-md-12 column">
 				<nav class="navbar navbar-default" role="navigation">
 					<div class="navbar-header">
-						 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">zetcom</a>
+						 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">zetcom</a>
 					</div>
 
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li class="active">
-								<a href="/p">Home</a>
-							</li>
-							<li>
-								<a href="/p/collection">Collection</a>
-							</li>
-							<li>
-								<a href="/p/artist">Artist</a>
-							</li>
+							<view name="nav-link" href="/">Home</view>
+							<view name="nav-link" href="/p/collection">Collection</view>
+							<view name="nav-link" href="/p/artist">Artist</view>
 						</ul>
 						<form class="navbar-form navbar-left" role="search">
 							<div class="form-group">
@@ -43,3 +37,10 @@
 			</div>
 		</div>
 	</div>
+
+
+<nav-link:>
+  <li class="{{if $render.url === @href}}active{{/}}">
+    <a href="{{@href}}">{{@content}}</a>
+  </li>
+
