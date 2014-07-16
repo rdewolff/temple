@@ -1,0 +1,30 @@
+<index:>
+  <view name="list"></view>
+
+<list:>
+  {{if _page.collection}}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Accession #</th>
+        <th>Title</th>
+        <th>Years</th>
+        <th>Material/technique</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{each _page.collection}}
+        <tr>
+          <td><a href="/p/collection/{{this.id}}">{{this.accession}}</a></td>
+          <td>{{this.title}}</td>
+          <td>{{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}</td>
+          <td>{{this.materialTechnique}}</td>
+        </tr>
+      {{/}}
+    </tbody>
+  </table>
+  <button class="btn btn-primary" on-click="collectionNew()">Create</button>
+  {{else}}
+  <h3>No object added yet.</h3>
+  <p>How about <a href="/p/collection/new">adding one</a>?</p>
+  {{/}}

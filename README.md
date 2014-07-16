@@ -4,7 +4,7 @@ temple
 
 # TODO
 
-## Private 
+## Private
 
 ### artist detail
 
@@ -15,3 +15,5 @@ temple
 ## Problems
 
 - pass data to view : how to do it properly?
+- split logic
+- file upload
