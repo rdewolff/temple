@@ -20,6 +20,11 @@ module.exports = function(app, options) {
   //});
 
   app.get('/p/artist/:id', function(page, model, params, next) {
+    model.set('_page.domain', [
+      {content: 'Red'},
+      {content: 'Orange'},
+      {content: 'Purple'}
+    ]);
     if (params.id === 'new') {
       return page.render('artistEdit');
     }
@@ -28,7 +33,6 @@ module.exports = function(app, options) {
       if (err) return next(err);
       if (!artist.get()) return next();
       model.ref('_page.artist', artist)
-
       page.render('artistEdit');
     });
   });

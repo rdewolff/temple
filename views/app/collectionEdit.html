@@ -1,2 +1,76 @@
 <index:>
-  edit
+  <form class="form-horizontal well" role="form" on-submit="done()">
+    <h4>{{if _page.collection.id}}Editing object {{_page.collection.accessionNr}}{{else}}Creating object{{/}}</h4>
+    <div class="form-group">
+      <label for="accessionNr" class="col-sm-2 control-label">Accession #</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" as="accessionNr" value="{{_page.collection.accessionNr}}">
+      </div>
+
+      <label for="domain" class="col-sm-offset-2 col-sm-2 control-label">Domain</label>
+      <dropdown class="col-sm-2" value="{{_page.collection.domain}}" id="domain">
+        <option>Main</option>
+        <option>Sub</option>
+      </dropdown>
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+
+        <div class="form-group">
+          <label for="title" class="col-sm-3 control-label">Title</label>
+          <div class="col-sm-6">
+            <input class="form-control" id="title" value="{{_page.collection.title}}" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="artists" class="col-sm-3 control-label">Artist(s)</label>
+          <div class="col-sm-6">
+            <select multiple class="form-control" value="{{_page.collection.artists}}">
+              <option>Fictive artist 1</option>
+              <option>Fictive artist 2</option>
+            </select>
+          </div>
+          <div class="col-sm-3">
+            <a href="#" class="btn btn-default btn-sm">Add</a>
+            <br />
+            <a href="#" class="btn btn-default btn-sm">Remove</a>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="yearFrom" class="col-sm-3 control-label">Year from</label>
+          <div class="col-sm-3">
+            <input class="form-control" id="yearFrom" value="{{_page.collection.yearFrom}}" />
+          </div>
+          <label for="yearTo" class="col-sm-3 control-label">Year to</label>
+          <div class="col-sm-3">
+            <input class="form-control" id="yearTo" value="{{_page.collection.yearTo}}" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="period" class="col-sm-3 control-label">Period</label>
+          <dropdown class="col-sm-6" value="{{_page.collection.domain}}" id="domain">
+            <option>BC</option>
+            <option>0-1000</option>
+            <option>1001-2000</option>
+            <option>2000+</option>
+          </dropdown>
+        </div>
+
+        <div class="form-group">
+          <label for="notes" class="col-sm-3 control-label">Description</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" rows="3" id="notes">{{_page.artist.notes}}</textarea>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-4">
+
+        <img src="http://lorempixel.com/400/365/" alt="" class="img-thumbnail" width="400px" height="366px">
+
+
+      </div>
+    </div>

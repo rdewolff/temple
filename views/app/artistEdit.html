@@ -1,141 +1,144 @@
 <index:>
-    <form class="form-horizontal well" role="form" on-submit="done()">
-        <h4>{{if _page.artist.id}}Editing artist {{_page.artist.firstname}}{{else}}Creating artist{{/}}</h4>
-        <div class="form-group">
-            <label for="firstname" class="col-sm-2 control-label">First name</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" as="firstname" value="{{_page.artist.firstname}}">
+  <form class="form-horizontal well" role="form" on-submit="done()">
+
+    <h4>{{if _page.artist.id}}Editing artist {{_page.artist.firstname}}{{else}}Creating artist{{/}}</h4>
+
+    <div class="form-group">
+      <label for="firstname" class="col-sm-2 control-label">First name</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" as="firstname" value="{{_page.artist.firstname}}">
+      </div>
+
+      <label for="domain" class="col-sm-2 control-label">Domain</label>
+      <dropdown class="col-sm-2" value="{{_page.artist.domain}}" options="{{_page.domain}}" id="domain"></dropdown>
+    </div>
+
+    <div class="form-group">
+      <label for="lastname" class="col-sm-2 control-label">Last name</label>
+      <div class="col-sm-6">
+        <input class="form-control" id="lastname" value="{{_page.artist.lastname}}" />
+      </div>
+
+      <label for="gender" class="col-sm-2 control-label">Gender</label>
+      <dropdown class="col-sm-2" value="{{_page.artist.gender}}" id="gender">
+        <option>Male</option>
+        <option>Female</option>
+      </dropdown>
+    </div>
+
+    <div class="form-group">
+      <label for="birthday" class="col-sm-2 control-label">Birthday</label>
+      <div class="col-sm-2">
+        <input type="date" class="form-control" id="birthday" value="{{_page.artist.birthday}}">
+      </div>
+
+      <label for="deathday" class="col-sm-2 control-label">Deathday</label>
+      <div class="col-sm-2">
+        <input type="date" class="form-control" id="deathday" value="{{_page.artist.deathday}}">
+      </div>
+
+      <label for="role" class="col-sm-2 control-label">Role</label>
+      <div class="col-sm-2">
+        <input class="form-control" id="role" value="{{_page.artist.role}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="birthcountry" class="col-sm-2 control-label">Birth Country</label>
+      <div class="col-sm-2">
+        <input class="form-control" id="birthcountry" value="{{_page.artist.birthcountry}}">
+      </div>
+
+      <label for="deathcountry" class="col-sm-2 control-label">Death Country</label>
+      <div class="col-sm-2">
+        <input class="form-control" id="deathcountry" value="{{_page.artist.deathcountry}}">
+      </div>
+
+      <label for="citizenship" class="col-sm-2 control-label">Citizenship</label>
+      <div class="col-sm-2">
+        <input class="form-control" id="citizenship" value="{{_page.artist.citizenship}}">
+      </div>
+    </div>
+
+    <div class="form-group">
+
+      <label for="birthplace" class="col-sm-2 control-label">Birth Place</label>
+      <div class="col-sm-2">
+        <input class="form-control" id="birthplace" value="{{_page.artist.birthplace}}">
+      </div>
+
+      <label for="deathplace" class="col-sm-2 control-label">Death Place</label>
+      <div class="col-sm-2">
+        <input class="form-control" id="deathplace" value="{{_page.artist.deathplace}}">
+      </div>
+
+      <!-- room for one field here :) -->
+
+    </div>
+
+
+    <div class="form-group">
+      <label for="address" class="col-sm-2 control-label">Address</label>
+      <div class="col-sm-6">
+        <textarea class="form-control" rows="3" id="address">{{_page.artist.address}}</textarea>
+        <a href="http://maps.google.co.in/maps?q={{_page.artist.address}}" target="_blank" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-map-marker"></span> Google Maps</a>
+      </div>
+
+      <label for="notes" class="col-sm-2 control-label">Notes</label>
+      <div class="col-sm-2">
+        <textarea class="form-control" rows="3" id="notes">{{_page.artist.notes}}</textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-12 tab">
+        <tabs selected-index="{{_page.data.currentTab}}">
+          <pane title="Objects">
+            <div class="row">
+              <div class="col-sm-12">
+                display and manage linked object
+                <table class="table table-striped">
+                  <tr>
+                    <th>header</th>
+                    <th>header</th>
+                  </tr>
+                  <tr>
+                    <td>data</td>
+                    <td>data</td>
+                  </tr>
+                  <tr>
+                    <td>data</td>
+                    <td>data</td>
+                  </tr>
+                </table>
+              </div>
             </div>
+          </pane>
 
-            <label for="domain" class="col-sm-2 control-label">Domain</label>
-            <dropdown class="col-sm-2" value="{{_page.artist.domain}}" id="domain">
-                <option>Main</option>
-                <option>Sub</option>
-            </dropdown>
-        </div>
+          <pane title="Biography">
+            <p class="spacer" />
+            <div class="form-group">
+              <label for="biography" class="col-sm-2 control-label">Biography</label>
+              <div class="col-sm-4">
+                <textarea class="form-control" rows="3" id="biography">{{_page.artist.biography}}</textarea>
+              </div>
 
-        <div class="form-group">
-            <label for="lastname" class="col-sm-2 control-label">Last name</label>
-            <div class="col-sm-6">
-                <input class="form-control" id="lastname" value="{{_page.artist.lastname}}"/>
+              <label for="awards" class="col-sm-2 control-label">Awards</label>
+              <div class="col-sm-4">
+                <textarea class="form-control" rows="3" id="awards">{{_page.artist.awards}}</textarea>
+              </div>
             </div>
+          </pane>
+        </tabs>
+      </div>
+    </div>
 
-            <label for="gender" class="col-sm-2 control-label">Gender</label>
-            <dropdown class="col-sm-2" value="{{_page.artist.gender}}" id="gender">
-                <option>Male</option>
-                <option>Female</option>
-            </dropdown>
-        </div>
-        
-        <div class="form-group">
-            <label for="birthday" class="col-sm-2 control-label">Birthday</label>
-            <div class="col-sm-2">
-                <input type="date" class="form-control" id="birthday" value="{{_page.artist.birthday}}">
-            </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/p/artist" class="btn btn-default">Cancel</a>
+        <a on-click="artistDelete()" style="float:right;margin-top:3px" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
 
-            <label for="deathday" class="col-sm-2 control-label">Deathday</label>
-            <div class="col-sm-2">
-                <input type="date" class="form-control" id="deathday" value="{{_page.artist.deathday}}">
-            </div>
-
-            <label for="role" class="col-sm-2 control-label">Role</label>
-            <div class="col-sm-2">
-                <input class="form-control" id="role" value="{{_page.artist.role}}">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="birthcountry" class="col-sm-2 control-label">Birth Country</label>
-            <div class="col-sm-2">
-                <input class="form-control" id="birthcountry" value="{{_page.artist.birthcountry}}">
-            </div>
-
-            <label for="deathcountry" class="col-sm-2 control-label">Death Country</label>
-            <div class="col-sm-2">
-                <input class="form-control" id="deathcountry" value="{{_page.artist.deathcountry}}">
-            </div>
-
-            <label for="citizenship" class="col-sm-2 control-label">Citizenship</label>
-            <div class="col-sm-2">
-                <input class="form-control" id="citizenship" value="{{_page.artist.citizenship}}">
-            </div>
-        </div>
-
-        <div class="form-group">
-
-            <label for="birthplace" class="col-sm-2 control-label">Birth Place</label>
-            <div class="col-sm-2">
-                <input class="form-control" id="birthplace" value="{{_page.artist.birthplace}}">
-            </div>
-
-            <label for="deathplace" class="col-sm-2 control-label">Death Place</label>
-            <div class="col-sm-2">
-                <input class="form-control" id="deathplace" value="{{_page.artist.deathplace}}">
-            </div>
-
-            <!-- room for one field here :) -->            
-
-        </div>
-
-
-        <div class="form-group">
-            <label for="address" class="col-sm-2 control-label">Address</label>
-            <div class="col-sm-6">
-                <textarea class="form-control" rows="3" id="address">{{_page.artist.address}}</textarea>
-                <a href="http://maps.google.co.in/maps?q={{_page.artist.address}}" target="_blank" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-map-marker"></span> Google Maps</a>
-            </div>
-
-            <label for="notes" class="col-sm-2 control-label">Notes</label>
-            <div class="col-sm-2">
-                <textarea class="form-control" rows="3" id="notes">{{_page.artist.notes}}</textarea>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-12 tab">
-                <tabs selected-index="">
-                    <pane title="Objects">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                display and manage linked object
-                                <table class="table table-striped">
-                                    <tr>
-                                        <th>header</th><th>header</th>
-                                    </tr>
-                                    <tr>
-                                        <td>data</td><td>data</td>
-                                      </tr>
-                                    <tr>
-                                        <td>data</td><td>data</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </pane>
-
-                    <pane title="Biography">
-                        <p class="spacer" />
-                        <div class="form-group">
-                            <label for="biography" class="col-sm-2 control-label">Biography</label>
-                            <div class="col-sm-4">
-                                <textarea class="form-control" rows="3" id="biography"></textarea>
-                            </div>
-
-                            <label for="awards" class="col-sm-2 control-label">Awards</label>
-                            <div class="col-sm-4">
-                                <textarea class="form-control" rows="3" id="awards"></textarea>
-                            </div>
-                        </div>
-                    </pane>
-                </tabs>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Save</button>
-                <a href="/p/artist" class="btn btn-default">Cancel</a>
-                <a on-click="artistDelete()" style="float:right;margin-top:3px" class="btn btn-danger">Delete</a>
-            </div>
-        </div>
-    </form>
+  </form>
