@@ -10,6 +10,16 @@ temple
 
 - bind the tab with the data like in the example from Derbyjs
 
+# Mongodb dump and restore
+```
+mongodump -d <our database name> -o <directory_backup>
+```
+
+And to "restore/import" that, i used (from directory_backup/dump/):
+```
+mongorestore <our database name>
+```
+
 # Derby.js notes
 
 ## Problems
