@@ -15,11 +15,9 @@ module.exports = function(app, options) {
 
 
   app.get('/p/collection/:id', function(page, model, params, next) {
-    model.set('_page.domain', [
-      {content: 'Red'},
-      {content: 'Orange'},
-      {content: 'Purple'}
-    ]);
+    model.set('_page.domain', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}]);
+    model.set('_page.period', [{content: 'AD'}, {content: 'BC'}]);
+
     if (params.id === 'new') {
       return page.render('collectionEdit');
     }

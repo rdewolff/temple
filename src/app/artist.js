@@ -20,11 +20,9 @@ module.exports = function(app, options) {
   //});
 
   app.get('/p/artist/:id', function(page, model, params, next) {
-    model.set('_page.domain', [
-      {content: 'Red'},
-      {content: 'Orange'},
-      {content: 'Purple'}
-    ]);
+    model.set('_page.domain', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}]);
+    model.set('_page.gender', [{content: 'Male'}, {content: 'Female'}]);
+
     if (params.id === 'new') {
       return page.render('artistEdit');
     }

@@ -8,10 +8,7 @@
       </div>
 
       <label for="domain" class="col-sm-offset-2 col-sm-2 control-label">Domain</label>
-      <dropdown class="col-sm-2" value="{{_page.collection.domain}}" id="domain">
-        <option>Main</option>
-        <option>Sub</option>
-      </dropdown>
+      <dropdown class="col-sm-2" value="{{_page.collection.domain}}" options="{{_page.domain}}" id="domain"></dropdown>
     </div>
     <div class="row">
 
@@ -52,12 +49,7 @@
 
         <div class="form-group">
           <label for="period" class="col-sm-3 control-label">Period</label>
-          <dropdown class="col-sm-6" value="{{_page.collection.domain}}" id="domain">
-            <option>BC</option>
-            <option>0-1000</option>
-            <option>1001-2000</option>
-            <option>2000+</option>
-          </dropdown>
+          <dropdown class="col-sm-6" value="{{_page.collection.domain}}" options="{{_page.period}}" id="domain"></dropdown>
         </div>
 
         <div class="form-group">
