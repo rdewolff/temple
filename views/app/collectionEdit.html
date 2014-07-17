@@ -14,6 +14,7 @@
       </dropdown>
     </div>
     <div class="row">
+
       <div class="col-sm-8">
 
         <div class="form-group">
@@ -62,7 +63,7 @@
         <div class="form-group">
           <label for="notes" class="col-sm-3 control-label">Description</label>
           <div class="col-sm-9">
-            <textarea class="form-control" rows="3" id="notes">{{_page.artist.notes}}</textarea>
+            <textarea class="form-control" rows="3" id="notes">{{_page.collection.description}}</textarea>
           </div>
         </div>
 
@@ -71,6 +72,19 @@
 
         <img src="http://lorempixel.com/400/365/" alt="" class="img-thumbnail" width="400px" height="366px">
 
-
       </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-sm-12">
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/p/artist" class="btn btn-default">Cancel</a>
+            <a on-click="collectionDelete()" style="float:right;" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    
     </div>
