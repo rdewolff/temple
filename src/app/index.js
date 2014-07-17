@@ -15,8 +15,10 @@ app.loadStyles(__dirname + '/../../styles/app');
 /**
  * HOME
  */
-app.get('/', function(page){
+app.get('/', function(page, model, params, next) {
+  
   page.render('home');
+
 });
 
 app.use(require('./artist'));
