@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "ns" : "temple.collection_ops", "name" : "_id_" }, { "v" : 1, "key" : { "name" : 1, "v" : 1 }, "unique" : true, "ns" : "temple.collection_ops", "name" : "name_1_v_1" } ] }
