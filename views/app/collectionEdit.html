@@ -67,8 +67,67 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="form-group">
+      <div class="col-sm-12 tab">
+        <tabs selected-index="{{_page.data.currentTab}}">
+          <pane title="Basic data">
 
+            <div class="form-group">
+
+              <label for="materialTechnique" class="col-sm-2 control-label">Material/technique</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" as="materialTechnique" value="{{_page.collection.materialTechnique}}">
+              </div>
+
+              <label for="editionSerie" class="col-sm-2 control-label">Edition/serie</label>
+              <div class="col-sm-4">
+                <input class="form-control" id="editionSerie" value="{{_page.collection.editionSerie}}" />
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <label for="dimension" class="col-sm-2 control-label">Dimension</label>
+              <div class="col-sm-4">
+                <select multiple class="form-control" value="{{_page.collection.dimensions}}">
+                  <option>10cm x 32cm x 3cm</option>
+                </select>
+              </div>
+
+              <label for="notes" class="col-sm-2 control-label">Notes</label>
+              <div class="col-sm-4">
+                <textarea class="form-control" rows="3" id="notes">{{_page.collection.notes}}</textarea>
+              </div>
+
+            </div>
+
+            <div class="form-group">
+
+              <label for="creditLine" class="col-sm-2 control-label">Credit line</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" as="creditLine" value="{{_page.collection.creditLine}}">
+              </div>
+
+              <label for="location" class="col-sm-2 control-label">Location</label>
+              <div class="col-sm-4">
+                <input class="form-control" id="location" value="{{_page.collection.location}}" />
+              </div>
+
+            </div>
+
+          </pane>
+          <pane title="Acquisition">
+            2
+          </pane>
+          <pane title="References">
+            3
+          </pane>
+        </tabs>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
