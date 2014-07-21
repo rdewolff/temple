@@ -1,2 +1,62 @@
 <index:>
-  home
+  <div class="row object">
+    
+    <div class="container">
+     <div class="jumbotron">
+        <h1>Welcome to Temple</h1>
+        <p>This is the administrative area. Use the upper menu to navigate through the available modules.</p>
+        <p><a class="btn btn-primary btn-lg" role="button">
+           Learn more, read the docs</a>
+        </p>
+     </div>
+    </div>
+    
+    <div class="col-sm-6">
+
+      <h3>Latest objects added</h3>
+
+      {{each _page.collection}}
+      <div class="row">
+        <a href="/p/collection/{{this.id}}">
+          <div class="col-sm-4">
+            <img src="http://lorempixel.com/100/100/" alt="" class="img-thumbnail" width="100px" height="100px">
+          </div>
+          <div class="col-sm-8">
+              <h4>{{this.title}}</h4>
+              <span class="label label-primary">{{this.accessionNr}}</span><br />
+              {{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}<br />
+              {{this.materialTechnique}}<br />
+          </div>
+        </a>
+      </div>
+      {{/}}
+
+      <p>Total objects <span class="badge">{{_page.objectCount}}</span> <a href="/p/collection">browse all objects</a>.</p>
+
+    </div> 
+
+    <div class="col-sm-6">
+
+      <h3>Latest artists added</h3>
+      
+      {{each _page.artist}}
+      <div class="row">
+        <a href="/p/artist/{{this.id}}">
+          <div class="col-sm-4">
+            <img src="http://www.tld-gse.com/shared/no_photo.jpg" alt="" class="img-thumbnail" width="100px" height="100px">
+          </div>
+          <div class="col-sm-8">
+              <h4>{{this.firstname}} {{this.lastname}}</h4>
+              {{this.birthday}}, {{this.birthcountry}}<br />
+              {{this.gender}}<br />
+          </div>
+        </a>
+      </div>
+      {{/}}
+
+      <p>Total artists <span class="badge">{{_page.artistCount}}</span> <a href="/p/artist">browse all artists</a>.</p>
+
+    </div>
+
+
+  </div>
