@@ -1,0 +1,17 @@
+<index:>
+  <!-- link to open sidr : <a id="menuLeftPaneToggle" href="#sidr">Toggle menu</a> -->
+  <!-- TODO: on page load, this page content blink very quickly - annoying! -->
+  <div id="sidr">
+    <ul>
+      <li><a href="#">List 1</a></li>
+      <li class="active"><a href="#">List 2</a></li>
+      <li><a href="#">List 3</a></li>
+    </ul>
+  </div>
+   
+  <script>
+  $(document).ready(function() {
+    $('#menuLeftPaneToggle').sidr();
+  });
+  </script>
+  
