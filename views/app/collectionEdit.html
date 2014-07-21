@@ -118,7 +118,31 @@
 
           </pane>
           <pane title="Acquisition">
-            2
+          
+            <div class="form-group">
+              <label for="owner" class="col-sm-2 control-label">Owner</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" as="owner" value="{{_page.collection.owner}}">
+              </div>
+
+              <label for="acqValue" class="col-sm-2 control-label">Acq. value</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" as="acqValue" value="{{_page.collection.acqValue}}">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="acqMode" class="col-sm-2 control-label">Acq. mode</label>
+              <div class="col-sm-4">
+                <dropdown class="col-sm-2" value="{{_page.collection.acqMode}}" options="{{_page.acqMode}}" id="acqMode"></dropdown>
+              </div>
+
+              <label for="acqNotes" class="col-sm-2 control-label">Acq. notes</label>
+              <div class="col-sm-4">
+                <textarea class="form-control" rows="3" id="acqNotes">{{_page.collection.notes}}</textarea>
+              </div>
+            </div>
+
           </pane>
           <pane title="References">
             <div class="form-group">

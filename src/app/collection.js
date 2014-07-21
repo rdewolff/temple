@@ -17,6 +17,7 @@ module.exports = function(app, options) {
   app.get('/p/collection/:id', function(page, model, params, next) {
     model.set('_page.domain', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}]);
     model.set('_page.period', [{content: 'AD'}, {content: 'BC'}]);
+    model.set('_page.acqMode', [{content: 'Achat'}, {content: 'Achat après commande'}, {content: 'Bourse'}, {content: 'Brocante'}, {content: 'Cadeau'}]);
 
     if (params.id === 'new') {
       return page.render('collectionEdit');
