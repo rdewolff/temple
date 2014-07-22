@@ -12,6 +12,10 @@ app.use(require('../../components/zetcom-derby-ui-forms'));
 app.loadViews(__dirname + '/../../views/app');
 app.loadStyles(__dirname + '/../../styles/app');
 
+
+app.get('/help', function(page, model, params, next) {
+  page.render('help');
+});
 /**
  * HOME
  */
