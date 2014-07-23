@@ -3,11 +3,16 @@
     <h4>{{if _page.collection.id}}Editing object {{_page.collection.accessionNr}}{{else}}Creating object{{/}}</h4>
     <div class="form-group">
       <label for="accessionNr" class="col-sm-2 control-label">Accession #</label>
+
       <div class="col-sm-4">
-        <input type="text" class="form-control" as="accessionNr" value="{{_page.collection.accessionNr}}">
+        <input type="text" class="form-control" as="accessionNr" pattern="[A-Z]{3}-[0-9]{4}" value="{{_page.collection.accessionNr}}">
+      </div>
+      <div class="col-sm-2">
+        <!-- FIXME: use Bootstrap Tooltip for this displaying pattern to respect -->
+        <span class="label label-default">Pattern : AAA-0000</span>
       </div>
 
-      <label for="domain" class="col-sm-offset-2 col-sm-2 control-label">Domain</label>
+      <label for="domain" class="col-sm-2 control-label">Domain</label>
       <dropdown class="col-sm-2" value="{{_page.collection.domain}}" options="{{_page.domain}}" id="domain"></dropdown>
     </div>
 
@@ -127,7 +132,7 @@
 
           </pane>
           <pane title="Acquisition">
-          
+
             <div class="form-group">
               <label for="owner" class="col-sm-2 control-label">Owner</label>
               <div class="col-sm-4">
