@@ -27,6 +27,7 @@ mongorestore <our database name>
 - pass data to view : how to do it properly?
 - split logic
 - file upload
+- list of reserver keyword not to use in our source code var name or function name
 
 
 ## Mail to Derby.js Google group
