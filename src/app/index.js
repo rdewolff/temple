@@ -12,21 +12,24 @@ app.use(require('../../components/zetcom-derby-ui-forms'));
 app.loadViews(__dirname + '/../../views/app');
 app.loadStyles(__dirname + '/../../styles/app');
 
-
+/**
+ * HELP
+ */
 app.get('/help', function(page, model, params, next) {
   page.render('help');
 });
+
 /**
  * HOME
  */
 app.get('/', function(page, model, params, next) {
-  
+
   var artistCount = model.query('artist', {$count: true});
   var objectCount = model.query('collection', {$count: true});
 
   // get the most recent objects
-  var collectionLatestQuery = model.query('collection', {$limit: 5 , $orderby: {"_m.ctime": -1}}); 
-  var artistLatestQuery = model.query('artist', {$limit: 5 , $orderby: {"_m.ctime": -1}}); 
+  var collectionLatestQuery = model.query('collection', {$limit: 5 , $orderby: {"_m.ctime": -1}});
+  var artistLatestQuery = model.query('artist', {$limit: 5 , $orderby: {"_m.ctime": -1}});
 
   model.subscribe(artistCount, objectCount, collectionLatestQuery, artistLatestQuery, function onCount(err, next) {
     if (err) return next(err);
@@ -48,3 +51,5 @@ app.get('/', function(page, model, params, next) {
 app.use(require('./artist'));
 
 app.use(require('./collection'));
+
+app.use(require('./search'));

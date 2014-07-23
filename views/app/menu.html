@@ -4,7 +4,14 @@
       <div class="col-md-12 column">
         <nav class="navbar navbar-default" role="navigation">
           <div class="navbar-header">
-             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">zetcom</a>
+             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="/">zetcom</a>
           </div>
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -15,9 +22,11 @@
             </ul>
             <form class="navbar-form navbar-left" role="search">
               <div class="form-group">
-                <input type="text" class="form-control">
-              </div> 
-              <a id="menuLeftPaneToggle" href="#sidr" class="btn btn-default">Search</a>
+                <input type="text" class="form-control" value="{{_session.search}}">
+              </div>
+              <!-- for sidr search - currently abbandoned : <a id="menuLeftPaneToggle" href="#sidr" class="btn btn-default"></a>-->
+              <button type="button" class="btn btn-default" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" on-click="search()">Search</button>
+
             </form>
             <ul class="nav navbar-nav navbar-right">
               <li>
@@ -44,4 +53,3 @@
   <li class="{{if $render.url === @href}}active{{/}}">
     <a href="{{@href}}">{{@content}}</a>
   </li>
-
