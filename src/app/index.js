@@ -1,6 +1,6 @@
 var derby = require('derby');
 
-var app = module.exports = derby.createApp('app', __filename);
+var app = module.exports = derby.createApp('temple', __filename);
 
 if (!derby.util.isProduction) global.app = app;
 
@@ -11,6 +11,7 @@ app.use(require('../../components/zetcom-derby-ui-forms'));
 
 app.loadViews(__dirname + '/../../views/app');
 app.loadStyles(__dirname + '/../../styles/app');
+
 
 /**
  * HELP
@@ -53,3 +54,21 @@ app.use(require('./artist'));
 app.use(require('./collection'));
 
 app.use(require('./search'));
+
+/**
+ * Controller function
+ */
+
+// TODO: in progress. Check right methode to use
+app.proto.enter = function(page, model, params, next) {
+
+
+
+  console.log('app.proto.enter');
+};
+
+app.proto.create = function(model) {
+  console.log('app.proto.create');
+
+  require('../../public/components/jquery/dist/jquery.min');
+}
