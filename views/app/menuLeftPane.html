@@ -63,11 +63,20 @@
 
   <script>
   $(document).ready(function() {
-    $('#menuLeftPaneToggle').sidr(function() {console.log('toggle')});
+    $('#menuLeftPaneToggle').sidr();
     $('#menuLeftPaneToggle').click(function() {
       $('#menuLeftPageSearchInput').focus();
+    });
+    $('#menuSearchInput').bind("enterKey",function(e){
+      $.sidr('open', 'sidr');
+      $('#menuLeftPageSearchInput').focus();  
+    });
+    $('#menuSearchInput').keyup(function(e){
+    if(e.keyCode == 13)
+    {
+        $(this).trigger("enterKey");
     }
-    )
+});
   });
 
   keyboardListener.simple_combo("esc", function() {
