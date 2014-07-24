@@ -21,15 +21,20 @@
   <link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap-theme.min.css">
   <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
   <!-- sidr, disabled. Using bootstrap CSS within the UL>LI tags was not working out of the box -->
-  <!-- <script src="/components/sidr/jquery.sidr.min.js"></script> -->
-  <!-- <link rel="stylesheet" href="/components/sidr/stylesheets/jquery.sidr.light.css"> -->
-  <script src="/components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css">
-
+  <script src="/components/sidr/jquery.sidr.min.js"></script>
+  <link rel="stylesheet" href="/components/sidr/stylesheets/jquery.sidr.light.css">
+  <!-- jasny-bootstrap left menu using his offcanvas plugin is not behaving correctly -->
+  <!-- <script src="/components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script> -->
+  <!-- <link rel="stylesheet" href="/components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css"> -->
+  <!-- keypress, handling keyboard shortcuts with javascript. http://dmauro.github.io/Keypress/ -->
+  <script src="/components/Keypress/keypress-2.0.3.min.js"></script>
+  <script type="text/javascript">
+  var keyboardListener = new window.keypress.Listener();
+  </script>
 
   <view name="header"/>
 
-  <view name="menuLeftPane"/>
+  <view name="menuLeftPane" _page="{{_page}}"/>
 
   <view name="menu"/>
 

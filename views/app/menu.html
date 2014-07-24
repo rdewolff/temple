@@ -20,14 +20,16 @@
               <view name="nav-link" href="/p/collection">Collection</view>
               <view name="nav-link" href="/p/artist">Artist</view>
             </ul>
+
             <form class="navbar-form navbar-left" role="search">
               <div class="form-group">
-                <input type="text" class="form-control" value="{{_session.search}}">
+                <input type="text" class="form-control" id="menuSearchInput" value="{{_session.search}}">
               </div>
-              <!-- for sidr search - currently abbandoned : <a id="menuLeftPaneToggle" href="#sidr" class="btn btn-default"></a>-->
-              <button type="button" class="btn btn-default" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" on-click="search()">Search</button>
-
+              <a id="menuLeftPaneToggle" href="#" class="btn btn-default">Search</a>
+              <!-- using offcanvas from jarny-bootstrap has been abandoned. Not working properly.
+              <button type="button" class="btn btn-default" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" on-click="search()">Search</button> -->
             </form>
+
             <ul class="nav navbar-nav navbar-right">
               <li>
                 <a href="/help">Help</a>

@@ -20,6 +20,28 @@ And to "restore/import" that, i used (from directory_backup/dump/):
 mongorestore <our database name>
 ```
 
+# Dependencies
+
+Temple use NPM for it's npm dependencies and bower.
+
+## Node.js NPM
+
+## Bower
+
+- Keypress : http://dmauro.github.io/Keypress/
+
+# Tweaks
+
+## Styling
+
+- public/component/sidr/stylesheets/jquery.sidr.light.css : removed the following styles :
+
+```
+font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-size:15px;
+```
+To avoid collision with bootstrap in the left menu
+
+
 # Derby.js notes
 
 ## Problems
@@ -28,6 +50,8 @@ mongorestore <our database name>
 - split logic
 - file upload
 - list of reserver keyword not to use in our source code var name or function name
+- list of properties like $render.ns that we can use
+- component event list (init, etc..?)
 
 
 ## Mail to Derby.js Google group
