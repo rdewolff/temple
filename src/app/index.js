@@ -60,9 +60,7 @@ app.use(require('./search'));
  */
 
 // TODO: in progress. Check right methode to use
-app.proto.enter = function(page, model, params, next) {
-
-
+app.enter = function(page, model, params, next) {
 
   console.log('app.proto.enter');
 };
@@ -71,4 +69,16 @@ app.proto.create = function(model) {
   console.log('app.proto.create');
 
   require('../../public/components/jquery/dist/jquery.min');
+  require('../../public/components/bootstrap/dist/js/bootstrap.min');
+  require('../../public/components/sidr/jquery.sidr.min');
+  require('../../public/components/Keypress/keypress-2.0.3.min');
+
+  var testJquery = $("menuLeftPaneToggle");
+  $("menuLeftPaneToggle").click(function() {
+    console.log('click');
+  });
+  console.log(testJquery.parent());
+
+  var keyboardListener = new window.keypress.Listener();
+
 }
