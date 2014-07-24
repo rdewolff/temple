@@ -34,7 +34,9 @@ Temple use NPM for it's npm dependencies and bower.
 
 ## Styling
 
-- public/component/sidr/stylesheets/jquery.sidr.light.css : removed the following styles :
+### Sidr CSS cleaned
+
+public/component/sidr/stylesheets/jquery.sidr.light.css : removed the following styles :
 
 ```
 font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-size:15px;
