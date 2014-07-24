@@ -16,12 +16,12 @@
       <h3>Latest objects added</h3>
 
       {{each _page.collection}}
-      <div class="row">
+      <div class="row spacer">
         <a href="/p/collection/{{this.id}}">
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <img src="http://lorempixel.com/100/100/" alt="" class="img-thumbnail" width="100px" height="100px">
           </div>
-          <div class="col-sm-8">
+          <div class="col-sm-9">
               <h4>{{this.title}}</h4>
               <span class="label label-primary">{{this.accessionNr}}</span><br />
               {{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}<br />
@@ -40,12 +40,12 @@
       <h3>Latest artists added</h3>
       
       {{each _page.artist}}
-      <div class="row">
+      <div class="row spacer">
         <a href="/p/artist/{{this.id}}">
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <img src="http://www.tld-gse.com/shared/no_photo.jpg" alt="" class="img-thumbnail" width="100px" height="100px">
           </div>
-          <div class="col-sm-8">
+          <div class="col-sm-9">
               <h4>{{this.firstname}} {{this.lastname}}</h4>
               {{this.birthday}}, {{this.birthcountry}}<br />
               {{this.gender}}<br />
