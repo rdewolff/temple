@@ -2,7 +2,7 @@ var express = require('express');
 
 var router = express.Router();
 
-// get the collection passed in param
+// get the collection passed in param and return the result in JSON
 router.get('/api/v1/:collection', function(req, res){
   
   var collection = req.params.collection

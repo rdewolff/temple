@@ -10,15 +10,25 @@ temple
 
 - bind the tab with the data like in the example from Derbyjs
 
-# Mongodb dump and restore
+# Mongodb
+
+## Backup
+
 ```
 mongodump -d <our database name> -o <directory_backup>
 ```
+
+## Restore 
 
 And to "restore/import" that, i used (from directory_backup/dump/):
 ```
 mongorestore <our database name>
 ```
+
+## Via JSON files
+
+```mongoexport -d temple -c collection -o data.json```
+```mongoimport -d temple -c artist data.json```
 
 # Dependencies
 
