@@ -18,7 +18,7 @@ temple
 mongodump -d <our database name> -o <directory_backup>
 ```
 
-## Restore 
+## Restore
 
 And to "restore/import" that, i used (from directory_backup/dump/):
 ```
@@ -56,7 +56,7 @@ To avoid collision with bootstrap in the left menu
 
 # Derby.js notes
 
-## Problems
+## Difficulties
 
 - pass data to view : how to do it properly?
 - split logic
@@ -64,6 +64,7 @@ To avoid collision with bootstrap in the left menu
 - list of reserver keyword not to use in our source code var name or function name
 - list of properties like $render.ns that we can use
 - component event list (init, etc..?)
+- understand client vs server side rendering
 
 
 ## Mail to Derby.js Google group
