@@ -14,21 +14,47 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-12">Objects</div>
+        <div class="col-sm-12"><b>Objects</b></div>
       </div>
-
       {{each _page.searchCollection}}
       <div class="row">
         <a href="/p/collection/{{this.id}}">
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <img src="http://lorempixel.com/80/80/" alt="" class="img-thumbnail" width="80px" height="80px">
           </div>
-          <div class="col-sm-8">
+          <div class="col-sm-9">
               <b>{{this.title}}</b><br />
               <span class="label label-primary">{{this.accessionNr}}</span><br />
               {{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}
           </div>
         </a>
+      </div>
+      {{else}}
+      <div class="row">
+        <div class="col-sm-12">No object found</div>
+      </div>
+      {{/}}
+
+      <!--  Artist -->
+      <div class="row">
+        <div class="col-sm-12"><b>Artists</b></div>
+      </div>
+      {{each _page.searchArtist}}
+      <div class="row spacer">
+        <a href="/p/artist/{{this.id}}">
+          <div class="col-sm-3">
+            <img src="http://www.tld-gse.com/shared/no_photo.jpg" alt="" class="img-thumbnail" width="80px" height="80px">
+          </div>
+          <div class="col-sm-9">
+              <b>{{this.firstname}} {{this.lastname}}</b><br />
+              {{this.birthday}}, {{this.birthcountry}}<br />
+              {{this.gender}}<br />
+          </div>
+        </a>
+      </div>
+      {{else}}
+      <div class="row">
+        <div class="col-sm-12">No artists found</div>
       </div>
       {{/}}
 

@@ -6,9 +6,8 @@ module.exports = function(app, options) {
   // triggered only once 
   app.proto.create = function(model) {
 
-    global.MODEL = model
-  //}
-  //app.ready('/', function () {
+    // TODO: remove this, debug only.
+    //global.MODEL = model
 
     console.log("binding data");
 
@@ -22,8 +21,34 @@ module.exports = function(app, options) {
       var searchQuery = model.get("_session.search");
 
       // get the most recent objects
-      var searchCollectionQuery = model.query('collection', {title: {$regex: searchQuery, $options: 'i'}, $limit: 5}); // ,$limit: 5 , $orderby: {"_m.ctime": -1}}); // $options 'i' = case insensitive
-      var searchArtistQuery = model.query('artist', {$limit: 5 , $orderby: {"_m.ctime": -1}});
+      var searchCollectionQuery = model.query(
+        'collection', 
+          {
+            $or:
+              [
+                {title: {$regex: searchQuery, $options: 'i'}},
+                {description: {$regex: searchQuery, $options: 'i'}},
+                {yearFrom: {$regex: searchQuery, $options: 'i'}},
+                {yearTo: {$regex: searchQuery, $options: 'i'}}
+              ], $limit: 5
+            //
+          }
+      ); // ,$limit: 5 , $orderby: {"_m.ctime": -1}}); // $options 'i' = case insensitive
+
+      var searchArtistQuery = model.query(
+        'artist', 
+        {
+            $or:
+              [
+                {lastname: {$regex: searchQuery, $options: 'i'}},
+                {firstname: {$regex: searchQuery, $options: 'i'}},
+                {notes: {$regex: searchQuery, $options: 'i'}},
+                {biography: {$regex: searchQuery, $options: 'i'}},
+                {awards: {$regex: searchQuery, $options: 'i'}}
+              ], $limit: 5
+            //
+          }
+      ); // ,$limit: 5 , $orderby: {"_m.ctime": -1}}); // $options 'i' = case insensitive
 
       model.subscribe(searchCollectionQuery, searchArtistQuery, function doSearch(err, next) {
         if (err) return next(err);
