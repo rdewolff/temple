@@ -7,7 +7,7 @@ if (!derby.util.isProduction) global.app = app;
 app.serverUse(module, 'derby-stylus');
 
 app.use(require('d-bootstrap'));
-app.use(require('../../components/zetcom-derby-ui-forms'));
+//app.use(require('../../components/zetcom-derby-ui-forms'));
 
 app.component(require('../../components/temple-panel'));
 
@@ -54,32 +54,85 @@ app.use(require('./artist'));
 
 app.use(require('./collection'));
 
-app.use(require('./search'));
-
 /**
  * Controller function
  */
 
-// TODO: in progress. Check right methode to use
-
 app.proto.create = function(model) {
 
-  console.log('app.proto launching');
+  console.log('src/app/index.js create');
 
+  /**
+   * Import scripts
+   */
   // application wide jquery
   require('../../public/vendor/jquery-1.9.1.min'); // the JQuery version from Derby example todos WORKS
   // NOT WORKING : require('../../public/components/jquery/dist/jquery.min'); // the Bower JQuery version does NOT work
 
-  // OK require('../../public/components/bootstrap/dist/js/bootstrap.min');
-  // TODO: implement the followings :
-  require('../../public/components/sidr/jquery.sidr.min');
-  //require('../../public/components/Keypress/keypress-2.0.3.min');
+  require('../../public/components/bootstrap/dist/js/bootstrap.min');
+  // use the corrected version - none minified
+  require('../../public/components/sidr/jquery.sidr');
+  require('../../public/components/Keypress/keypress-2.0.3.min');
+
+  console.log("binding data for search");
+
+  model.set('_session.search', '');
+
+  /**
+   * Search using the left temple-panel
+   */
+  // TODO: can we call model.on() in a composant create methode or that would
+  // regiser many times the same trigger?
+  model.on('change', '_session.search', function() {
+
+    console.log("_session.search has changed! " + Date());
+
+    var searchQuery = model.get("_session.search");
+
+    // get the most recent objects
+    var searchCollectionQuery = model.query(
+      'collection',
+        {
+          $or:
+            [
+              {title: {$regex: searchQuery, $options: 'i'}},
+              {description: {$regex: searchQuery, $options: 'i'}},
+              {yearFrom: {$regex: searchQuery, $options: 'i'}},
+              {yearTo: {$regex: searchQuery, $options: 'i'}}
+            ], $limit: 5
+          //
+        }
+    ); // ,$limit: 5 , $orderby: {"_m.ctime": -1}}); // $options 'i' = case insensitive
+
+    var searchArtistQuery = model.query(
+      'artist',
+      {
+          $or:
+            [
+              {lastname: {$regex: searchQuery, $options: 'i'}},
+              {firstname: {$regex: searchQuery, $options: 'i'}},
+              {notes: {$regex: searchQuery, $options: 'i'}},
+              {biography: {$regex: searchQuery, $options: 'i'}},
+              {awards: {$regex: searchQuery, $options: 'i'}}
+            ], $limit: 5
+          //
+        }
+    ); // ,$limit: 5 , $orderby: {"_m.ctime": -1}}); // $options 'i' = case insensitive
+
+    model.subscribe(searchCollectionQuery, searchArtistQuery, function doSearch(err, next) {
+      if (err) return next(err);
+
+      searchCollectionQuery.ref('_page.searchCollection');
+      searchArtistQuery.ref('_page.searchArtist');
+      // TODO: understand what's better performance-wise, ref or set... ref is dynamic
+      //model.set('_page.searchCollection', searchCollectionQuery.get());
+      //model.set('_page.searchArtist', searchArtistQuery.get());
+
+      console.log("SEARCH DONE. RESULT : "+searchCollectionQuery.get().length);
+
+    // app.history.push('/p/search');
+    });
+  });
 
 
-  // var keyboardListener = new window.keypress.Listener();
-
-}
-
-app.proto.enter = function() {
-    console.log('app.proto.enter');
 }

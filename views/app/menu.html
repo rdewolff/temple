@@ -22,10 +22,8 @@
             </ul>
 
             <div class="navbar-form navbar-left">
-              <!-- <div class="form-group"> -->
               <input type="text" class="form-control" id="menuSearchInput" value="{{_session.search}}">
-              <!-- </div> -->
-              <a id="menuLeftPaneToggle" href="#" class="btn btn-default">Search</a>
+              <view name="temple-panel:link" />
               <!-- using offcanvas from jarny-bootstrap has been abandoned. Not working properly.
               <button type="button" class="btn btn-default" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body" on-click="search()">Search</button> -->
             </div>

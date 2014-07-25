@@ -1,10 +1,7 @@
 <index:>
-  <a href="#" id="temple-panel-open">Open</a>
-  <a href="#" id="temple-panel-close">Close</a>
 
-  <!-- link to open sidr : <a id="menuLeftPaneToggle" href="#sidr">Toggle menu</a> -->
-  <!-- TODO: on page load, this page content blink very quickly - annoying! -->
   <!-- FIXME: move the style to CSS -->
+  <!-- TODO: factorize module to make it usable across different modules and fields -->
   <div id="sidr" style="display: none;">
 
       <div class="row">
@@ -12,9 +9,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-12"><input type="text" id="menuLeftPageSearchInput" class="form-control" value="{{_session.search}}"></div>
+        <div class="col-sm-12">
+          <!-- TODO: clean, don't use #root -->
+          <input type="text" value="{{#root._session.search}}" id="menuLeftPageSearchInput" class="form-control">
+        </div>
       </div>
 
+      <!-- Object -->
       <div class="row">
         <div class="col-sm-12"><b>Objects</b></div>
       </div>
@@ -60,5 +61,8 @@
       </div>
       {{/}}
 
-
   </div>
+
+
+<link:>
+  <a id="temple-panel" href="#" class="btn btn-default">Search</a>

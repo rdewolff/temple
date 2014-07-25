@@ -7,55 +7,43 @@ templePanel.prototype.name = "temple-panel";
 templePanel.prototype.view = __dirname;
 
 templePanel.prototype.init = function() {
-  var model = this.model;
+  //var model = this.model;
 };
 
-templePanel.prototype.close = function() {
-    console.log('close');
-}
+templePanel.prototype.create = function(model) {
 
-templePanel.prototype.create = function() {
-
-  console.log('templePanel.create()');
-
-  // console.log(require('derby').util.isServer);
+  console.log('templePanel create');
 
   $('#temple-panel').sidr();
 
-  $('#temple-panel-open').click(function() {
-    $.sidr('open', 'sidr');
+  $('#temple-panel').click(function() {
+    $('#menuLeftPageSearchInput').focus();
   });
 
-  $('#temple-panel-close').click(function() {
-    $.sidr('close', 'sidr');
+  // TODO: how to pass param from the view to here ?
+  // console.log(@fieldDetectingEnter);
+
+  $('#menuSearchInput').bind("enterKey",function(e){
+     //do stuff here
+     console.log('enter!');
+     $.sidr('open', 'sidr');
+     $('#menuLeftPageSearchInput').focus();
+  });
+  
+  $('#menuSearchInput').keyup(function(e){
+      if(e.keyCode == 13)
+      {
+          $(this).trigger("enterKey");
+      }
   });
 
 
-
-  /*
-
-    console.log('app.proto launching');
-
-    // This lets us play with the model in the console:
-    //   MODEL.get("widgets");
-    global.MODEL = model
-
-    require('../../public/vendor/jquery-1.9.1.min'); // the JQuery version from Derby example todos WORKS
-    //require('../../public/components/jquery/dist/jquery.min'); // the Bower JQuery version does NOT work
-
-    require('../../public/components/bootstrap/dist/js/bootstrap.min');
-    //require('../../public/components/sidr/jquery.sidr.min');
-    //require('../../public/components/Keypress/keypress-2.0.3.min');
-
-    var testJquery = $("#menuLeftPaneToggle");
-
-    $("#menuLeftPaneToggle").click(function() {
-      console.log('click');
-    });
+  var keyboardListener = new window.keypress.Listener();
 
 
-    // var keyboardListener = new window.keypress.Listener();
+}
 
-  */
 
+templePanel.prototype.destroy = function() {
+    console.log('templePanel destroy');
 }
