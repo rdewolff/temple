@@ -9,9 +9,10 @@ app.serverUse(module, 'derby-stylus');
 app.use(require('d-bootstrap'));
 app.use(require('../../components/zetcom-derby-ui-forms'));
 
+app.component(require('../../components/temple-panel'));
+
 app.loadViews(__dirname + '/../../views/app');
 app.loadStyles(__dirname + '/../../styles/app');
-
 
 /**
  * HELP
@@ -60,25 +61,25 @@ app.use(require('./search'));
  */
 
 // TODO: in progress. Check right methode to use
-app.enter = function(page, model, params, next) {
-
-  console.log('app.proto.enter');
-};
 
 app.proto.create = function(model) {
-  console.log('app.proto.create');
 
-  require('../../public/components/jquery/dist/jquery.min');
-  require('../../public/components/bootstrap/dist/js/bootstrap.min');
+  console.log('app.proto launching');
+
+  // application wide jquery
+  require('../../public/vendor/jquery-1.9.1.min'); // the JQuery version from Derby example todos WORKS
+  // NOT WORKING : require('../../public/components/jquery/dist/jquery.min'); // the Bower JQuery version does NOT work
+
+  // OK require('../../public/components/bootstrap/dist/js/bootstrap.min');
+  // TODO: implement the followings :
   require('../../public/components/sidr/jquery.sidr.min');
-  require('../../public/components/Keypress/keypress-2.0.3.min');
+  //require('../../public/components/Keypress/keypress-2.0.3.min');
 
-  var testJquery = $("menuLeftPaneToggle");
-  $("menuLeftPaneToggle").click(function() {
-    console.log('click');
-  });
-  console.log(testJquery.parent());
 
-  var keyboardListener = new window.keypress.Listener();
+  // var keyboardListener = new window.keypress.Listener();
 
+}
+
+app.proto.enter = function() {
+    console.log('app.proto.enter');
 }
