@@ -76,7 +76,7 @@ To avoid collision with bootstrap in the left menu
 - pass data to view : how to do it properly?
 - split logic
 - file upload
-- list of reserver keyword not to use in our source code var name or function name
+- list of reserved keyword not to use in our source code var name or function name
 - list of properties like $render.ns that we can use
 - component event list (init, etc..?)
 - understand client vs server side rendering
@@ -96,7 +96,11 @@ To avoid collision with bootstrap in the left menu
   to make that better in the futur?
 - most common type of object used in derby and their methods and properties ! this is a must have!
 - should components have a static content path?
-
+- can we do model.ref() in component or that does make no sense? Do we _have to_ use
+  the modle.set() to handle data in our components?
+- can we call model.on() in a composant create methode or that would
+  register many times the same trigger?
+- how to pass parameter from a view to a component index.js ? 
 
 ## Mail to Derby.js Google group
 
