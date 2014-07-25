@@ -27,8 +27,19 @@ mongorestore <our database name>
 
 ## Via JSON files
 
-```mongoexport -d temple -c collection -o data.json```
-```mongoimport -d temple -c artist data.json```
+```
+mongoexport -d temple -c collection -o data.json
+```
+```
+mongoimport -d temple -c artist data.json
+```
+
+## Convert any mongodb to livedb compatible
+
+To use your standard mongodb database with livedb, you need to ad a few info in
+the database. That's why the tool IGOR has been created.
+
+https://github.com/share/igor
 
 # Dependencies
 
