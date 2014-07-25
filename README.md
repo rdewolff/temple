@@ -56,7 +56,7 @@ To avoid collision with bootstrap in the left menu
 
 # Derby.js notes
 
-## Difficulties
+## Difficulties & questions
 
 - pass data to view : how to do it properly?
 - split logic
@@ -65,6 +65,10 @@ To avoid collision with bootstrap in the left menu
 - list of properties like $render.ns that we can use
 - component event list (init, etc..?)
 - understand client vs server side rendering
+- schema illustrating derby, components, etc... one image = 1000 words :)
+- component interaction : use the model? exchange other info?
+- do component share JS like jQuery?
+- how to use other external JS libs? Can I include them in my views? Should I "browserify" them?
 
 
 ## Mail to Derby.js Google group
