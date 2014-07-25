@@ -53,6 +53,10 @@ font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-size:15px;
 ```
 To avoid collision with bootstrap in the left menu
 
+# Known bugs
+
+- If you change page while the temple-panel is still open, it won't ropen. You
+  have to reload the whole page for it to work again.
 
 # Derby.js notes
 
@@ -69,6 +73,18 @@ To avoid collision with bootstrap in the left menu
 - component interaction : use the model? exchange other info?
 - do component share JS like jQuery?
 - how to use other external JS libs? Can I include them in my views? Should I "browserify" them?
+- good practice
+  - I feel like I have done many mistakes because there are multiple way to do
+  things and the error are not very expressfull. So sometimes you can end up
+  doing stuff that works (partially?) but not in the good way. And that's usually
+  later that you discover your mistakes and you have to rewrite part of your app.
+  Having a "Good practice" section in the doc would help newbies to get started
+  and take the good road directly!
+- how does the ```<includes:>``` link with ```{{@static}}/file``` work?
+- serving static content (like with the codemirror) is really a mess.. any way
+  to make that better in the futur?
+- most common type of object used in derby and their methods and properties ! this is a must have!
+- should components have a static content path?
 
 
 ## Mail to Derby.js Google group
