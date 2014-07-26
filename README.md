@@ -82,7 +82,7 @@ To avoid collision with bootstrap in the left menu
 - understand client vs server side rendering
 - schema illustrating derby, components, etc... one image = 1000 words :)
 - component interaction : use the model? exchange other info?
-- do component share JS like jQuery?
+- do component share external JS like jQuery?
 - how to use other external JS libs? Can I include them in my views? Should I "browserify" them?
 - good practice
   - I feel like I have done many mistakes because there are multiple way to do
@@ -92,12 +92,12 @@ To avoid collision with bootstrap in the left menu
   Having a "Good practice" section in the doc would help newbies to get started
   and take the good road directly!
 - how does the ```<includes:>``` link with ```{{@static}}/file``` work?
-- serving static content (like with the codemirror) is really a mess.. any way
+- serving static content in components (like with the codemirror) is really a mess.. any way
   to make that better in the futur?
 - most common type of object used in derby and their methods and properties ! this is a must have!
 - should components have a static content path?
 - can we do model.ref() in component or that does make no sense? Do we _have to_ use
-  the modle.set() to handle data in our components?
+  the modle.set() to handle data in our components? Seems not the case.
 - can we call model.on() in a composant create methode or that would
   register many times the same trigger?
 - how to pass parameter from a view to a component index.js ? 
