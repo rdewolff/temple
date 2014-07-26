@@ -34,6 +34,10 @@ module.exports = function (store, apps, error, cb){
     expressApp.use(app.router());
   });
 
+  // public area
+  var publicApp = require('../src/public');
+  expressApp.use(app.router());
+
   expressApp.use(require('./routes'));
 
   expressApp
