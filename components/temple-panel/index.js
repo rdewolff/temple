@@ -29,7 +29,7 @@ templePanel.prototype.create = function(model) {
      $.sidr('open', 'sidr');
      $('#menuLeftPageSearchInput').focus();
   });
-  
+
   $('#menuSearchInput').keyup(function(e){
       if(e.keyCode == 13)
       {
@@ -37,9 +37,20 @@ templePanel.prototype.create = function(model) {
       }
   });
 
+  $(document).keyup(function(e) {
+    if (e.keyCode == 27) { // esc key
+      $.sidr('close', 'sidr');
+    }
+    $(document).keydown(function(e) {
+        if (e.keyCode == 70 && e.ctrlKey) { // ctrl + f
+            $.sidr('open', 'sidr');
+            $('#menuLeftPageSearchInput').focus();
+        }
+    });
+  });
 
-  var keyboardListener = new window.keypress.Listener();
-
+  // TODO: remove if not using the keypress js lib
+  // var keyboardListener = new window.keypress.Listener();
 
 }
 
