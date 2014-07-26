@@ -7,12 +7,12 @@ var express = require('./server/express');
 var chalk = require('chalk');
 
 var apps = [
-  require('./src/app')
+  require('./src/app'),
+  require('./src/public')
 ];
 
 var error = require('./server/error');
 var publicDir = process.cwd() + '/public';
-
 
 var defaults = require('./config/defaults');
 

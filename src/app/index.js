@@ -24,7 +24,7 @@ app.get('/help', function(page, model, params, next) {
 /**
  * HOME
  */
-app.get('/', function(page, model, params, next) {
+app.get('/p', function(page, model, params, next) {
 
   var artistCount = model.query('artist', {$count: true});
   var objectCount = model.query('collection', {$count: true});
