@@ -1,0 +1,55 @@
+<index:>
+
+  <div class="container">
+
+    <div class="row row-offcanvas row-offcanvas-right">
+
+      <div class="col-xs-12 col-sm-9">
+        <p class="pull-right visible-xs">
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+        </p>
+        <div class="jumbotron">
+          <h1>Temple collection</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad alias aperiam at corporis cupiditate debitis dolorum enim mollitia nam nostrum optio, praesentium quo rem rerum sit tempora voluptate voluptatibus.</p>
+        </div>
+        <div class="row">
+          {{each _page.collection}}
+          <div class="col-6 col-sm-6 col-lg-4">
+            <h2>{{this.title}}</h2>
+            <p>{{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}.</p>
+            <p>
+              {{this.materialTechnique}}
+            </p>
+            <p class="badge">{{this.accessionNr}}</p>
+            <p><a class="btn btn-default" href="/p/collection/{{this.id}}">View détails</a></p>
+          </div>
+          {{/}}
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="list-group">
+          <a href="#" class="list-group-item active">Categories</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+          <a href="#" class="list-group-item">Link</a>
+        </div>
+      </div><!--/span-->
+    </div><!--/row-->
+
+    <hr>
+
+    <footer>
+      <p>&copy; Company 2014</p>
+
+      <a class="btn btn-danger btn-lg" href="/p">Temple admin</a>
+
+    </footer>
+
+  </div><!--/.container-->

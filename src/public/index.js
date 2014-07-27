@@ -15,7 +15,17 @@ app.loadStyles(__dirname + '/../../styles/public');
  * Home
  */
 app.get('/', function(page, model, params, next) {
-  page.render();
+
+  var collectionQuery = model.query('collection', {publish: "Highlight"});
+
+  model.subscribe(collectionQuery, function onCount(err, next){
+    if (err) return next(err);
+
+    collectionQuery.ref('_page.collection');
+
+    page.render('home');
+  });
+
 });
 
 
@@ -29,5 +39,5 @@ app.proto.create = function(model) {
   // NOT WORKING : require('../../public/components/jquery/dist/jquery.min'); // the Bower JQuery version does NOT work
 
   require('../../public/components/bootstrap/dist/js/bootstrap.min');
-  
+
 }
