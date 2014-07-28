@@ -1,188 +1,188 @@
 <index:>
-  <form class="form-horizontal" role="form" on-submit="done()">
+  <form class='form-horizontal' role='form' on-submit='done()'>
     <h4>{{if _page.collection.id}}Editing object {{_page.collection.accessionNr}}{{else}}Creating object{{/}}</h4>
-    <div class="form-group">
-      <label for="accessionNr" class="col-sm-2 control-label">Accession #</label>
+    <div class='form-group'>
+      <label for='accessionNr' class='col-sm-2 control-label'>Accession #</label>
 
-      <div class="col-sm-4">
-        <input type="text" class="form-control" as="accessionNr" pattern="[A-Z]{3}-[0-9]{4}" value="{{_page.collection.accessionNr}}">
+      <div class='col-sm-4'>
+        <input type='text' class='form-control' as='accessionNr' pattern='[A-Z]{3}-[0-9]{4}' value='{{_page.collection.accessionNr}}'>
       </div>
-      <div class="col-sm-2">
+      <div class='col-sm-2'>
         <!-- FIXME: use Bootstrap Tooltip for this displaying pattern to respect -->
-        <span class="label label-default">Pattern : AAA-0000</span>
+        <span class='label label-default'>Pattern : AAA-0000</span>
       </div>
 
-      <label for="domain" class="col-sm-2 control-label">Domain</label>
-      <dropdown class="col-sm-2" value="{{_page.collection.domain}}" options="{{_page.domain}}" id="domain"></dropdown>
+      <label for='domain' class='col-sm-2 control-label'>Domain</label>
+      <dropdown class='col-sm-2' value='{{_page.collection.domain}}' options='{{_page.domain}}' id='domain'></dropdown>
     </div>
 
-    <div class="form-group">
-      <label for="secondNumber" class="col-sm-2 control-label">Second number #</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" as="secondNumber" value="{{_page.collection.secondNumber}}">
+    <div class='form-group'>
+      <label for='secondNumber' class='col-sm-2 control-label'>Second number #</label>
+      <div class='col-sm-4'>
+        <input type='text' class='form-control' as='secondNumber' value='{{_page.collection.secondNumber}}'>
       </div>
 
-      <label for="publish" class="col-sm-offset-2 col-sm-2 control-label">Publish</label>
-      <dropdown class="col-sm-2" value="{{_page.collection.publish}}" options="{{_page.publish}}" id="publish"></dropdown>
+      <label for='publish' class='col-sm-offset-2 col-sm-2 control-label'>Publish</label>
+      <dropdown class='col-sm-2' value='{{_page.collection.publish}}' options='{{_page.publish}}' id='publish'></dropdown>
 
     </div>
 
-    <div class="row">
+    <div class='row'>
 
-      <div class="col-sm-8">
+      <div class='col-sm-8'>
 
-        <div class="form-group">
-          <label for="title" class="col-sm-3 control-label">Title</label>
-          <div class="col-sm-6">
-            <input class="form-control" id="title" value="{{_page.collection.title}}" />
+        <div class='form-group'>
+          <label for='title' class='col-sm-3 control-label'>Title</label>
+          <div class='col-sm-6'>
+            <input class='form-control' id='title' value='{{_page.collection.title}}' />
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="artists" class="col-sm-3 control-label">Artist(s)</label>
-          <div class="col-sm-6">
-            <select multiple class="form-control" value="{{_page.collection.artists}}">
+        <div class='form-group'>
+          <label for='artists' class='col-sm-3 control-label'>Artist(s)</label>
+          <div class='col-sm-6'>
+            <select multiple class='form-control' value='{{_page.collection.artists}}'>
               <option>Fictive artist 1</option>
               <option>Fictive artist 2</option>
             </select>
           </div>
-          <div class="col-sm-3">
-            <a href="#" class="btn btn-default btn-sm">Add</a>
+          <div class='col-sm-3'>
+            <a href='#' class='btn btn-default btn-sm'>Add</a>
             <br />
-            <a href="#" class="btn btn-default btn-sm">Remove</a>
+            <a href='#' class='btn btn-default btn-sm'>Remove</a>
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="yearFrom" class="col-sm-3 control-label">Year from</label>
-          <div class="col-sm-3">
-            <input class="form-control" id="yearFrom" value="{{_page.collection.yearFrom}}" />
+        <div class='form-group'>
+          <label for='yearFrom' class='col-sm-3 control-label'>Year from</label>
+          <div class='col-sm-3'>
+            <input class='form-control' id='yearFrom' value='{{_page.collection.yearFrom}}' />
           </div>
-          <label for="yearTo" class="col-sm-3 control-label">Year to</label>
-          <div class="col-sm-3">
-            <input class="form-control" id="yearTo" value="{{_page.collection.yearTo}}" />
+          <label for='yearTo' class='col-sm-3 control-label'>Year to</label>
+          <div class='col-sm-3'>
+            <input class='form-control' id='yearTo' value='{{_page.collection.yearTo}}' />
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="period" class="col-sm-3 control-label">Period</label>
-          <dropdown class="col-sm-6" value="{{_page.collection.domain}}" options="{{_page.period}}" id="domain"></dropdown>
+        <div class='form-group'>
+          <label for='period' class='col-sm-3 control-label'>Period</label>
+          <dropdown class='col-sm-6' value='{{_page.collection.period}}' options='{{_page.period}}' id='period'></dropdown>
         </div>
 
-        <div class="form-group">
-          <label for="notes" class="col-sm-3 control-label">Description</label>
-          <div class="col-sm-9">
-            <textarea class="form-control" rows="3" id="notes">{{_page.collection.description}}</textarea>
+        <div class='form-group'>
+          <label for='notes' class='col-sm-3 control-label'>Description</label>
+          <div class='col-sm-9'>
+            <textarea class='form-control' rows='3' id='notes'>{{_page.collection.description}}</textarea>
           </div>
         </div>
 
       </div>
-      <div class="col-sm-4">
+      <div class='col-sm-4'>
 
-        <img src="http://lorempixel.com/400/365/" alt="" class="img-thumbnail" width="400px" height="366px">
+        <img src='http://lorempixel.com/400/365/' alt='' class='img-thumbnail' width='400px' height='366px'>
 
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="col-sm-12 tab">
-        <tabs selected-index="{{_page.data.currentTab}}">
-          <pane title="Basic data">
+    <div class='form-group'>
+      <div class='col-sm-12 tab'>
+        <tabs selected-index='{{_page.data.currentTab}}'>
+          <pane title='Basic data'>
 
-            <div class="form-group">
+            <div class='form-group'>
 
-              <label for="materialTechnique" class="col-sm-2 control-label">Material/technique</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" as="materialTechnique" value="{{_page.collection.materialTechnique}}">
+              <label for='materialTechnique' class='col-sm-2 control-label'>Material/technique</label>
+              <div class='col-sm-4'>
+                <input type='text' class='form-control' as='materialTechnique' value='{{_page.collection.materialTechnique}}'>
               </div>
 
-              <label for="editionSerie" class="col-sm-2 control-label">Edition/serie</label>
-              <div class="col-sm-4">
-                <input class="form-control" id="editionSerie" value="{{_page.collection.editionSerie}}" />
+              <label for='editionSerie' class='col-sm-2 control-label'>Edition/serie</label>
+              <div class='col-sm-4'>
+                <input class='form-control' id='editionSerie' value='{{_page.collection.editionSerie}}' />
               </div>
 
             </div>
 
-            <div class="form-group">
+            <div class='form-group'>
 
-              <label for="dimension" class="col-sm-2 control-label">Dimension</label>
-              <div class="col-sm-4">
-                <select multiple class="form-control" value="{{_page.collection.dimensions}}">
+              <label for='dimension' class='col-sm-2 control-label'>Dimension</label>
+              <div class='col-sm-4'>
+                <select multiple class='form-control' value='{{_page.collection.dimensions}}'>
                   <option>10cm x 32cm x 3cm</option>
                 </select>
               </div>
 
-              <label for="notes" class="col-sm-2 control-label">Notes</label>
-              <div class="col-sm-4">
-                <textarea class="form-control" rows="3" id="notes">{{_page.collection.notes}}</textarea>
+              <label for='notes' class='col-sm-2 control-label'>Notes</label>
+              <div class='col-sm-4'>
+                <textarea class='form-control' rows='3' id='notes'>{{_page.collection.notes}}</textarea>
               </div>
 
             </div>
 
-            <div class="form-group">
+            <div class='form-group'>
 
-              <label for="creditLine" class="col-sm-2 control-label">Credit line</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" as="creditLine" value="{{_page.collection.creditLine}}">
+              <label for='creditLine' class='col-sm-2 control-label'>Credit line</label>
+              <div class='col-sm-4'>
+                <input type='text' class='form-control' as='creditLine' value='{{_page.collection.creditLine}}'>
               </div>
 
-              <label for="location" class="col-sm-2 control-label">Location</label>
-              <div class="col-sm-4">
-                <input class="form-control" id="location" value="{{_page.collection.location}}" />
+              <label for='location' class='col-sm-2 control-label'>Location</label>
+              <div class='col-sm-4'>
+                <input class='form-control' id='location' value='{{_page.collection.location}}' />
               </div>
 
-            </div>
-
-          </pane>
-          <pane title="Acquisition">
-
-            <div class="form-group">
-              <label for="owner" class="col-sm-2 control-label">Owner</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" as="owner" value="{{_page.collection.owner}}">
-              </div>
-
-              <label for="acqValue" class="col-sm-2 control-label">Acq. value</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" as="acqValue" value="{{_page.collection.acqValue}}">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="acqMode" class="col-sm-2 control-label">Acq. mode</label>
-              <div class="col-sm-4">
-                <dropdown class="col-sm-2" value="{{_page.collection.acqMode}}" options="{{_page.acqMode}}" id="acqMode"></dropdown>
-              </div>
-
-              <label for="acqNotes" class="col-sm-2 control-label">Acq. notes</label>
-              <div class="col-sm-4">
-                <textarea class="form-control" rows="3" id="acqNotes">{{_page.collection.notes}}</textarea>
-              </div>
             </div>
 
           </pane>
-          <pane title="References">
-            <div class="form-group">
-              <label for="contracts" class="col-sm-2 control-label">Contracts</label>
-              <div class="col-sm-4">
-                <textarea class="form-control" rows="3" id="contracts">{{_page.collection.contracts}}</textarea>
+          <pane title='Acquisition'>
+
+            <div class='form-group'>
+              <label for='owner' class='col-sm-2 control-label'>Owner</label>
+              <div class='col-sm-4'>
+                <input type='text' class='form-control' as='owner' value='{{_page.collection.owner}}'>
               </div>
 
-              <label for="ownerHistory" class="col-sm-2 control-label">Owner history</label>
-              <div class="col-sm-4">
-                <textarea class="form-control" rows="3" id="contracts">{{_page.collection.contracts}}</textarea>
+              <label for='acqValue' class='col-sm-2 control-label'>Acq. value</label>
+              <div class='col-sm-4'>
+                <input type='text' class='form-control' as='acqValue' value='{{_page.collection.acqValue}}'>
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="litMigration" class="col-sm-2 control-label">Lit. (migration)</label>
-              <div class="col-sm-4">
-                <textarea class="form-control" rows="3" id="litMigration">{{_page.collection.litMigration}}</textarea>
+            <div class='form-group'>
+              <label for='acqMode' class='col-sm-2 control-label'>Acq. mode</label>
+              <div class='col-sm-4'>
+                <dropdown class='col-sm-2' value='{{_page.collection.acqMode}}' options='{{_page.acqMode}}' id='acqMode'></dropdown>
               </div>
 
-              <label for="exhMigration" class="col-sm-2 control-label">Exh. (migration)</label>
-              <div class="col-sm-4">
-                <textarea class="form-control" rows="3" id="exhMigration">{{_page.collection.exhMigration}}</textarea>
+              <label for='acqNotes' class='col-sm-2 control-label'>Acq. notes</label>
+              <div class='col-sm-4'>
+                <textarea class='form-control' rows='3' id='acqNotes'>{{_page.collection.notes}}</textarea>
+              </div>
+            </div>
+
+          </pane>
+          <pane title='References'>
+            <div class='form-group'>
+              <label for='contracts' class='col-sm-2 control-label'>Contracts</label>
+              <div class='col-sm-4'>
+                <textarea class='form-control' rows='3' id='contracts'>{{_page.collection.contracts}}</textarea>
+              </div>
+
+              <label for='ownerHistory' class='col-sm-2 control-label'>Owner history</label>
+              <div class='col-sm-4'>
+                <textarea class='form-control' rows='3' id='contracts'>{{_page.collection.contracts}}</textarea>
+              </div>
+            </div>
+
+            <div class='form-group'>
+              <label for='litMigration' class='col-sm-2 control-label'>Lit. (migration)</label>
+              <div class='col-sm-4'>
+                <textarea class='form-control' rows='3' id='litMigration'>{{_page.collection.litMigration}}</textarea>
+              </div>
+
+              <label for='exhMigration' class='col-sm-2 control-label'>Exh. (migration)</label>
+              <div class='col-sm-4'>
+                <textarea class='form-control' rows='3' id='exhMigration'>{{_page.collection.exhMigration}}</textarea>
               </div>
             </div>
           </pane>
@@ -190,13 +190,13 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a href="/p/artist" class="btn btn-default">Cancel</a>
-            <a on-click="collectionDelete()" style="float:right;" class="btn btn-danger">Delete</a>
+    <div class='row'>
+      <div class='col-sm-12'>
+        <div class='form-group'>
+          <div class='col-sm-offset-2 col-sm-10'>
+            <button type='submit' class='btn btn-primary'>Save</button>
+            <a href='/p/artist' class='btn btn-default'>Cancel</a>
+            <a on-click='collectionDelete()' style='float:right;' class='btn btn-danger'>Delete</a>
           </div>
         </div>
       </div>

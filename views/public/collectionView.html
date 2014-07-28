@@ -1,36 +1,54 @@
 <index:>
 
-  <h1>collection view</h1>
+  <h1>Collection object details</h1>
 
-
-  <div class='row'>
-    <div class='col-sm-5'>
-
-      <!-- image -->
-
-    </div>
-
-    <div class='col-sm-7'>
-
-      <!-- fields -->
-
-      <div class='row'>
-        <div class='col-sm-6'>
-          Title
-        </div>
-        <div class='col-sm-6'>
-          {{_page.collection.title}}
-        </div>
-      </div>
-
-
-    </div>
-  </div>
 
   {{if _page.collection}}
-  Voila
+    <div class='row'>
+      <div class='col-sm-5'>
+
+        <!-- image -->
+
+        <img src='http://lorempixel.com/400/365/' alt='' class='img-thumbnail' width='400px' height='366px'>
+
+      </div>
+
+      <div class='col-sm-5'>
+
+        <!-- fields -->
+        
+        <view name='field' label='Title' field='{{_page.collection.title}}' />
+        <view name='field' label='Accession #' field='{{_page.collection.accessionNr}}' />
+        <view name='field' label='Year from' field='{{_page.collection.yearFrom}}' />
+        <view name='field' label='Year to' field='{{_page.collection.yearTo}}' />
+        <view name='field' label='Period' field='{{_page.collection.period}}' />
+        <view name='field' label='Description' field='{{_page.collection.description}}' />
+        <view name='field' label='Material/technique' field='{{_page.collection.materialTechnique}}' />
+        <view name='field' label='Edition/serie' field='{{_page.collection.editionSerie}}' />
+        <view name='field' label='Dimension' field='{{_page.collection.dimensions}}' />
+        <view name='field' label='Notes' field='{{_page.collection.notes}}' />
+        <view name='field' label='Credit line' field='{{_page.collection.creditLine}}' />
+        <view name='field' label='Location' field='{{_page.collection.location}}' />
+        <view name='field' label='Owner' field='{{_page.collection.owner}}' />
+
+      </div>
+
+      <div class='col-sm-2'>
+
+        <!-- TODO: related artworks or artist or something :) -->
+
+      </div>
+    </div>
+
   {{else}}
-  No object
+    Object not found.
   {{/}}
 
-  Accession # : {{_page.collection.accessionNr}}
+
+<field:>
+  {{if @field}}
+  <dl class='dl-horizontal'>
+    <dt>{{@label}}</dt>
+    <dd>{{@field}}</dd>
+  </dl>
+  {{/}}

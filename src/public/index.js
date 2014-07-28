@@ -15,21 +15,15 @@ app.loadStyles(__dirname + '/../../styles/public');
  * Home
  */
 app.get('/', function(page, model, params, next) {
-
   var collectionQuery = model.query('collection', {publish: "Highlight"});
-
   model.subscribe(collectionQuery, function onCount(err, next){
     if (err) return next(err);
-
     collectionQuery.ref('_page.collection');
-
     page.render('home');
   });
-
 });
 
 app.use(require('./collection'));
-
 
 app.proto.create = function(model) {
 
