@@ -9,6 +9,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <Body:>
+
+  <!-- login modal box -->
+  <modal as="login" on-hide="signIn()">
+    <title>Authenticate to access private area</title>
+    <div class="container">
+    <div class="row text-center">
+      <div class="col-sm-5">
+        <form class="form-signin">
+        <input type="text" class="form-control" placeholder="Email" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" required>
+        <!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
+        <!-- <a href="/p" class="btn btn-lg btn-primary btn-block">Sign in</a>-->
+        <label class="checkbox pull-left">
+          <input type="checkbox" value="remember-me">
+          Remember me
+        </label>
+        <!-- <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span> -->
+        </form>
+        </div>
+      </div>
+    </div>
+    <action>Cancel</action>
+    <action class="btn-primary">Sign in</action>
+  </modal>
+
   <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -29,7 +54,7 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="/p"><span class="glyphicon glyphicon-log-in"> Login</span></a>
+            <a href="#" on-click="login.show()"><span class="glyphicon glyphicon-log-in"> Login</span></a>
           </li>
         </ul>
       </div>
@@ -39,7 +64,5 @@
 
   <!-- content goes here -->
   <div class="container">
-
-        <view name="{{$render.ns}}" _page="{{_page}}"/>
-
+    <view name="{{$render.ns}}" _page="{{_page}}"/>
   </div>

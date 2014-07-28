@@ -25,6 +25,11 @@ app.get('/', function(page, model, params, next) {
 
 app.use(require('./collection'));
 
+app.proto.signIn = function(action, cancel) {
+  if (action === 'Sign in')
+    app.history.push('/p');
+};
+
 app.proto.create = function(model) {
 
   /**
