@@ -15,9 +15,9 @@
         <div class="row">
           {{each _page.collection}}
           <div class="col-sm-4 highlight">
-            <a href="/p/collection/{{this.id}}">
+            <a href="/collection/{{this.id}}">
             <img src="http://lorempixel.com/120/120/" alt="" class="img-circle" width="120px" height="120px">
-          
+
             <h2>{{this.title}}</h2>
             <p>{{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}</p>
             <p>
@@ -33,6 +33,9 @@
 
       <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
         <div class="list-group">
+          {{each _page.group}}
+            {{this}}
+          {{/}}
           <a href="#" class="list-group-item active">Categories</a>
           <a href="#" class="list-group-item">Link</a>
           <a href="#" class="list-group-item">Link</a>

@@ -1,5 +1,5 @@
 /**
- * COLLECTION
+ * PRIVATE COLLECTION
  */
 
 module.exports = function(app, options) {

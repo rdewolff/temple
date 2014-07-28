@@ -1,0 +1,36 @@
+<index:>
+
+  <h1>collection view</h1>
+
+
+  <div class='row'>
+    <div class='col-sm-5'>
+
+      <!-- image -->
+
+    </div>
+
+    <div class='col-sm-7'>
+
+      <!-- fields -->
+
+      <div class='row'>
+        <div class='col-sm-6'>
+          Title
+        </div>
+        <div class='col-sm-6'>
+          {{_page.collection.title}}
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  {{if _page.collection}}
+  Voila
+  {{else}}
+  No object
+  {{/}}
+
+  Accession # : {{_page.collection.accessionNr}}

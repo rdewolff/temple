@@ -28,6 +28,8 @@ app.get('/', function(page, model, params, next) {
 
 });
 
+app.use(require('./collection'));
+
 
 app.proto.create = function(model) {
 
