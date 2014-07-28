@@ -100,7 +100,8 @@ To avoid collision with bootstrap in the left menu
   the modle.set() to handle data in our components? Seems not the case.
 - can we call model.on() in a composant create methode or that would
   register many times the same trigger?
-- how to pass parameter from a view to a component index.js ? 
+- how to pass parameter from a view to a component index.js ?
+- No distinct query in Derby/Racer ?
 
 ## Mail to Derby.js Google group
 
