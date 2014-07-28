@@ -14,13 +14,16 @@
         </div>
         <div class="row">
           {{each _page.collection}}
-          <div class="col-sm-4">
+          <div class="col-sm-4 highlight">
+            <a href="/p/collection/{{this.id}}">
+            <img src="http://lorempixel.com/120/120/" alt="" class="img-circle" width="120px" height="120px">
             <h2>{{this.title}}</h2>
-            <p>{{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}.</p>
+            <p>{{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}</p>
             <p>
               {{this.materialTechnique}}
             </p>
             <p class="badge">{{this.accessionNr}}</p>
+            </a>
             <p><a class="btn btn-default" href="/p/collection/{{this.id}}">View détails</a></p>
           </div>
           {{/}}
@@ -46,7 +49,7 @@
     <hr>
 
     <footer>
-      <p>&copy; Company 2014</p>
+      <p>&copy; Zetcom 2014</p>
 
       <a class="btn btn-danger btn-lg" href="/p">Temple admin</a>
 
