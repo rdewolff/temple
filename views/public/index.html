@@ -47,9 +47,9 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="/collection">Collection</a></li>
-          <li><a href="/artists">Artists</a></li>
+          <view name="nav-link" href="/">Home</view>
+          <view name="nav-link" href="/collection">Collection</view>
+          <view name="nav-link" href="/artists">Artists</view>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -66,3 +66,9 @@
   <div class="container">
     <view name="{{$render.ns}}" _page="{{_page}}"/>
   </div>
+
+
+<nav-link:>
+  <li class="{{if $render.url === @href}}active{{/}}">
+    <a href="{{@href}}">{{@content}}</a>
+  </li>
