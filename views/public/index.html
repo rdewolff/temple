@@ -4,9 +4,9 @@
   Temple public
 
 <Head:>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <Body:>
-
   <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -20,9 +20,9 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">Objects</a></li>
-          <li><a href="#contact">Artists</a></li>
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/collection">Collection</a></li>
+          <li><a href="/artists">Artists</a></li>
         </ul>
       </div>
     </div>
@@ -30,10 +30,7 @@
 
   <!-- content goes here -->
   <div class="container">
-    <div class="row clearfix">
-      <div class="col-md-12 column">
-        <!-- here the view get rendered -->
+
         <view name="{{$render.ns}}" _page="{{_page}}"/>
-      </div>
-    </div>
+    
   </div>
