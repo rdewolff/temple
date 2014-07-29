@@ -2,22 +2,32 @@
 
   <h1>Collections</h1>
 
-  <div class="col-sm-6">
+  <div class="row">
+    <label for='domain' class='col-sm-2 control-label'>Filter domain</label>
+    <dropdown class='col-sm-2' value='{{_page.filterChoice}}' options='{{_page.filter}}' id='filter'></dropdown>
 
-    {{each _page.collection}}
-    <div class="row spacer">
-      <a href="/collection/{{this.id}}">
-        <div class="col-sm-3">
-          <img src="http://lorempixel.com/100/100/" alt="" class="img-thumbnail" width="100px" height="100px">
-        </div>
-        <div class="col-sm-9">
-            <h4>{{this.title}}</h4>
-            <span class="label label-primary">{{this.accessionNr}}</span><br />
-            {{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}<br />
-            {{this.materialTechnique}}<br />
-        </div>
-      </a>
+    <label for='domain' class='col-sm-2 control-label'>Order</label>
+    <dropdown class='col-sm-2' value='{{_page.orderChoice}}' options='{{_page.order}}' id='filter'></dropdown>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+
+      {{each _page.collection}}
+      <div class="row spacer">
+        <a href="/collection/{{this.id}}">
+          <div class="col-sm-3">
+            <img src="http://lorempixel.com/100/100/" alt="" class="img-thumbnail" width="100px" height="100px">
+          </div>
+          <div class="col-sm-9">
+              <h4>{{this.title}}</h4>
+              <span class="label label-primary">{{this.accessionNr}}</span><br />
+              {{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}<br />
+              {{this.materialTechnique}}<br />
+          </div>
+        </a>
+      </div>
+      {{/}}
+
     </div>
-    {{/}}
-
   </div>
