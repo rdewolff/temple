@@ -102,6 +102,8 @@ To avoid collision with bootstrap in the left menu
   register many times the same trigger?
 - how to pass parameter from a view to a component index.js ?
 - No distinct query in Derby/Racer ?
+- wrong model events don't necesserly show error when not used correctly. they
+  simply die silently. TODO: example.
 
 ## Mail to Derby.js Google group
 
@@ -127,7 +129,7 @@ Common error page would be helpfull
 ## Derby bug with display collection object
 
 *Status:* actually working on it
- 
+
 Hi all
 
 While making much progress in the last few days, I think I've run through a bug in Derby 0.6.
