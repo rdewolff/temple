@@ -4,6 +4,28 @@
 
 module.exports = function(app, options) {
 
+  app.on('model', function(model) {
+    model.fn('filter', function(item, id, obj) {
+      // TODO: this is not working with live binding : model.get('_page.filterChoice'); // "Red";
+
+      console.log("_page.filterChoice=" + model.get('_page.filterChoice'));
+      console.log(id);
+      console.log(obj);
+      return item.domain === 'Red';
+
+    });
+  });
+
+  app.get('/collection2', function(page, model, params, next) {
+    model.subscribe('collection', function(err){
+      if (err) return next(err);
+      var filter = model.filter('collection', 'filter');
+      filter.ref('_page.collection');
+      model.set('_page.filter', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}]);
+      page.render('collectionList');
+    });
+  });
+
   app.get('/collection', function(page, model, params, next) {
     var collection = model.query('collection', {domain: model.get('_page.filterChoice'), $or: [{publish: 'Public'}, {publish: 'Highlight'}]});
     model.subscribe(collection, function(err) {

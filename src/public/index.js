@@ -32,6 +32,9 @@ app.proto.signIn = function(action, cancel) {
 
 app.proto.create = function(model) {
 
+  // TODO: remove this only for debug
+  global.MODEL = model
+
   /**
    * Import scripts
    */

@@ -60,6 +60,9 @@ app.use(require('./collection'));
 
 app.proto.create = function(model) {
 
+  // TODO: remove this only for debug
+  global.MODEL = model
+
   console.log('src/app/index.js create');
 
   /**
