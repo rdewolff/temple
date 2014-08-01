@@ -3,9 +3,17 @@
   <h1>Collections</h1>
 
   <div class="row">
-    <label for='domain' class='col-sm-2 control-label'>Filter domain</label>
-    <dropdown class='col-sm-2' value='{{_page.filterChoice}}' options='{{_page.filter}}' id='filter'></dropdown>
 
+    <!-- filter -->
+    <div class="btn-group col-sm-4">
+      <a href="/collection" class="btn btn-default">All</a>
+      <a href="/collection/f/red" class="btn btn-default">Red</a>
+      <!-- <button type="button" class="btn btn-default" href="/collection">All</button> -->
+      <button type="button" class="btn btn-default">Orange</button>
+      <button type="button" class="btn btn-default">Purple</button>
+    </div>
+
+    <!-- order -->
     <label for='domain' class='col-sm-2 control-label'>Order</label>
     <dropdown class='col-sm-2' value='{{_page.orderChoice}}' options='{{_page.order}}' id='filter'></dropdown>
   </div>
