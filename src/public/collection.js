@@ -5,16 +5,14 @@
 module.exports = function(app, options) {
 
   app.on('model', function(model) {
+    // TODO: this is not working with live binding : model.get('_page.filterChoice'); // "Red";
     model.fn('filter-red', function(item, key, obj) {
-      // TODO: this is not working with live binding : model.get('_page.filterChoice'); // "Red";
       return item.domain === 'Red';
     });
     model.fn('filter-orange', function(item, key, obj) {
-      // TODO: this is not working with live binding : model.get('_page.filterChoice'); // "Red";
       return item.domain === 'Orange';
     });
     model.fn('filter-purple', function(item, key, obj) {
-      // TODO: this is not working with live binding : model.get('_page.filterChoice'); // "Red";
       return item.domain === 'Purple';
     });
   });
