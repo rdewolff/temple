@@ -62,6 +62,10 @@ module.exports = function(app, options) {
     app.history.push('/p/collection');
   }
 
+  CollectionEditForm.prototype.stringify = function(str) {
+    return JSON.stringify(str, null, 2);
+  }
+
   CollectionEditForm.prototype.collectionDelete = function() {
     this.model.silent().del('_page.collection');
     app.history.back();

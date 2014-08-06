@@ -1,4 +1,4 @@
-<index:>
+pagey<index:>
   <form class='form-horizontal' role='form' on-submit='done()'>
     <h4>
       {{if _page.collection.id}}
@@ -85,7 +85,32 @@
       </div>
       <div class='col-sm-4'>
 
+        <!-- TODO: file upload -->
+        
         <img src='http://lorempixel.com/400/365/' alt='' class='img-thumbnail' width='400px' height='366px'>
+
+        <style>
+          .file-input {
+            width: 300px;
+            margin: 20px 0 0 20px;
+          }
+          .file-input-multi {
+            border: 1px solid orange;
+          }
+        </style>
+        <l-upload url="/p/collection/upload" files={{_page.pending}} responses={{_page.response}} class="file-input" multiple={{false}}></l-upload>
+        <div class="pending">
+          <p>pending:<br>
+          </p>
+          <pre>
+          {{stringify(_page.pending)}}
+          </pre>
+          <p>response:<br>
+          </p>
+          <pre>
+          {{stringify(_page.response)}}
+          </pre>
+        </div>
 
       </div>
     </div>

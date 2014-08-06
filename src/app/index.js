@@ -7,6 +7,9 @@ if (!derby.util.isProduction) global.app = app;
 app.serverUse(module, 'derby-stylus');
 
 app.use(require('d-bootstrap'));
+
+app.component(require('l-upload')); // lever file-upload
+
 //app.use(require('../../components/zetcom-derby-ui-forms'));
 
 app.component(require('../../components/temple-panel'));
