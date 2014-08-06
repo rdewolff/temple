@@ -1,0 +1,59 @@
+<index:>
+
+  <h1>Artist details</h1>
+
+
+
+  {{if _page.artist}}
+    <div class='row'>
+
+      <div class='col-sm-5'>
+
+        <!-- fields -->
+        <view name='field' label='Name' field='{{_page.artist.firstname}}' />
+        <view name='field' label='Lastname' field='{{_page.artist.lastname}}' />
+        <view name='field' label='Role' field='{{_page.artist.role}}' />
+        <view name='field' label='Domain #' field='{{_page.artist.domain}}' />
+        <view name='field' label='Gender' field='{{_page.artist.gender}}' />
+        <view name='field' label='Birthday' field='{{_page.artist.birthday}}' />
+        <view name='field' label='Deathday' field='{{_page.artist.deathday}}' />
+        <view name='field' label='Birthplace' field='{{_page.artist.birthplace}}' />
+        <view name='field' label='Deathplace' field='{{_page.artist.deathplace}}' />
+        <view name='field' label='Birth Country' field='{{_page.artist.birthcountry}}' />
+        <view name='field' label='Death Country' field='{{_page.artist.deathcountry}}' />
+        <view name='field' label='Citizenship' field='{{_page.artist.citizenship}}' />
+        <view name='field' label='Biography' field='{{_page.artist.biography}}' />
+        <view name='field' label='Awards' field='{{_page.artist.awards}}' />
+        <view name='field' label='Notes' field='{{_page.artist.notes}}' />
+
+      </div>
+
+      <div class='col-sm-5'>
+
+        <!-- TODO: show related work -->
+
+        Work
+
+      </div>
+
+
+      <div class='col-sm-2'>
+
+        <!-- TODO: related artworks or artist or something :) -->
+
+
+      </div>
+    </div>
+
+  {{else}}
+    Artist not found.
+  {{/}}
+
+
+<field:>
+  {{if @field}}
+  <dl class='dl-horizontal'>
+    <dt>{{@label}}</dt>
+    <dd>{{@field}}</dd>
+  </dl>
+  {{/}}

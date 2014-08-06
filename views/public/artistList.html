@@ -1,0 +1,67 @@
+<index:>
+
+  <h1>Artists</h1>
+
+  <div class="row">
+
+    <div class="btn-group col-sm-12">
+      <view name="filter-link" href="/artist">All</view>
+      {{each _page.alphabet}}
+        <view name="filter-link" href="/artist?filter={{this}}">{{this}}</view>
+      {{/}}
+    </div>
+
+  </div>
+
+  <div class="row-spacer"></div>
+
+  {{if _page.artist}}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Birthdate</th>
+        <th>Birth country</th>
+        <th>Gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{each _page.artist}}
+        <tr>
+          <td><a href="/artist/{{this.id}}">{{this.lastname}} {{this.firstname}}</a></td>
+          <td>{{this.birthday}}</td>
+          <td>{{this.birthcountry}}</td>
+          <td>{{this.gender}}</td>
+        </tr>
+      {{/}}
+    </tbody>
+  </table>
+  {{else}}
+  <h3>No artist.</h3>
+  {{/}}
+
+
+  <div class="row-spacer"></div>
+
+  <!-- TODO: pages -->
+  <div class="btn-group">
+    <button type="button" class="btn btn-default">1</button>
+    <button type="button" class="btn btn-default">2</button>
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        ...
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row-spacer"></div>
+
+
+<filter-link:>
+  <a href="{{@href}}" class='btn btn-default {{if $render.url === @href}}active{{/}}'>{{@content}}</a>

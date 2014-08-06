@@ -25,6 +25,9 @@ app.get('/', function(page, model, params, next) {
 
 app.use(require('./collection'));
 
+app.use(require('./artist'));
+
+
 app.proto.signIn = function(action, cancel) {
   if (action === 'Sign in')
     app.history.push('/p');
