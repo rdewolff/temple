@@ -42,6 +42,13 @@ module.exports = function(app, options) {
   app.component('collectionEdit', CollectionEditForm);
   function CollectionEditForm() {}
 
+  CollectionEditForm.prototype.init = function() {
+    this.model.setNull("_page.pending", []);
+    this.model.setNull("_page.pendingFiles", []);
+    this.model.setNull("_page.response", []);
+    this.model.setNull("_page.responses", []);
+  }
+
   CollectionEditForm.prototype.done = function() {
     var model = this.model;
     /* TODO: validation
