@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 var multiparty = require('multiparty');
-var fs = require('fs')
+var fs = require('fs');
 
 // get the collection passed in param and return the result in JSON
 router.get('/api/v1/:collection', function(req, res){

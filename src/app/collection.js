@@ -2,6 +2,8 @@
  * PRIVATE COLLECTION
  */
 
+var fs = require('fs');
+
 module.exports = function(app, options) {
 
   app.get('/p/collection', function(page, model, params, next) {
@@ -85,6 +87,34 @@ module.exports = function(app, options) {
   CollectionEditForm.prototype.collectionDelete = function() {
     this.model.silent().del('_page.collection');
     app.history.back();
+  }
+
+  CollectionEditForm.prototype.deleteFile = function(file, index) {
+    var model = this.model;
+    console.log('delete file', file);
+    console.log('index', index);
+    // delete file form filesystem
+    // FIXME: use a global path for the project
+    var filePath = '/public/files/'+ file.fileName;
+    console.log('filePath', filePath);
+
+    // TODO: delete image from the server / this needs to be done server side
+    /*
+    fs.unlink(filePath, function (err) {
+      if (err) throw err;
+      console.log('successfully deleted '+filePath);
+    });*/
+
+    // remove file from file list of the current object
+    //console.log(model.get('_page.collection.file'));
+    var files = model.at('_page.collection.file');
+    console.log(files);
+    files.remove(index);
+    console.log(files);
+
+    // remove file form the database
+    // TODO: delete file form model, not working yet
+    //model.del('file.'+file.id);
   }
 
 }
