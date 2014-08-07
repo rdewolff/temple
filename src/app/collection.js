@@ -32,6 +32,10 @@ module.exports = function(app, options) {
     });
   });
 
+  app.on('model', function(model){
+    model.fn()
+  });
+
   app.component('collectionList', CollectionListForm);
   function CollectionListForm() {}
 
@@ -43,10 +47,15 @@ module.exports = function(app, options) {
   function CollectionEditForm() {}
 
   CollectionEditForm.prototype.init = function() {
-    this.model.setNull("_page.pending", []);
-    this.model.setNull("_page.pendingFiles", []);
-    this.model.setNull("_page.response", []);
-    this.model.setNull("_page.responses", []);
+    var model = this.model;
+    model.setNull("_page.pending", []);
+    model.setNull("_page.response", []);
+
+    // TODO: keep in mind this works as a "reactive function"
+    /*
+    model.start('_page.collection.file', '_page.response', function(item) {
+      return model.get('_page.response');
+    }); */
   }
 
   CollectionEditForm.prototype.done = function() {

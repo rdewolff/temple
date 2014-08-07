@@ -38,12 +38,12 @@ router.post('/p/collection/upload', function(req, res, next) {
         fileUploaded = {
           id: file.fieldName.replace(/\.[^/.]+$/, ""),
           fileOriginalFilename: file.originalFilename,
-          fileNewFilename: file.fieldName,
+          fileName: file.fieldName,
           fileSize: file.size
         };
         // save in model
         model.add('file', fileUploaded)
-        // return result for processing 
+        // return result for processing
         return res.json(fileUploaded);
       });
     });

@@ -86,8 +86,13 @@ pagey<index:>
       <div class='col-sm-4'>
 
         <!-- TODO: file upload -->
-        
-        <img src='http://lorempixel.com/400/365/' alt='' class='img-thumbnail' width='400px' height='366px'>
+        {{if _page.collection.file}}
+          {{each _page.collection.file}}
+              <img src='/files/{{this.fileName}}' alt='' class='img-thumbnail' width='400px'>
+          {{/}}
+        {{else}}
+          <img src='http://lorempixel.com/400/365/' alt='' class='img-thumbnail' width='400px' height='366px'>
+        {{/}}
 
         <style>
           .file-input {
@@ -98,7 +103,9 @@ pagey<index:>
             border: 1px solid orange;
           }
         </style>
-        <l-upload url="/p/collection/upload" files={{_page.pending}} responses={{_page.response}} class="file-input" multiple={{false}}></l-upload>
+        <l-upload url="/p/collection/upload" files={{_page.pending}} responses={{_page.collection.file}} class="file-input" multiple={{false}}></l-upload>
+
+        <!-- debug file upload
         <div class="pending">
           <p>pending:<br>
           </p>
@@ -110,7 +117,13 @@ pagey<index:>
           <pre>
           {{stringify(_page.response)}}
           </pre>
+          <p>file:<br>
+          </p>
+          <pre>
+          {{stringify(_page.collection.file)}}
+          </pre>
         </div>
+        -->
 
       </div>
     </div>
