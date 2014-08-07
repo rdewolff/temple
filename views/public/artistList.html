@@ -5,6 +5,7 @@
   <div class="row">
 
     <div class="btn-group col-sm-12">
+      <a href="#" class='btn btn-default disabled'>Filter name starting with :</a>
       <view name="filter-link" href="/artist">All</view>
       {{each _page.alphabet}}
         <view name="filter-link" href="/artist?filter={{this}}">{{this}}</view>
