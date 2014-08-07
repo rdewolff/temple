@@ -24,6 +24,8 @@
     "compression": "^1.0",
     "serve-favicon": "^2.0",
     "d-bootstrap": "~0.1.0",
+    "d-connection-alert": "~0.1.0",
+    "d-before-unload": "~0.1.0",
     "l-upload": "*",
     "multiparty": "*"
   },

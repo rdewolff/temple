@@ -7,6 +7,8 @@ if (!derby.util.isProduction) global.app = app;
 app.serverUse(module, 'derby-stylus');
 
 app.use(require('d-bootstrap'));
+app.component(require('d-connection-alert'));
+app.component(require('d-before-unload'));
 
 app.component(require('l-upload')); // lever file-upload
 
