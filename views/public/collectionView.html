@@ -8,8 +8,14 @@
       <div class='col-sm-5'>
 
         <!-- image -->
-
-        <img src='http://lorempixel.com/400/365/' alt='' class='img-thumbnail' width='400px' height='366px'>
+        {{if _page.collection.file}}
+          {{each _page.collection.file}}
+              <img src='/files/{{this.fileName}}' alt='' class='img-thumbnail' width='400px'>
+          {{/}}
+        {{else}}
+          <!-- no image, we use a random image from the web -->
+          <img src='http://lorempixel.com/400/365/' alt='' class='img-thumbnail' width='400px' height='366px'>
+        {{/}}
 
       </div>
 
