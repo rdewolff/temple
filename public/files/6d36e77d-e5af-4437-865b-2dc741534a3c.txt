@@ -1,0 +1,3 @@
+VPN Server IP
+
+VPN Server IP address : 178.22.109.223:4433
