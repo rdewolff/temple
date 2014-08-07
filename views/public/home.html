@@ -16,7 +16,14 @@
           {{each _page.collection}}
           <div class="col-sm-4 highlight">
             <a href="/collection/{{this.id}}">
+            <!-- TODO: if test doesn't work here
+            {{if this.file[0].fileName}}
+            <img src="/files/{{this.file[0].fileName}}" title="{{this.file[0].fileOriginalFilename}}" class="img-circle" width="120px" height="120px">
+            {{else}}
             <img src="http://lorempixel.com/120/120/" alt="" class="img-circle" width="120px" height="120px">
+            {{/}}
+            -->
+            <img src="/files/{{this.file[0].fileName}}" title="{{this.file[0].fileOriginalFilename}}" class="img-circle" width="120px" height="120px">
             <h2>{{this.title}}</h2>
             <p>{{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}</p>
             <p>
