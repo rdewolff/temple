@@ -1,4 +1,21 @@
 <index:>
+  <modal as="modalCollectionArtistLink" on-hide="hideModal()">
+    <title>Add artist</title>
+
+    Choose artist to add
+    Filter: <input type="text">
+    <br />
+    <select name="" size="5">
+      <option value="">Nom</option>
+      {{each _page.artist}}
+        <option>{{this.lastname}} {{this.firstname}}</option>
+      {{/}}
+    </select>
+
+    <action>Cancel</action>
+    <action class="btn-primary">Done</action>
+  </modal>
+
   <form class='form-horizontal' role='form' on-submit='done()'>
     <h4>
       {{if _page.collection.id}}
@@ -53,7 +70,7 @@
             </select>
           </div>
           <div class='col-sm-3'>
-            <a href='#' class='btn btn-default btn-sm'>Add</a>
+            <a href='#' class='btn btn-default btn-sm' on-click="modalCollectionArtistLink.show()">Add</a>
             <br />
             <a href='#' class='btn btn-default btn-sm'>Remove</a>
           </div>

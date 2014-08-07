@@ -16,6 +16,8 @@ module.exports = function(app, options) {
   });
 
   app.get('/p/collection/:id', function(page, model, params, next) {
+
+    // FIXME: use administrable data. Probably with component to factorize
     model.set('_page.domain', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}]);
     model.set('_page.period', [{content: 'AD'}, {content: 'BC'}]);
     model.set('_page.acqMode', [{content: 'Achat'}, {content: 'Achat après commande'}, {content: 'Bourse'}, {content: 'Brocante'}, {content: 'Cadeau'}]);
@@ -25,10 +27,12 @@ module.exports = function(app, options) {
       return page.render('collectionEdit');
     }
     var collection = model.at('collection.' + params.id);
-    collection.subscribe(function(err) {
+    var artist = model.query('artist', {});
+    model.subscribe(collection, artist, function(err) {
       if (err) return next(err);
-      if (!collection.get()) return next();
-      model.ref('_page.collection', collection)
+      //if (!collection.get()) return next();
+      model.ref('_page.collection', collection);
+      model.ref('_page.artist', artist);
 
       page.render('collectionEdit');
     });
@@ -50,6 +54,7 @@ module.exports = function(app, options) {
 
   CollectionEditForm.prototype.init = function() {
     var model = this.model;
+    // file upload
     model.setNull("_page.pending", []);
     model.setNull("_page.response", []);
 
@@ -116,5 +121,12 @@ module.exports = function(app, options) {
     // TODO: delete file form model, not working yet
     //model.del('file.'+file.id);
   }
+
+  CollectionEditForm.prototype.hideModal = function(action, cancel) {
+    console.log(action);
+    //if (!window.confirm('Action: ' + action + '\n\nContinue to hide?')) {
+    //  cancel();
+    //}
+  };
 
 }
