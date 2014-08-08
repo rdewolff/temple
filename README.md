@@ -109,6 +109,11 @@ To avoid collision with bootstrap in the left menu
 - No distinct query in Derby/Racer ?
 - wrong model events don't necesserly show error when not used correctly. they
   simply die silently. TODO: example.
+- how to query the model in the app.get() controller, and then re-run the query on
+  change of something? Should we share object? Simply re run a new query, subscribe
+  again to it and ref() it ? What's the best practice??? Am struggling to try to
+  do this properly to filter a collection displayed based on the user input.
+
 
 ### Mail to Derby.js Google group
 
@@ -139,7 +144,13 @@ Hi all
 
 While making much progress in the last few days, I think I've run through a bug in Derby 0.6.
 
-The actual app is an app to manage art objects and artists. One part of the app is the "private" one (backend) and the other is the public one (front end). In the backend, I can edit a collection object using ```model.at('collection.'+params.id)```. That was working fine, until... I added the same method to display the collection object detail with the same method : ```model.at('collection.'+params.id)```. When I added this second method, doing the same thing with a different route for my second app :
+The actual app is an app to manage art objects and artists. One part of the app
+is the "private" one (backend) and the other is the public one (front end). In the
+backend, I can edit a collection object using ```model.at('collection.'+params.id)```.
+That was working fine, until... I added the same method to display the collection
+object detail with the same method : ```model.at('collection.'+params.id)```. When
+I added this second method, doing the same thing with a different route for my
+second app :
 
 1. I lost data!! That's the worst part. All the object I tried to view in details where wipped form the database. The object still exist, but all the records have been _deleted_!
 2. The system now crash with the following error code :
