@@ -1,31 +1,33 @@
-temple
-=============
+# Temple
 
+## Model
 
-# TODO
+### Application model
 
-## Private
+- ```_session.search``` :
 
-### artist detail
+## TODO
 
-- bind the tab with the data like in the example from Derbyjs
+- remove delete button on edit form when adding new object
 
-# Mongodb
+Cf. specification document [https://docs.google.com/document/d/1LaTlhE7MRqVQabxxX4uBnHOJha9I_-ZU1Y43ri5kXmI]
 
-## Backup
+## Mongodb
+
+### Backup
 
 ```
 mongodump -d <our database name> -o <directory_backup>
 ```
 
-## Restore
+### Restore
 
 And to "restore/import" that, i used (from directory_backup/dump/):
 ```
 mongorestore <our database name>
 ```
 
-## Via JSON files
+### Via JSON files
 
 ```
 mongoexport -d temple -c collection -o data.json
@@ -34,28 +36,30 @@ mongoexport -d temple -c collection -o data.json
 mongoimport -d temple -c artist data.json
 ```
 
-## Convert any mongodb to livedb compatible
+### Convert any mongodb to livedb compatible
 
 To use your standard mongodb database with livedb, you need to ad a few info in
 the database. That's why the tool IGOR has been created.
 
 https://github.com/share/igor
 
-# Dependencies
+## Dependencies
 
 Temple use NPM for it's npm dependencies and bower.
 
-## Node.js NPM
+### Node.js NPM
 
-## Bower
+- Cf. package.json file
+
+### Bower
 
 - Keypress : http://dmauro.github.io/Keypress/
 
-# Tweaks
+## Tweaks
 
-## Styling
+### Styling
 
-### Sidr CSS cleaned
+#### Sidr CSS cleaned
 
 public/component/sidr/stylesheets/jquery.sidr.light.css : removed the following styles :
 
@@ -64,14 +68,14 @@ font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-size:15px;
 ```
 To avoid collision with bootstrap in the left menu
 
-# Known bugs
+## Known bugs
 
 - If you change page while the temple-panel is still open, it won't ropen. You
   have to reload the whole page for it to work again.
 
-# Derby.js notes
+## Derby.js notes
 
-## Difficulties & questions
+### Difficulties & questions
 
 - pass data to view : how to do it properly?
 - split logic
@@ -91,6 +95,7 @@ To avoid collision with bootstrap in the left menu
   later that you discover your mistakes and you have to rewrite part of your app.
   Having a "Good practice" section in the doc would help newbies to get started
   and take the good road directly!
+  - model.query() : when no query object passed in parameter, error should be more expressfull
 - how does the ```<includes:>``` link with ```{{@static}}/file``` work?
 - serving static content in components (like with the codemirror) is really a mess.. any way
   to make that better in the futur?
@@ -105,7 +110,7 @@ To avoid collision with bootstrap in the left menu
 - wrong model events don't necesserly show error when not used correctly. they
   simply die silently. TODO: example.
 
-## Mail to Derby.js Google group
+### Mail to Derby.js Google group
 
 In reply to : https://groups.google.com/forum/#!topic/derbyjs/tcj4Ezeh2-A
 
@@ -126,7 +131,7 @@ Docs : have a doc in http://devdocs.io/ !
 Common error page would be helpfull
 ```
 
-## Derby bug with display collection object
+### Derby bug with display collection object
 
 *Status:* actually working on it
 
