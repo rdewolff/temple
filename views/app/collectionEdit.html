@@ -1,19 +1,16 @@
 <index:>
   <modal as="modalCollectionArtistLink" on-hide="hideModal()">
     <title>Add artist</title>
-
-    Choose artist to add
-    Filter: <input type="text">
-    <br />
-    <select name="" size="5">
-      <option value="">Nom</option>
+    <!-- TODO: filter artist list
+    <input type="text" value='{{_session.collectionEdit_ArtistFilter}}' class="form-control" id="filterArtist" placeholder="Search artist">
+    <br />-->
+    <select multiple class='form-control' size="10" as="artistsFullList">
       {{each _page.artist}}
-        <option>{{this.lastname}} {{this.firstname}}</option>
+        <option on-dblclick="addArtist(this)">{{this.lastname}} {{this.firstname}}</option>
       {{/}}
     </select>
-
     <action>Cancel</action>
-    <action class="btn-primary">Done</action>
+    <action class="btn-primary")>Done</action>
   </modal>
 
   <form class='form-horizontal' role='form' on-submit='done()'>
@@ -64,15 +61,16 @@
         <div class='form-group'>
           <label for='artists' class='col-sm-3 control-label'>Artist(s)</label>
           <div class='col-sm-6'>
-            <select multiple class='form-control' value='{{_page.collection.artists}}'>
-              <option>Fictive artist 1</option>
-              <option>Fictive artist 2</option>
+            <select multiple class='form-control' value='{{_page.collection.artists}}' as="artistsList">
+              {{each _page.collection.artists}}
+              <option>{{this.lastname}} {{this.firstname}}</option>
+              {{/}}
             </select>
           </div>
           <div class='col-sm-3'>
             <a href='#' class='btn btn-default btn-sm' on-click="modalCollectionArtistLink.show()">Add</a>
             <br />
-            <a href='#' class='btn btn-default btn-sm'>Remove</a>
+            <a href='#' class='btn btn-default btn-sm' on-click="removeArtist()">Remove</a>
           </div>
         </div>
 

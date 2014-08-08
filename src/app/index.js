@@ -82,18 +82,16 @@ app.proto.create = function(model) {
   require('../../public/components/sidr/jquery.sidr');
   require('../../public/components/Keypress/keypress-2.0.3.min');
 
-  console.log("binding data for search");
-
-  model.set('_session.search', '');
-
   /**
    * Search using the left temple-panel
    */
+  // TODO: is the set here necessary ? With -> model.setNull('_session.search', []); -> doesn't work.
+
   // TODO: can we call model.on() in a composant create methode or that would
   // regiser many times the same trigger?
   model.on('change', '_session.search', function() {
 
-    console.log("_session.search has changed! " + Date());
+    // debug console.log("_session.search has changed! " + Date());
 
     var searchQuery = model.get("_session.search");
 
@@ -136,11 +134,13 @@ app.proto.create = function(model) {
       //model.set('_page.searchCollection', searchCollectionQuery.get());
       //model.set('_page.searchArtist', searchArtistQuery.get());
 
-      console.log("SEARCH DONE. RESULT : "+searchCollectionQuery.get().length);
+      // Debug
+      console.log("Search result # : "+searchCollectionQuery.get().length);
 
     // app.history.push('/p/search');
     });
   });
+
 
 
 }

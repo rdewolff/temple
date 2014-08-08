@@ -30,16 +30,11 @@ module.exports = function(app, options) {
     var artist = model.query('artist', {});
     model.subscribe(collection, artist, function(err) {
       if (err) return next(err);
-      //if (!collection.get()) return next();
+      if (!collection.get()) return next();
       model.ref('_page.collection', collection);
       model.ref('_page.artist', artist);
-
       page.render('collectionEdit');
     });
-  });
-
-  app.on('model', function(model){
-    model.fn()
   });
 
   app.component('collectionList', CollectionListForm);
@@ -52,8 +47,8 @@ module.exports = function(app, options) {
   app.component('collectionEdit', CollectionEditForm);
   function CollectionEditForm() {}
 
-  CollectionEditForm.prototype.init = function() {
-    var model = this.model;
+  // init() is called first, on both the server and the client
+  CollectionEditForm.prototype.init = function(model,app) {
     // file upload
     model.setNull("_page.pending", []);
     model.setNull("_page.response", []);
@@ -63,6 +58,39 @@ module.exports = function(app, options) {
     model.start('_page.collection.file', '_page.response', function(item) {
       return model.get('_page.response');
     }); */
+
+  }
+
+  // Add object - artist linked via modal
+  CollectionEditForm.prototype.addArtist = function (artist) {
+    console.log('add artist', artist);
+    this.model.at('_page.collection.artists').push(artist);
+  };
+
+  CollectionEditForm.prototype.removeArtist = function () {
+    console.log(this.artistsList.selectedIndex);
+    // remove element from array at selected position
+    if (this.artistsList.selectedIndex > -1)
+      this.model.at('_page.collection.artists').remove(this.artistsList.selectedIndex);
+    else
+      alert('Please select the artist you want to remove from the list.');
+  };
+
+  CollectionEditForm.prototype.hideModal = function(action, cancel) {
+    // if done button was pushed, add the selection to the OBJ-ART link
+    if (action === "Done") {
+      // save artist
+      // TODO : trying to add the artist that is currently selected in the select in the modal
+      console.log(this.artistsFullList.selectedIndex);
+      console.log(this.model.at('_page.artist'));
+      // this.model.at('_page.collection.artists').push(artist);
+
+    }
+  };
+
+  // created() is called second, only on the client. You can add stuff like jQuery here.
+  CollectionEditForm.prototype.create = function(model) {
+
   }
 
   CollectionEditForm.prototype.done = function() {
@@ -122,11 +150,5 @@ module.exports = function(app, options) {
     //model.del('file.'+file.id);
   }
 
-  CollectionEditForm.prototype.hideModal = function(action, cancel) {
-    console.log(action);
-    //if (!window.confirm('Action: ' + action + '\n\nContinue to hide?')) {
-    //  cancel();
-    //}
-  };
 
 }
