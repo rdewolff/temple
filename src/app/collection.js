@@ -6,6 +6,9 @@ var fs = require('fs');
 
 module.exports = function(app, options) {
 
+  /**
+   * Collection list
+   */
   app.get('/p/collection', function(page, model, params, next) {
     var collectionQuery = model.query('collection', {});
     collectionQuery.subscribe(function(err) {
@@ -15,6 +18,9 @@ module.exports = function(app, options) {
     });
   });
 
+  /**
+   * Collection create and edit
+   */
   app.get('/p/collection/:id', function(page, model, params, next) {
 
     // FIXME: use administrable data. Probably with component to factorize
@@ -26,13 +32,38 @@ module.exports = function(app, options) {
     if (params.id === 'new') {
       return page.render('collectionEdit');
     }
+
+    // Query all the required data
     var collection = model.at('collection.' + params.id);
     var artist = model.query('artist', {});
-    model.subscribe(collection, artist, function(err) {
+    // selected artist related to current collection
+    var collectionArtist = model.query('collectionArtist', {collection_id: params.id});
+
+    // Retrieve all the required data
+    model.subscribe(collection, artist, collectionArtist, function(err) {
       if (err) return next(err);
       if (!collection.get()) return next();
       model.ref('_page.collection', collection);
       model.ref('_page.artist', artist);
+      model.ref('_page.collectionArtist', collectionArtist);
+
+      var collectionArtistSelected = collectionArtist.get();
+      var collectionArtistIdSelected = [];
+      model.setNull('_page.collectionArtistSelected', []);
+
+      // FIXME: this seems very clunky !!
+      for (var i = 0; i < collectionArtistSelected.length; i++) {
+        // debug : console.log(i, collectionArtistSelected[i]);
+        collectionArtistIdSelected.push(collectionArtistSelected[i].artist_id);
+        model.at('_page.collectionArtistSelected').push(model.at('artist.'+collectionArtistSelected[i].artist_id).get());
+      }
+
+      // debug console.log('result', collectionArtistIdSelected);
+      // TODO: refList usable here? Cannot make it working
+      // model.refList('_page.collectionArtistSelected', 'artist', collectionArtistIdSelected);
+
+      // get the artist linked for the view to display
+
       page.render('collectionEdit');
     });
   });
@@ -40,12 +71,18 @@ module.exports = function(app, options) {
   app.component('collectionList', CollectionListForm);
   function CollectionListForm() {}
 
+  // FIXME: remove if unused?
   CollectionListForm.prototype.collectionNew = function () {
     app.history.push('/p/collection/new');
   }
 
   app.component('collectionEdit', CollectionEditForm);
   function CollectionEditForm() {}
+
+  // created() is called second, only on the client. You can add stuff like jQuery here.
+  CollectionEditForm.prototype.create = function(model) {
+
+  }
 
   // init() is called first, on both the server and the client
   CollectionEditForm.prototype.init = function(model,app) {
@@ -59,12 +96,23 @@ module.exports = function(app, options) {
       return model.get('_page.response');
     }); */
 
+
+
   }
 
   // Add object - artist linked via modal
   CollectionEditForm.prototype.addArtist = function (artist) {
+    var model = this.model;
     console.log('add artist', artist);
-    this.model.at('_page.collection.artists').push(artist);
+    // FIXME: remove old way to do this was to store the artist directly in the collection collection
+    // this.model.at('_page.collection.artists').push(artist);
+    // store the link in the collectionArtist collection
+    model.add('_page.collectionArtist', {
+      collection_id: model.get('_page.collection.id'),
+      artist_id    : artist.id
+    });
+    // update the view
+
   };
 
   CollectionEditForm.prototype.removeArtist = function () {
@@ -88,11 +136,6 @@ module.exports = function(app, options) {
     }
   };
 
-  // created() is called second, only on the client. You can add stuff like jQuery here.
-  CollectionEditForm.prototype.create = function(model) {
-
-  }
-
   CollectionEditForm.prototype.done = function() {
     var model = this.model;
     /* TODO: validation
@@ -113,6 +156,7 @@ module.exports = function(app, options) {
     app.history.push('/p/collection');
   }
 
+  // to display file upload progress
   CollectionEditForm.prototype.stringify = function(str) {
     return JSON.stringify(str, null, 2);
   }

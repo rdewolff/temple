@@ -62,15 +62,20 @@
           <label for='artists' class='col-sm-3 control-label'>Artist(s)</label>
           <div class='col-sm-6'>
             <select multiple class='form-control' value='{{_page.collection.artists}}' as="artistsList">
-              {{each _page.collection.artists}}
+              <!--  FIXME: clean old method-->
+              <!-- {{each _page.collectionArtist}}
+              <option>{{this.collection_id}} {{this.artist_id}} {{this.lastname}} {{this.firstname}}</option>
+              {{/}} -->
+              {{each _page.collectionArtistSelected}}
               <option>{{this.lastname}} {{this.firstname}}</option>
               {{/}}
             </select>
+
           </div>
           <div class='col-sm-3'>
-            <a href='#' class='btn btn-default btn-sm' on-click="modalCollectionArtistLink.show()">Add</a>
+            <a href='#' class='btn btn-default btn-sm{{unless _page.collection.id}} disabled{{/unless}}' on-click="modalCollectionArtistLink.show()">Add</a>
             <br />
-            <a href='#' class='btn btn-default btn-sm' on-click="removeArtist()">Remove</a>
+            <a href='#' class='btn btn-default btn-sm{{unless _page.collection.id}} disabled{{/unless}}' on-click="removeArtist()">Remove</a>
           </div>
         </div>
 
