@@ -114,6 +114,8 @@ To avoid collision with bootstrap in the left menu
   change of something? Should we share object? Simply re run a new query, subscribe
   again to it and ref() it ? What's the best practice??? Am struggling to try to
   do this properly to filter a collection displayed based on the user input.
+- How to use the RefList correctly? Can we use it for a N to N relationship between 2 collections?
+
 
 
 ### Mail to Derby.js Google group
