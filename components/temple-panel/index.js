@@ -12,7 +12,8 @@ templePanel.prototype.init = function() {
 
 templePanel.prototype.create = function(model) {
 
-  console.log('templePanel create');
+  // debug
+  // console.log('templePanel create');
 
   $('#temple-panel').sidr();
 
@@ -24,8 +25,6 @@ templePanel.prototype.create = function(model) {
   // console.log(@fieldDetectingEnter);
 
   $('#menuSearchInput').bind("enterKey",function(e){
-     //do stuff here
-     console.log('enter!');
      $.sidr('open', 'sidr');
      $('#menuLeftPageSearchInput').focus();
   });
@@ -56,5 +55,6 @@ templePanel.prototype.create = function(model) {
 
 
 templePanel.prototype.destroy = function() {
-    console.log('templePanel destroy');
+    // debug :
+    // console.log('templePanel destroy');
 }
