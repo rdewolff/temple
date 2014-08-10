@@ -14,7 +14,11 @@ app.loadStyles(__dirname + '/../../styles/public');
 /**
  * Home
  */
-app.get('/', function(page, model, params, next) {
+app.get('/', function(app){
+  app.redirect('/home');
+});
+
+app.get('/home', function(page, model, params, next) {
   var collectionQuery = model.query('collection', {publish: "Highlight"});
   model.subscribe(collectionQuery, function onCount(err, next){
     if (err) return next(err);
@@ -27,6 +31,7 @@ app.use(require('./collection'));
 
 app.use(require('./artist'));
 
+app.use(require('../shared/shared.js'));
 
 app.proto.signIn = function(action, cancel) {
   if (action === 'Sign in')

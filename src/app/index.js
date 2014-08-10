@@ -22,14 +22,18 @@ app.loadStyles(__dirname + '/../../styles/app');
 /**
  * HELP
  */
-app.get('/help', function(page, model, params, next) {
+app.get('/p/help', function(page, model, params, next) {
   page.render('help');
 });
 
 /**
  * HOME
  */
-app.get('/p', function(page, model, params, next) {
+app.get('/p', function(page) {
+   page.redirect('/p/home');
+ })
+
+app.get('/p/home', function(page, model, params, next) {
 
   var artistCount = model.query('artist', {$count: true});
   var objectCount = model.query('collection', {$count: true});
@@ -62,6 +66,8 @@ app.use(require('./collection'));
 /**
  * Controller function
  */
+
+app.use(require('../shared/shared.js'));
 
 app.proto.create = function(model) {
 
@@ -140,7 +146,4 @@ app.proto.create = function(model) {
     // app.history.push('/p/search');
     });
   });
-
-
-
 }
