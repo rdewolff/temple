@@ -47,6 +47,10 @@ module.exports = function(app, options) {
       model.ref('_page.artist', artist);
       model.ref('_page.collectionArtist', collectionArtist);
 
+      // get the linked artist
+      //console.log('artist.get()', artist.get());
+      //console.log('0b16be59-0a6e-4e06-958a-fc0778237b8b', artist.get('_id.0b16be59-0a6e-4e06-958a-fc0778237b8b'));
+      console.log('artistid', model.get('artist.0b16be59-0a6e-4e06-958a-fc0778237b8b'));
       var collectionArtistSelected = collectionArtist.get();
       var collectionArtistIdSelected = [];
       model.setNull('_page.collectionArtistSelected', []);
@@ -55,7 +59,9 @@ module.exports = function(app, options) {
       for (var i = 0; i < collectionArtistSelected.length; i++) {
         // debug : console.log(i, collectionArtistSelected[i]);
         collectionArtistIdSelected.push(collectionArtistSelected[i].artist_id);
-        model.at('_page.collectionArtistSelected').push(model.at('artist.'+collectionArtistSelected[i].artist_id).get());
+        // bad way : model.at('_page.collectionArtistSelected').push(model.at('artist.'+collectionArtistSelected[i].artist_id).get());
+        // better :
+        model.at('_page.collectionArtistSelected').push(model.get('artist.'+collectionArtistSelected[i].artist_id));
       }
 
       // debug console.log('result', collectionArtistIdSelected);
