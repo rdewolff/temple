@@ -105,7 +105,6 @@ module.exports = function(app, options) {
   // Add object - artist linked via modal
   CollectionEditForm.prototype.addArtist = function (artist) {
     var model = this.model;
-    console.log('add artist', artist);
     // FIXME: remove old way to do this was to store the artist directly in the collection collection
     // this.model.at('_page.collection.artists').push(artist);
     // store the link in the collectionArtist collection
@@ -114,27 +113,53 @@ module.exports = function(app, options) {
       artist_id    : artist.id
     });
     // update the view
-
+    model.at('_page.collectionArtistSelected').push(artist);
   };
 
+  // Delete the link between the current object and the selected artist
   CollectionEditForm.prototype.removeArtist = function () {
-    console.log(this.artistsList.selectedIndex);
+
+    var model = this.model;
+    var selectedIndex = this.artistsList.selectedIndex;
+
     // remove element from array at selected position
-    if (this.artistsList.selectedIndex > -1)
-      this.model.at('_page.collection.artists').remove(this.artistsList.selectedIndex);
-    else
+    if (selectedIndex > -1) {
+      // remove if data stored directly in collection model (old way)
+      // model.at('_page.collection.artists').remove(this.artistsList.selectedIndex);
+      // debug
+      //console.log(this.artistsList.selectedIndex);
+      //console.log(this.artistsList.value); // id
+
+      var collectionArtist = model.query('collectionArtist', {
+        collection_id: model.get('_page.collection.id'),
+        artist_id    : this.artistsList.value
+      });
+
+      // there should be only 1 artist linked. but we use forEach for proper handling
+      collectionArtist.fetch(function(err) {
+        collectionArtist.get().forEach(function(entry){
+          // Update model without emitting events so that the page doesn't update
+          model.root.silent().del('collectionArtist.'+entry.id);
+          // Update the view <select>
+          model.at('_page.collectionArtistSelected').remove(selectedIndex);
+        });
+      })
+    } else {
       alert('Please select the artist you want to remove from the list.');
+    }
   };
 
+  // Can add an artist via modal
   CollectionEditForm.prototype.hideModal = function(action, cancel) {
+    var model = this.model;
     // if done button was pushed, add the selection to the OBJ-ART link
     if (action === "Done") {
       // save artist
       // TODO : trying to add the artist that is currently selected in the select in the modal
       console.log(this.artistsFullList.selectedIndex);
-      console.log(this.model.at('_page.artist'));
-      // this.model.at('_page.collection.artists').push(artist);
-
+      console.log(this.artistsFullList.value);
+      console.log(model.at('_page.artist'));
+      // model.at('_page.collectionArtistSelected').push(model.at('artist.'+this.artistsFullList.value).get());
     }
   };
 
