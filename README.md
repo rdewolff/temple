@@ -2,6 +2,48 @@
 
 ## Model
 
+### Mongodb structure
+
+```
+collection {
+  id
+  accessionNr
+  title
+  yearFrom
+  publish
+  materialTechnique
+  file [
+    {
+      id:
+      fileOriginalFilename:
+      fileName:
+      fileSize:
+    }
+  ]
+}
+
+artist {
+  id
+  firstname
+  lastname
+  domain
+  gender
+  lastname
+  birthday
+  birthcountry
+  birthplace
+  deathday
+  address
+  citizenship
+}
+
+collectionArtist {
+  collection_id
+  artist_id
+}
+
+```
+
 ### Application model
 
 - ```_session.search``` :
