@@ -52,6 +52,7 @@ collectionArtist {
 
 - remove delete button on edit form when adding new object
 - build guided tour of temple
+- improve collection - artist link (on private collection edit page) to work with reactive function. Or better way?
 
 Cf. specification document [https://docs.google.com/document/d/1LaTlhE7MRqVQabxxX4uBnHOJha9I_-ZU1Y43ri5kXmI]
 
