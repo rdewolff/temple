@@ -60,13 +60,14 @@ Cf. specification document [https://docs.google.com/document/d/1LaTlhE7MRqVQabxx
 
 ### Backup
 
+Backup the wanted database in specific directory :
 ```
 mongodump -d <our database name> -o <directory_backup>
 ```
 
 ### Restore
 
-And to "restore/import" that, i used (from directory_backup/dump/):
+Restore the backed up database from specific directory : 
 ```
 mongorestore <our database name>
 ```
