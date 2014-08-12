@@ -53,6 +53,7 @@ collectionArtist {
 - remove delete button on edit form when adding new object
 - build guided tour of temple
 - improve collection - artist link (on private collection edit page) to work with reactive function. Or better way?
+- check if the various reactive function are not causing problems with similar names (getCollectionArtistLinkedIds())
 
 Cf. specification document [https://docs.google.com/document/d/1LaTlhE7MRqVQabxxX4uBnHOJha9I_-ZU1Y43ri5kXmI]
 
@@ -67,7 +68,7 @@ mongodump -d <our database name> -o <directory_backup>
 
 ### Restore
 
-Restore the backed up database from specific directory : 
+Restore the backed up database from specific directory :
 ```
 mongorestore <our database name>
 ```
