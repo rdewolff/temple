@@ -64,12 +64,10 @@
           <label for='artists' class='col-sm-3 control-label'>Artist(s)</label>
           <div class='col-sm-6'>
             <select multiple class='form-control' value='{{_page.collection.artists}}' as="artistsList">
-              <!--  FIXME: clean old method-->
-              <!-- {{each _page.collectionArtist}}
-              <option>{{this.collection_id}} {{this.artist_id}} {{this.lastname}} {{this.firstname}}</option>
-              {{/}} -->
-              {{each _page.collectionArtistSelected}}
-              <option value="{{this.id}}">{{this.lastname}} {{this.firstname}}</option>
+              <!-- TODO: bug report the value with the ID of the artist for each option doesn't get rendered properly on the client. It does get
+                         properly rendered first time, but now when you browse back or so. -->
+              {{each _page.collectionArtistSelected as #artist}}
+              <option value="{{#artist.id}}" on-dblclick="showArtist($event, $element)">{{#artist.lastname}} {{#artist.firstname}}</option>
               {{/}}
             </select>
 

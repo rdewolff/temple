@@ -116,6 +116,14 @@ module.exports = function(app, options) {
     model.at('_page.collectionArtistSelected').push(artist);
   };
 
+  CollectionEditForm.prototype.showArtist = function(e, el) {
+    // debug :
+    // console.log('e', e);
+    // console.log('el', el);
+    alert(this.artistsList.value);
+    app.history.push('/p/artist/'+this.artistsList.value)
+  }
+
   // Delete the link between the current object and the selected artist
   CollectionEditForm.prototype.removeArtist = function () {
 
