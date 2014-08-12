@@ -5,6 +5,7 @@
 module.exports = function(app, options) {
 
   app.get('/collection', function(page, model, params, next) {
+
     var query = {
       domain: params.query.filter,
       $or: [
@@ -14,9 +15,9 @@ module.exports = function(app, options) {
       $orderby: [{}]
     };
     query.$orderby[0][params.query.sort] = 1; // use the parameters for the order by
-    // debug : console.log(query.$orderby);
 
     var collection = model.query('collection', query);
+
     model.subscribe(collection, function(err) {
       if (err) return next(err);
 
@@ -39,12 +40,34 @@ module.exports = function(app, options) {
   }
 
   app.get('/collection/:id', function(page, model, params, next) {
+
+    // current object
     var collection = model.at('collection.'  + params.id);
-    collection.subscribe(function(err) {
+    // the related artist(s)
+    var collectionArtist = model.query('collectionArtist', {collection_id: params.id});
+    // subscribe to data
+    model.subscribe(collection, collectionArtist, function(err) {
       if (err) return next(err);
       if (!collection.get()) return next();
       model.ref('_page.collection', collection);
-      page.render('collectionView');
+      // get linked artist via reactive function
+      model.start('_page.collectionArtistsIds', 'collectionArtist', 'getCollectionArtistLinkedIds');
+      var collectionArtistLinked = model.query('artist', '_page.collectionArtistsIds');
+      model.subscribe(collectionArtistLinked, function(){
+        model.ref('_page.collectionArtistObjects', collectionArtistLinked);
+        page.render('collectionView');
+      });
+    });
+  });
+
+  // reactive function getting the ids of the related object and artist
+  app.on('model', function onModel(model) {
+    model.fn('getCollectionArtistLinkedIds', function getCollectionArtistLinkedIds(collectionArtist) {
+      var ids = {};
+      for (var key in collectionArtist) ids[collectionArtist[key].artist_id] = true;
+      // Reactive model functions are *synchronous* so
+      // you *absolutely* must `return` a value. Do this now.
+      return Object.keys(ids);
     });
   });
 

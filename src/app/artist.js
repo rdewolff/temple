@@ -28,16 +28,13 @@ module.exports = function(app, options) {
       if (!artist.get()) return next();
       model.ref('_page.artist', artist);
       model.ref('_page.collectionArtist', collectionArtist);
-
       model.start('_page.collectionArtistsIds', 'collectionArtist', 'getCollectionArtistLinkedIds');
-
       var collectionArtistLinked = model.query('collection', '_page.collectionArtistsIds');
       model.subscribe(collectionArtistLinked, function(err, next) {
         if (err) return next(err);
         model.ref('_page.collectionArtistObjects', collectionArtistLinked);
         page.render('artistEdit');
       })
-
     });
   });
 

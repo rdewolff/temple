@@ -38,11 +38,20 @@
         <view name='field' label='Location' field='{{_page.collection.location}}' />
         <view name='field' label='Owner' field='{{_page.collection.owner}}' />
 
+        <!-- related artist -->
+
+        <dl class='dl-horizontal'>
+          <dt>Artists</dt>
+          {{each _page.collectionArtistObjects}}
+          <dd><a href="/artist/{{this.id}}">{{this.lastname}} {{this.firstname}}</a></dd>
+          {{/}}
+        </dl>
+
       </div>
 
       <div class='col-sm-2'>
 
-        <!-- TODO: related artworks or artist or something :) -->
+        <!-- room for some other info/data/enhancements -->
 
       </div>
     </div>
