@@ -13,12 +13,6 @@ module.exports = function(app, options) {
     });
   });
 
-  // TODO: cleanup
-  // view helper to highlight correct menu even on sub page path (artist should be highlighted on /artist/ and on /artist/meuh)
-  //view.fn('test', function(value) {
-  //  return "meuh";
-  //});
-
   app.get('/p/artist/:id', function(page, model, params, next) {
     model.set('_page.domain', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}]);
     model.set('_page.gender', [{content: 'Male'}, {content: 'Female'}]);
@@ -27,11 +21,34 @@ module.exports = function(app, options) {
       return page.render('artistEdit');
     }
     var artist = model.at('artist.' + params.id);
-    artist.subscribe(function(err) {
+    var collectionArtist = model.query('collectionArtist', {artist_id: params.id});
+
+    model.subscribe(artist, collectionArtist, function(err, next) {
       if (err) return next(err);
       if (!artist.get()) return next();
-      model.ref('_page.artist', artist)
-      page.render('artistEdit');
+      model.ref('_page.artist', artist);
+      model.ref('_page.collectionArtist', collectionArtist);
+
+      model.start('_page.collectionArtistsIds', 'collectionArtist', 'getCollectionArtistLinkedIds');
+
+      var collectionArtistLinked = model.query('collection', '_page.collectionArtistsIds');
+      model.subscribe(collectionArtistLinked, function(err, next) {
+        if (err) return next(err);
+        model.ref('_page.collectionArtistObjects', collectionArtistLinked);
+        page.render('artistEdit');
+      })
+
+    });
+  });
+
+  // reactive function getting the ids of the related object and artist
+  app.on('model', function onModel(model) {
+    model.fn('getCollectionArtistLinkedIds', function getCollectionArtistLinkedIds(collectionArtist) {
+      var ids = {};
+      for (var key in collectionArtist) ids[collectionArtist[key].collection_id] = true;
+      // Reactive model functions are *synchronous* so
+      // you *absolutely* must `return` a value. Do this now.
+      return Object.keys(ids);
     });
   });
 

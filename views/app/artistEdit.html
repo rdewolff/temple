@@ -93,23 +93,32 @@
           <pane title="Objects">
             <div class="row">
               <div class="col-sm-12">
-                display and manage linked object
+                {{if _page.collectionArtistObjects}}
                 <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Accession #</th>
+                      <th>Title</th>
+                      <th>Years</th>
+                      <th>Material/technique</th>
+                      <th>Publish</th>
+                    </tr>
+                  </thead>
                   <tbody>
-                  <tr>
-                    <th>header</th>
-                    <th>header</th>
-                  </tr>
-                  <tr>
-                    <td>data</td>
-                    <td>data</td>
-                  </tr>
-                  <tr>
-                    <td>data</td>
-                    <td>data</td>
-                  </tr>
+                    {{each _page.collectionArtistObjects}}
+                      <tr>
+                        <td><a href="/p/collection/{{this.id}}">{{this.accessionNr}}</a></td>
+                        <td>{{this.title}}</td>
+                        <td>{{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}</td>
+                        <td>{{this.materialTechnique}}</td>
+                        <td>{{this.publish}}</td>
+                      </tr>
+                    {{/}}
                   </tbody>
                 </table>
+                {{else}}
+                <p>No linked object.</p>
+                {{/}}
               </div>
             </div>
           </pane>
