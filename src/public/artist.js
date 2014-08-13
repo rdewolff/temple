@@ -29,11 +29,32 @@ module.exports = function(app, options) {
 
   app.get('/artist/:id', function(page, model, params, next) {
     var artist = model.at('artist.'  + params.id);
-    artist.subscribe(function(err) {
+    var collectionArtist = model.query('collectionArtist', {artist_id: params.id});
+
+    model.subscribe(artist, collectionArtist, function(err) {
       if (err) return next(err);
       if (!artist.get()) return next();
       model.ref('_page.artist', artist);
-      page.render('artistView');
+      // TODO: check if we need to ref the collectionArtist query here for the reactive function to work
+      model.start('_page.collectionArtistsIds2', 'collectionArtist', 'getCollectionArtistLinkedCollectionIds');
+      // get the linked object for the current artist
+      var collectionArtistLinked = model.query('collection', '_page.collectionArtistsIds2');
+      model.subscribe(collectionArtistLinked, function(err, next) {
+        if (err) return next();
+        model.ref('_page.collectionArtistObjects', collectionArtistLinked);
+        page.render('artistView');
+      });
+    });
+  });
+
+  // reactive function getting the ids of the related object and artist
+  app.on('model', function onModel(model) {
+    model.fn('getCollectionArtistLinkedCollectionIds', function getCollectionArtistLinkedCollectionIds(collectionArtist) {
+      var ids = {};
+      for (var key in collectionArtist) ids[collectionArtist[key].collection_id] = true;
+      // Reactive model functions are *synchronous* so
+      // you *absolutely* must `return` a value. Do this now.
+      return Object.keys(ids);
     });
   });
 

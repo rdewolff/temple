@@ -51,7 +51,7 @@ module.exports = function(app, options) {
       if (!collection.get()) return next();
       model.ref('_page.collection', collection);
       // get linked artist via reactive function
-      model.start('_page.collectionArtistsIds', 'collectionArtist', 'getCollectionArtistLinkedIds');
+      model.start('_page.collectionArtistsIds', 'collectionArtist', 'getCollectionArtistLinkedArtistIds');
       var collectionArtistLinked = model.query('artist', '_page.collectionArtistsIds');
       model.subscribe(collectionArtistLinked, function(){
         model.ref('_page.collectionArtistObjects', collectionArtistLinked);
@@ -62,7 +62,7 @@ module.exports = function(app, options) {
 
   // reactive function getting the ids of the related object and artist
   app.on('model', function onModel(model) {
-    model.fn('getCollectionArtistLinkedIds', function getCollectionArtistLinkedIds(collectionArtist) {
+    model.fn('getCollectionArtistLinkedArtistIds', function getCollectionArtistLinkedArtistIds(collectionArtist) {
       var ids = {};
       for (var key in collectionArtist) ids[collectionArtist[key].artist_id] = true;
       // Reactive model functions are *synchronous* so

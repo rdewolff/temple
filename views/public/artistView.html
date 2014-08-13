@@ -32,15 +32,33 @@
 
         <!-- TODO: show related work -->
 
-        Work
+        <div class="row">
+          <div class="col-sm-12">
+            {{each _page.collectionArtistObjects as #object}}
+            <div class="row spacer">
+              <a href="/collection/{{#object.id}}">
+                <div class="col-sm-3">
+                  <!-- <img src="http://lorempixel.com/100/100/" alt="" class="img-thumbnail" width="100px" height="100px"> -->
+                  <img src="/files/{{#object.file[0].fileName}}" title="{{#object.file[0].fileOriginalFilename}}" class="img-thumbnail" width="100px" height="100px">
+                </div>
+                <div class="col-sm-9">
+                    <h4>{{#object.title}}</h4>
+                    <span class="label label-primary">{{#object.accessionNr}}</span><br />
+                    {{#object.yearFrom}}{{if #object.yearTo}} - {{#object.yearTo}}{{/}}<br />
+                    {{#object.materialTechnique}}<br />
+                </div>
+              </a>
+            </div>
+            {{/}}
+          </div>
+        </div>
 
       </div>
 
 
       <div class='col-sm-2'>
 
-        <!-- TODO: related artworks or artist or something :) -->
-
+        <!-- room for some other info/data/enhancements -->
 
       </div>
     </div>
