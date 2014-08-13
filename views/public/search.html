@@ -1,0 +1,144 @@
+<index:>
+  <h1>Search</h1>
+
+  <div class='row'>
+    <div class='col-sm-6'>
+
+      <h2>Query</h2>
+
+      <form class='form-horizontal' role='form' on-submit='done()'>
+        <div class='form-group'>
+          <label for='fullTextSearch' class='col-sm-6 control-label'>Fulltext search</label>
+          <div class='col-sm-6'>
+            <input type='text' class='form-control' as='fullTextSearch' value='{{_page.fullTextSearch}}'>
+          </div>
+        </div>
+      </form>
+
+      <hr>
+
+      <tabs selected-index='{{_page.data.currentTab}}'>
+        <pane title='Collection'>
+
+          <form class='form-horizontal' role='form' on-submit='done2()'>
+            <div class='form-group'>
+              <label for='title' class='col-sm-6 control-label'>Title :</label>
+              <div class='col-sm-6'>
+                <input type='text' class='form-control' as='title' value='{{_page.object.title}}'>
+              </div>
+            </div>
+
+            <div class='form-group'>
+              <label for='artist' class='col-sm-6 control-label'>Artist :</label>
+              <div class='col-sm-6'>
+                <select class="form-control" id="Artist" name="Artist">
+                  <option value="" selected="{{_page.object.artist === ''}}" ></option>
+                  {{each _page.artistAll}}
+                  <option value="{{this.id}}" selected="{{_page.object.artist === this.id}}" >{{this.lastname}} {{this.firstname}}</option>
+                  {{/}}
+                </select>
+              </div>
+            </div>
+
+            <div class='form-group'>
+              <label for='domain' class='col-sm-6 control-label'>Domain :</label>
+              <div class='col-sm-6'>
+                <input type='text' class='form-control' as='domain' value='{{_page.object.domain}}'>
+              </div>
+            </div>
+
+            <div class='form-group'>
+              <label for='materialTechnique' class='col-sm-6 control-label'>Material/technique :</label>
+              <div class='col-sm-6'>
+                <input type='text' class='form-control' as='materialTechnique' value='{{_page.object.materialTechnique}}'>
+              </div>
+            </div>
+
+            <div class='form-group'>
+              <label for='description' class='col-sm-6 control-label'>Description :</label>
+              <div class='col-sm-6'>
+                <input type='text' class='form-control' as='description' value='{{_page.object.description}}'>
+              </div>
+            </div>
+
+            <div class='row'>
+              <div class='col-sm-12'>
+                <div class='form-group'>
+                  <div class='col-sm-offset-2 col-sm-10'>
+                    <a on-click='searchClear()' style='float:right;' class='btn btn-danger'>Clear</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </form>
+
+        </pane>
+
+        <pane title='Artist'>
+
+          <!--  TODO: artist search mask -->
+
+          <p>left blank intentionnally</p>
+
+        </pane>
+
+      </tabs>
+
+
+    </div>
+
+    <div class='col-sm-6'>
+
+      <h2>Results</h2>
+
+      <h3>Collection</h3>
+      {{each _page.collection}}
+      <div class="row spacer">
+        <a href="/collection/{{this.id}}">
+          <div class="col-sm-3">
+            <!-- <img src="http://lorempixel.com/100/100/" alt="" class="img-thumbnail" width="100px" height="100px"> -->
+            <img src="/files/{{this.file[0].fileName}}" title="{{this.file[0].fileOriginalFilename}}" class="img-thumbnail" width="100px" height="100px">
+          </div>
+          <div class="col-sm-9">
+              <h4>{{this.title}}</h4>
+              <span class="label label-primary">{{this.accessionNr}}</span><br />
+              {{this.yearFrom}}{{if this.yearTo}} - {{this.yearTo}}{{/}}<br />
+              {{this.materialTechnique}}<br />
+          </div>
+        </a>
+      </div>
+      {{else}}
+      No collection object found.<br />
+      {{/}}
+
+      <h3>Artists</h3>
+      {{if _page.artist}}
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Birthdate</th>
+            <th>Birth country</th>
+            <th>Gender</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{each _page.artist}}
+            <tr>
+              <td><a href="/artist/{{this.id}}">{{this.lastname}} {{this.firstname}}</a></td>
+              <td>{{this.birthday}}</td>
+              <td>{{this.birthcountry}}</td>
+              <td>{{this.gender}}</td>
+            </tr>
+          {{/}}
+        </tbody>
+      </table>
+      {{else}}
+      No artist found.
+      {{/}}
+
+    </div>
+
+  </div>

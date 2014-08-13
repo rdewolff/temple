@@ -92,10 +92,9 @@ app.proto.create = function(model) {
    * Search using the left temple-panel
    */
   // TODO: is the set here necessary ? With -> model.setNull('_session.search', []); -> doesn't work.
-
   // TODO: can we call model.on() in a composant create methode or that would
   // regiser many times the same trigger?
-  model.on('change', '_session.search', function() {
+  model.on('change', '_page.fullTextSearch', function() {
 
     // debug console.log("_session.search has changed! " + Date());
 
