@@ -12,6 +12,7 @@ collection {
   yearFrom
   publish
   materialTechnique
+  description
   file [
     {
       id:
