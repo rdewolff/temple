@@ -11,10 +11,10 @@ router.get('/api/v1/:collection', function(req, res){
   var collection = req.params.collection
   var model = req.getModel();
 
-  var artistQuery = model.query(collection, {});
-	artistQuery.subscribe(function(err) {
+  var query = model.query(collection, {});
+	query.subscribe(function(err) {
   	if (err) return next(err);
-  	res.json(artistQuery.get());
+  	res.json(query.get());
 	});
 
 });
