@@ -32,7 +32,18 @@
         <view name='field' label='Description' field='{{_page.collection.description}}' />
         <view name='field' label='Material/technique' field='{{_page.collection.materialTechnique}}' />
         <view name='field' label='Edition/serie' field='{{_page.collection.editionSerie}}' />
-        <view name='field' label='Dimension' field='{{_page.collection.dimensions}}' />
+        <!-- Dimension -->
+        {{if _page.collection.dimension}}
+        <dl class='dl-horizontal'>
+          <dt>Dimension</dt>
+          <dd>
+            {{each _page.collection.dimension}}
+            <b>{{this.width}}</b> {{this.unit}} x <b>{{this.height}}</b> {{this.unit}} x <b>{{this.depth}}</b> {{this.unit}}<br />
+            {{/}}
+          </dd>
+        </dl>
+        {{/}}
+        <view name='field' label='Dimension' field='' />
         <view name='field' label='Notes' field='{{_page.collection.notes}}' />
         <view name='field' label='Credit line' field='{{_page.collection.creditLine}}' />
         <view name='field' label='Location' field='{{_page.collection.location}}' />
