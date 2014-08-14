@@ -234,6 +234,21 @@ module.exports = function(app, options) {
       return;
     }
      */
+
+    // send the object to Portal
+    var data = new FormData();
+    data.append('title', 'test');
+    data.append('text', 'Romain');
+
+    xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:3001/api/v1/add');
+    xhr.onload = function() {
+      // debug
+      console.log(Date() + ' ' + this.responseText);
+    };
+    xhr.send({data: 'Romain'});
+
+
     if (!model.get('collection.id')) {
       model.root.add('collection', model.get('_page.collection'));
     }
