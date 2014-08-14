@@ -8,7 +8,6 @@ module.exports = function(app, options) {
 
     // filter
     var query = {
-      // domain: params.query.filter,
       $or: [
         {publish: 'Public'},
         {publish: 'Highlight'}
@@ -18,13 +17,13 @@ module.exports = function(app, options) {
     // add all query passed by parameter
     // FIXME: security disable other input
     for (key in params.query) {
-      console.log(key+' -> '+params.query[key]);
+      // debug console.log(key+' -> '+params.query[key]);
       query[key] = params.query[key];
     }
 
     query.$orderby[0][params.query.sort] = 1; // use the parameters for the order by
 
-    console.log(query);
+    // debug console.log(query);
     var collection = model.query('collection', query);
 
     model.subscribe(collection, function(err) {
