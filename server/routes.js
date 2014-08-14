@@ -5,6 +5,9 @@ var router = express.Router();
 var multiparty = require('multiparty');
 var fs = require('fs');
 
+// FIXME: this should use the options from the config file
+var db = require('mongoskin').db('mongodb://localhost:27017/temple');
+
 // get the collection passed in param and return the result in JSON
 router.get('/api/v1/:collection', function(req, res){
 
@@ -16,6 +19,19 @@ router.get('/api/v1/:collection', function(req, res){
   	if (err) return next(err);
   	res.json(query.get());
 	});
+
+});
+
+// get the
+router.get('/api/v1/collection/materialTechnique', function(req, res, next) {
+
+  // in mongo this works : db.collection.aggregate({$group: {_id: "$materialTechnique"}})
+
+  db.collection('collection').aggregate({$group: {_id: "$materialTechnique"}}, function(err, result) {
+
+    res.json(result);
+
+  });
 
 });
 
