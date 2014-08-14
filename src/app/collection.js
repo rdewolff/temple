@@ -171,6 +171,55 @@ module.exports = function(app, options) {
     }
   };
 
+  CollectionEditForm.prototype.hideModalCollectionDimension = function(action, cancel) {
+    var model = this.model;
+    // TODO: dimension bug, sometimes the whole name get passed and not the actual select option value
+    // console.log('unit', this.dimensionUnit.value);
+    // if done button was pushed
+    if (action === "Done") {
+      var dimension = {
+        width: this.dimensionWidth.value,
+        height: this.dimensionHeight.value,
+        depth: this.dimensionDepth.value,
+        unit: this.dimensionUnit.value
+      }
+      // check if we are adding a new dimension or editing an existing one
+      if (model.get('_page.collection.dimensionEdit.selectedIndex') > -1) {
+        // edit dimension
+        model.set('_page.collection.dimension.'+model.get('_page.collection.dimensionEdit.selectedIndex'), dimension)
+      } else {
+        // save dimension
+        model.at('_page.collection.dimension').push(dimension);
+      }
+    }
+    // in all cases, reset the editable dimension
+    model.del('_page.collection.dimensionEdit');
+  };
+
+  CollectionEditForm.prototype.CollectionEditDimension = function() {
+    var model = this.model;
+    if (this.dimension.selectedIndex > -1) {
+      // prepare the data to be edited
+      model.set('_page.collection.dimensionEdit', model.at('_page.collection.dimension').get(this.dimension.selectedIndex));
+      model.set('_page.collection.dimensionEdit.selectedIndex', this.dimension.selectedIndex);
+      // show the modal window
+      this.modalCollectionDimension.show();
+    } else {
+      alert('Please select the dimension you want to edit');
+    }
+
+
+  }
+
+  CollectionEditForm.prototype.CollectionRemoveDimension = function() {
+    if (this.dimension.selectedIndex > -1) {
+      this.model.at('_page.collection.dimension').remove(this.dimension.selectedIndex);
+      this.dimension.selectedIndex = 0;
+    } else {
+      alert('Please select the dimension you want to remove');
+    }
+  };
+
   CollectionEditForm.prototype.done = function() {
     var model = this.model;
     /* TODO: validation
@@ -203,12 +252,13 @@ module.exports = function(app, options) {
 
   CollectionEditForm.prototype.deleteFile = function(file, index) {
     var model = this.model;
-    console.log('delete file', file);
-    console.log('index', index);
+    // Debug
+    // console.log('delete file', file);
+    // console.log('index', index);
     // delete file form filesystem
     // FIXME: use a global path for the project
     var filePath = '/public/files/'+ file.fileName;
-    console.log('filePath', filePath);
+    // debug console.log('filePath', filePath);
 
     // TODO: delete image from the server / this needs to be done server side
     /*

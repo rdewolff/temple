@@ -1,4 +1,6 @@
 <index:>
+
+  <!-- Collection Artist selection modal window -->
   <modal as="modalCollectionArtistLink" on-hide="hideModal()">
     <title>Add artist</title>
     <!-- TODO: filter artist list
@@ -15,6 +17,27 @@
     <action class="btn-primary")>Done</action>
   </modal>
 
+  <!-- Dimension modal window -->
+  <modal as="modalCollectionDimension" on-hide="hideModalCollectionDimension()">
+    <title>Dimension</title>
+    <label for='dimensionWidth' class='control-label'>Width</label>
+    <input type="text" class="form-control" as="dimensionWidth" value="{{_page.collection.dimensionEdit.width}}">
+    <label for='dimensionHeight' class='control-label'>Height</label>
+    <input type="text" class="form-control" as="dimensionHeight" value="{{_page.collection.dimensionEdit.height}}">
+    <label for='dimensionDepth' class='control-label'>Depth</label>
+    <input type="text" class="form-control" as="dimensionDepth" value="{{_page.collection.dimensionEdit.depth}}">
+    <label for='dimensionDepth' class='control-label'>Unit</label>
+    <!-- TODO: preselect the previous unit for edition -->
+    <!-- <option value="cm" {{if _page.collection.dimensionEdit.unit == 'cm'}}selected{{/}}>Centimeter</option> -->
+    <select class='form-control' name="dimensionUnit" as="dimensionUnit">
+      <option value="cm">Centimeter</option>
+      <option value="in">Inches</option>
+    </select>
+    <action>Cancel</action>
+    <action class="btn-primary">Done</action>
+  </modal>
+
+  <!-- Content -->
   <form class='form-horizontal' role='form' on-submit='done()'>
     <h4>
       {{if _page.collection.id}}
@@ -162,10 +185,21 @@
             <div class='form-group'>
 
               <label for='dimension' class='col-sm-2 control-label'>Dimension</label>
-              <div class='col-sm-4'>
-                <select multiple class='form-control' value='{{_page.collection.dimensions}}'>
-                  <option>10cm x 32cm x 3cm</option>
+              <div class='col-sm-3'>
+                <select multiple class='form-control' as="dimension">
+                  {{each _page.collection.dimension}}
+                    <option>{{this.width}}{{this.unit}} x {{this.height}}{{this.unit}} x {{this.depth}}{{this.unit}}</option>
+                  {{/}}
                 </select>
+              </div>
+
+              <div class='col-sm-1'>
+                <!-- FIXME: disable button when not possible to edit or remove dimension -->
+                <a href='#' class='btn btn-default btn-sm' on-click="modalCollectionDimension.show()">Add</a>
+                <br />
+                  <a href='#' class='btn btn-default btn-sm' on-click="CollectionEditDimension()">Edit</a>
+                <br />
+                <a href='#' class='btn btn-default btn-sm' on-click="CollectionRemoveDimension()">Remove</a>
               </div>
 
               <label for='notes' class='col-sm-2 control-label'>Notes</label>
