@@ -90,10 +90,11 @@ app.proto.create = function(model) {
    */
   // TODO: is the set here necessary ? With -> model.setNull('_session.search', []); -> doesn't work.
   // TODO: can we call model.on() in a composant create methode or that would
-  // regiser many times the same trigger?
-  model.on('change', '_page.fullTextSearch', function() {
+  // register many times the same trigger?
+  model.on('change', '_session.search', function() {
 
-    // debug console.log("_session.search has changed! " + Date());
+    // debug
+    console.log("_session.search has changed! " + Date());
 
     var searchQuery = model.get("_session.search");
 
