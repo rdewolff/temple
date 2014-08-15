@@ -8,7 +8,8 @@ var chalk = require('chalk');
 
 var apps = [
   require('./src/app'),
-  require('./src/public')
+  require('./src/public'),
+  require('./src/admin')
 ];
 
 var error = require('./server/error');
