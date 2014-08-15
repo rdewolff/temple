@@ -5,8 +5,7 @@ var router = express.Router();
 var multiparty = require('multiparty');
 var fs = require('fs');
 
-// FIXME: this should use the options from the config file
-var db = require('mongoskin').db('mongodb://localhost:27017/temple');
+var db = require('mongoskin').db(process.env.MONGO_URL);
 
 // get the collection passed in param and return the result in JSON
 router.get('/api/v1/:collection', function(req, res){
