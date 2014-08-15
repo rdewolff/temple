@@ -73,7 +73,6 @@ module.exports = function(app, options) {
   app.component('collectionList', CollectionListForm);
   function CollectionListForm() {}
 
-  // FIXME: remove if unused?
   CollectionListForm.prototype.collectionNew = function () {
     app.history.push('/p/collection/new');
   }
@@ -105,8 +104,6 @@ module.exports = function(app, options) {
   // Add object - artist linked via modal
   CollectionEditForm.prototype.addArtist = function (artist) {
     var model = this.model;
-    // FIXME: remove old way to do this was to store the artist directly in the collection collection
-    // this.model.at('_page.collection.artists').push(artist);
     // store the link in the collectionArtist collection
     model.add('_page.collectionArtist', {
       collection_id: model.get('_page.collection.id'),
