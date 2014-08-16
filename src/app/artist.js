@@ -14,6 +14,10 @@ module.exports = function(app, options) {
   });
 
   app.get('/p/artist/:id', function(page, model, params, next) {
+
+    // get the country list from the static file
+    var countryList = require('../../config/country');
+    model.set('_page.countries', countryList);
     model.set('_page.domain', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}]);
     model.set('_page.gender', [{content: 'Male'}, {content: 'Female'}]);
 

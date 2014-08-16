@@ -42,15 +42,11 @@
 
     <div class="form-group">
       <label for="birthcountry" class="col-sm-2 control-label">Birth Country</label>
-      <div class="col-sm-2">
-        <input class="form-control" id="birthcountry" value="{{_page.artist.birthcountry}}">
-      </div>
+      <dropdown class="col-sm-2" value="{{_page.artist.birthcountry}}" options="{{_page.countries}}" id="birthcountry"></dropdown>
 
       <label for="deathcountry" class="col-sm-2 control-label">Death Country</label>
-      <div class="col-sm-2">
-        <input class="form-control" id="deathcountry" value="{{_page.artist.deathcountry}}">
-      </div>
-
+      <dropdown class="col-sm-2" value="{{_page.artist.deathcountry}}" options="{{_page.countries}}" id="deathcountry"></dropdown>
+      
       <label for="citizenship" class="col-sm-2 control-label">Citizenship</label>
       <div class="col-sm-2">
         <input class="form-control" id="citizenship" value="{{_page.artist.citizenship}}">
