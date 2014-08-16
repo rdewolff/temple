@@ -18,8 +18,8 @@
           <input type="text" class="form-control" value="{{#prop.value}}">
       </div>
       <div class="col-sm-2">
-          <button name="duplicate" class="btn btn-success" on-click="propertiesDuplicate(#prop.id)">Duplicate</button>
-          <button name="delete" class="btn btn-danger" on-click="propertiesDelete(#prop.id)">Delete</button>
+          <button name="duplicate" title="Duplicate" class="btn btn-success" on-click="propertiesDuplicate(#prop.id)"><span class="glyphicon glyphicon-plus"></span></button>
+          <button name="delete" class="btn btn-danger" on-click="propertiesDelete(#prop.id)"><span class="glyphicon glyphicon-remove"></span></button>
       </div>
     </div>
   {{/}}
