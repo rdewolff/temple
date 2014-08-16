@@ -1,0 +1,39 @@
+<index:>
+  <h1>Admin - properties</h1>
+
+  <div class="row">
+    <label for="lastname" class="col-sm-5 control-label">Name</label>
+    <label for="lastname" class="col-sm-5 control-label">Value</label>
+    <label for="lastname" class="col-sm-2 control-label">Action</label>
+  </div>
+
+  {{each _page.adminProperties}}
+    <div class="row">
+      <div class="col-sm-5">
+          <input type="text" class="form-control" value="{{this.name}}">
+      </div>
+      <div class="col-sm-5">
+          <input type="text" class="form-control" value="{{this.value}}">
+      </div>
+      <div class="col-sm-2">
+          <button name="duplicate" class="btn btn-success" on-click="propertiesDuplicate(this.id)">Duplicate</button>
+          <button name="delete" class="btn btn-danger" on-click="propertiesDelete(this.id)">Delete</button>
+      </div>
+    </div>
+  {{/}}
+
+  <div class="row">
+    <label for="lastname" class="col-sm-2 control-label">Add a new propertie</label>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-5">
+        <input type="text" class="form-control" as="propertieNewName" value="{{_page.adminPropertiesNewName}}">
+    </div>
+    <div class="col-sm-5">
+        <input type="text" class="form-control" as="propertieNewValue" value="{{_page.adminPropertiesNewValue}}">
+    </div>
+    <div class="col-sm-2">
+        <button name="duplicate" class="btn btn-primary" on-click="propertiesAdd()">Add</button>
+    </div>
+  </div>

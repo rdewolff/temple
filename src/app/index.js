@@ -63,6 +63,8 @@ app.use(require('./artist'));
 
 app.use(require('./collection'));
 
+app.use(require('./admin'));
+
 /**
  * Controller function
  */
