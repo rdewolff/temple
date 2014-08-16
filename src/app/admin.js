@@ -29,13 +29,13 @@ module.exports = function(app, options) {
     }
     this.model.root.add('adminProperties', newProperties);
     // FIXME: this should be required - auto refreshes normally
-    this.app.history.refresh();
+    //this.app.history.refresh();
   }
 
   AdminPropertiesForm.prototype.propertiesDelete = function (id) {
     this.model.root.del('adminProperties.'+id);
     // FIXME: this should be required - auto refreshes normally
-    this.app.history.refresh();
+    // this.app.history.refresh();
   }
 
   AdminPropertiesForm.prototype.propertiesDuplicate = function (id) {
@@ -45,7 +45,7 @@ module.exports = function(app, options) {
     }
     this.model.root.add('adminProperties', duplicatedProperties);
     // FIXME: this should be required - auto refreshes normally
-    this.app.history.refresh();
+    // this.app.history.refresh();
   }
 
 

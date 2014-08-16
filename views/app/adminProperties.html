@@ -7,17 +7,19 @@
     <label for="lastname" class="col-sm-2 control-label">Action</label>
   </div>
 
-  {{each _page.adminProperties}}
+  <!--  FIXME: sometimes actions do NOT get refreshed live on the page ?!?!
+               and sometimes they do. Unconsistant behavior. -->
+  {{each _page.adminProperties as #prop}}
     <div class="row">
       <div class="col-sm-5">
-          <input type="text" class="form-control" value="{{this.name}}">
+          <input type="text" class="form-control" value="{{#prop.name}}">
       </div>
       <div class="col-sm-5">
-          <input type="text" class="form-control" value="{{this.value}}">
+          <input type="text" class="form-control" value="{{#prop.value}}">
       </div>
       <div class="col-sm-2">
-          <button name="duplicate" class="btn btn-success" on-click="propertiesDuplicate(this.id)">Duplicate</button>
-          <button name="delete" class="btn btn-danger" on-click="propertiesDelete(this.id)">Delete</button>
+          <button name="duplicate" class="btn btn-success" on-click="propertiesDuplicate(#prop.id)">Duplicate</button>
+          <button name="delete" class="btn btn-danger" on-click="propertiesDelete(#prop.id)">Delete</button>
       </div>
     </div>
   {{/}}
