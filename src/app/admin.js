@@ -4,7 +4,7 @@
 
 module.exports = function(app, options) {
 
-  app.get('/admin/properties', function(page, model, params, next) {
+  app.get('/p/admin/properties', function(page, model, params, next) {
     var adminProperties = model.query('adminProperties', {});
     model.subscribe(adminProperties, function(err, next) {
       // if no data, add an example
