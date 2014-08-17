@@ -163,6 +163,7 @@ To avoid collision with bootstrap in the left menu
   again to it and ref() it ? What's the best practice??? Am struggling to try to
   do this properly to filter a collection displayed based on the user input.
 - How to use the RefList correctly? Can we use it for a N to N relationship between 2 collections?
+- Can we clone an object with object.at('col.'+id) and then change it's ID with new model.id() and add it? or can that cause strange behaviors?
 
 
 
