@@ -33,7 +33,7 @@ derby.run(function(){
 
     apps.forEach(function(app){
       app.writeScripts(store, publicDir, {extensions: ['.coffee']}, function(){
-        console.log('Bundle created:', chalk.yellow(app.name));
+        console.log('Bundle created:', chalk.blue(app.name));
       });
     });
   });

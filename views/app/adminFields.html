@@ -1,2 +1,88 @@
 <index:>
-  fields
+  <h1>Admin - fields</h1>
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          <label for="lastname" class="control-label">Database</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Table</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Field</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Label</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Function</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Comment</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Action</label>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{each _page.adminFields as #field}}
+      <tr>
+        <td>
+          <input type="text" class="form-control" value="{{#field.database}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#field.table}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#field.field}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#field.label}}">
+        </td>
+        <td>
+          <textarea class='form-control' rows='1' id='notes'>{{#field.function}}</textarea>
+        </td>
+        <td>
+          <textarea class='form-control' rows='1' id='notes'>{{#field.comment}}</textarea>
+        </td>
+        <td nowrap>
+          <button name="duplicate" title="Duplicate" class="btn btn-sm btn-success" on-click="fieldsDuplicate(#field.id)"><span class="glyphicon glyphicon-plus"></span></button>
+          <button name="delete" class="btn btn-sm btn-danger" on-click="fieldsDelete(#field.id)"><span class="glyphicon glyphicon-remove"></span></button>
+        </td>
+      </tr>
+      {{/}}
+      <tr>
+        <td colspan="7">
+          <label for="lastname" class="control-label">Add a new field</label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminFieldNew.database}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminFieldNew.table}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminFieldNew.field}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminFieldNew.label}}">
+        </td>
+        <td>
+          <textarea class='form-control' rows='1' id='notes'>{{_page.adminFieldNew.function}}</textarea>
+        </td>
+        <td>
+          <textarea class='form-control' rows='1' id='notes'>{{_page.adminFieldNew.comment}}</textarea>
+        </td>
+        <td nowrap>
+          <button name="duplicate" class="btn btn-primary" on-click="fieldsAdd()">Add</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>

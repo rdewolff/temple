@@ -73,8 +73,6 @@ app.use(require('../shared/shared.js'));
 
 app.proto.create = function(model) {
 
-  console.log('src/app/index.js create');
-
   /**
    * Import scripts
    */
