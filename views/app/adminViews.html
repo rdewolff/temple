@@ -1,0 +1,79 @@
+<index:>
+  <h1>Admin - views</h1>
+
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          <label for="lastname" class="control-label">Name</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Data</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">View type</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Location</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Comment</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Action</label>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{each _page.adminViews as #view}}
+      <tr>
+        <td>
+          <input type="text" class="form-control" value="{{#view.name}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#view.data}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#view.viewType}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#view.location}}">
+        </td>
+        <td>
+          <textarea class='form-control' rows='1' id='notes'>{{#view.comment}}</textarea>
+        </td>
+        <td nowrap>
+          <button name="duplicate" title="Duplicate" class="btn btn-sm btn-success" on-click="viewsDuplicate(#view.id)"><span class="glyphicon glyphicon-plus"></span></button>
+          <button name="delete" class="btn btn-sm btn-danger" on-click="viewsDelete(#view.id)"><span class="glyphicon glyphicon-remove"></span></button>
+        </td>
+      </tr>
+      {{/}}
+      <tr>
+        <td colspan="7">
+          <label for="lastname" class="control-label">Add a new view</label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminViewNew.name}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminViewNew.data}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminViewNew.viewType}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminViewNew.location}}">
+        </td>
+        <td>
+          <textarea class='form-control' rows='1' id='notes'>{{_page.adminViewNew.comment}}</textarea>
+        </td>
+        <td nowrap>
+          <button name="duplicate" class="btn btn-primary" on-click="viewsAdd()">Add</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
