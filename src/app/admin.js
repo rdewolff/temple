@@ -136,4 +136,48 @@ module.exports = function(app, options) {
   }
 
 
+  /**
+   * FIELDS - VIEWS
+   */
+  app.get('/p/admin/fieldsViews', function(page, model, params, next){
+
+    var fieldsViews = model.query('fieldsViews', {});
+    model.subscribe(fieldsViews, function(err, next) {
+      // if no data, add an example
+      if (!fieldsViews.get().length) {
+        model.add('fieldsViews', {
+          view: 'view',
+          field: 'field',
+          label: 'label',
+          comment: 'comment'
+        });
+      }
+      model.ref('_page.fieldsViews', fieldsViews);
+      page.render('adminFieldsViews');
+    });
+
+  });
+
+
+  app.component('adminFieldsViews', adminFieldsViewsForm);
+  function adminFieldsViewsForm() {}
+
+  adminFieldsViewsForm.prototype.fieldsViewsAdd = function () {
+    console.log('add');
+    this.model.root.add('fieldsViews', this.model.del('_page.fieldViewNew'));
+  }
+
+  adminFieldsViewsForm.prototype.fieldsViewsDelete = function (id) {
+    console.log('del', id);
+    this.model.root.del('fieldsViews.'+id);
+  }
+
+  adminFieldsViewsForm.prototype.fieldsViewsDuplicate = function (id) {
+    console.log('dup', id);
+    var duplicateFieldsView = this.model.root.get('fieldsViews.'+id);
+    duplicateFieldsView['id'] = this.model.id(); // new id
+    delete duplicateFieldsView['__proto__']; // clean
+    this.model.root.add('fieldsViews', duplicateFieldsView);
+  }
+
 }

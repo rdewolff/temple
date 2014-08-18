@@ -1,0 +1,69 @@
+<index:>
+  <h1>Admin - fields - views</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          <label for="lastname" class="control-label">View</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Field</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Label</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Comment</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Action</label>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{each _page.fieldsViews as #fieldView}}
+      <tr>
+        <td>
+          <input type="text" class="form-control" value="{{#fieldView.view}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#fieldView.field}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#fieldView.label}}">
+        </td>
+        <td>
+          <textarea class='form-control' rows='1' id='notes'>{{#fieldView.comment}}</textarea>
+        </td>
+        <td nowrap>
+          <button name="duplicate" title="Duplicate" class="btn btn-sm btn-success" on-click="fieldsViewsDuplicate(#fieldView.id)"><span class="glyphicon glyphicon-plus"></span></button>
+          <button name="delete" class="btn btn-sm btn-danger" on-click="fieldsViewsDelete(#fieldView.id)"><span class="glyphicon glyphicon-remove"></span></button>
+        </td>
+      </tr>
+      {{/}}
+      <tr>
+        <td colspan="7">
+          <label for="lastname" class="control-label">Add a new view</label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" class="form-control" value="{{_page.fieldViewNew.view}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.fieldViewNew.field}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.fieldViewNew.label}}">
+        </td>
+        <td>
+          <textarea class='form-control' rows='1' id='notes'>{{_page.fieldViewNew.comment}}</textarea>
+        </td>
+        <td nowrap>
+          <button name="duplicate" class="btn btn-primary" on-click="fieldsViewsAdd()">Add</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
