@@ -164,7 +164,7 @@ To avoid collision with bootstrap in the left menu
   do this properly to filter a collection displayed based on the user input.
 - How to use the RefList correctly? Can we use it for a N to N relationship between 2 collections?
 - Can we clone an object with object.at('col.'+id) and then change it's ID with new model.id() and add it? or can that cause strange behaviors?
-
+- Dropdown don't get selected when used in a loop (example in Admin Fields Views)
 
 
 ### Mail to Derby.js Google group
