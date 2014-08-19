@@ -233,6 +233,7 @@ module.exports = function(app, options) {
      */
 
     // send the object to Portal
+    /*
     var data = new FormData();
     data.append('title', 'test');
     data.append('text', 'Romain');
@@ -244,7 +245,7 @@ module.exports = function(app, options) {
       console.log(Date() + ' ' + this.responseText);
     };
     xhr.send({data: 'Romain'});
-
+    */
 
     if (!model.get('collection.id')) {
       model.root.add('collection', model.get('_page.collection'));
