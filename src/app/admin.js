@@ -140,13 +140,13 @@ module.exports = function(app, options) {
    */
   app.get('/p/admin/fieldsViews', function(page, model, params, next){
 
-    var fieldsViews = model.query('fieldsViews', {});
+    var fieldsViews = model.query('adminFieldsViews', {});
     // get all the view names
 
     model.subscribe(fieldsViews, function(err, next) {
       // if no data, add an example
       if (!fieldsViews.get().length) {
-        model.add('fieldsViews', {
+        model.add('adminFieldsViews', {
           view: 'view',
           field: 'field',
           label: 'label',
@@ -183,20 +183,20 @@ module.exports = function(app, options) {
 
   adminFieldsViewsForm.prototype.fieldsViewsAdd = function () {
     console.log('add');
-    this.model.root.add('fieldsViews', this.model.del('_page.fieldViewNew'));
+    this.model.root.add('adminFieldsViews', this.model.del('_page.fieldViewNew'));
   }
 
   adminFieldsViewsForm.prototype.fieldsViewsDelete = function (id) {
     console.log('del', id);
-    this.model.root.del('fieldsViews.'+id);
+    this.model.root.del('adminFieldsViews.'+id);
   }
 
   adminFieldsViewsForm.prototype.fieldsViewsDuplicate = function (id) {
     console.log('dup', id);
-    var duplicateFieldsView = this.model.root.get('fieldsViews.'+id);
+    var duplicateFieldsView = this.model.root.get('adminFieldsViews.'+id);
     duplicateFieldsView['id'] = this.model.id(); // new id
     delete duplicateFieldsView['__proto__']; // clean
-    this.model.root.add('fieldsViews', duplicateFieldsView);
+    this.model.root.add('adminFieldsViews', duplicateFieldsView);
   }
 
 }
