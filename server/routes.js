@@ -21,17 +21,18 @@ router.get('/api/v1/:collection', function(req, res){
 
 });
 
-// get the
+// Get all distinct material technique values from the database
 router.get('/api/v1/collection/materialTechnique', function(req, res, next) {
-
   // in mongo this works : db.collection.aggregate({$group: {_id: "$materialTechnique"}})
-
   db.collection('collection').aggregate({$group: {_id: "$materialTechnique"}}, function(err, result) {
-
     res.json(result);
-
   });
+});
 
+router.get('/api/v1/admin/views', function(req, res, next) {
+  db.collection('adminViews').aggregate({$group: {_id: "$name"}}, function(err, result) {
+    res.json(result);
+  });
 });
 
 // file upload

@@ -116,7 +116,6 @@ module.exports = function(app, options) {
 
   });
 
-
   app.component('adminViews', adminViewsForm);
   function adminViewsForm() {}
 
@@ -142,6 +141,8 @@ module.exports = function(app, options) {
   app.get('/p/admin/fieldsViews', function(page, model, params, next){
 
     var fieldsViews = model.query('fieldsViews', {});
+    // get all the view names
+
     model.subscribe(fieldsViews, function(err, next) {
       // if no data, add an example
       if (!fieldsViews.get().length) {
@@ -158,9 +159,27 @@ module.exports = function(app, options) {
 
   });
 
-
   app.component('adminFieldsViews', adminFieldsViewsForm);
   function adminFieldsViewsForm() {}
+
+  // client side only
+  adminFieldsViewsForm.prototype.create = function(model) {
+    // retrieve the material techniques
+    xhr = new XMLHttpRequest();
+    xhr.open('GET', '/api/v1/admin/views', true);
+    xhr.onload = function() {
+      // debug
+      // FIXME: change the key name from '_id' to 'content' so it can be used directly in the view
+      var viewList = [];
+      var responseJson = JSON.parse(this.responseText);
+      for (var key in responseJson) {
+        viewList.push({content: responseJson[key]._id});
+      }
+      // component
+      model.root.set('_page.adminViewsName', viewList); // JSON.parse(this.responseText));
+    }
+    xhr.send();
+  }
 
   adminFieldsViewsForm.prototype.fieldsViewsAdd = function () {
     console.log('add');

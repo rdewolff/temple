@@ -25,7 +25,8 @@
       {{each _page.fieldsViews as #fieldView}}
       <tr>
         <td>
-          <input type="text" class="form-control" value="{{#fieldView.view}}">
+          <dropdown class='col-sm-6' value='{{#fieldView.view}}' options='{{_page.adminViewsName}}'></dropdown>
+          ({{#fieldView.view}})
         </td>
         <td>
           <input type="text" class="form-control" value="{{#fieldView.field}}">
@@ -49,7 +50,7 @@
       </tr>
       <tr>
         <td>
-          <input type="text" class="form-control" value="{{_page.fieldViewNew.view}}">
+          <dropdown class='col-sm-6' value='{{_page.fieldViewNew.view}}' options='{{_page.adminViewsName}}'></dropdown>
         </td>
         <td>
           <input type="text" class="form-control" value="{{_page.fieldViewNew.field}}">
