@@ -18,12 +18,16 @@ module.exports = function(app, options) {
     // FIXME: security disable other input
     for (key in params.query) {
       // debug console.log(key+' -> '+params.query[key]);
-      query[key] = params.query[key];
+      // don't include the sort option here
+      if (key != 'sort')
+        query[key] = params.query[key];
     }
 
     query.$orderby[0][params.query.sort] = 1; // use the parameters for the order by
 
-    // debug console.log(query);
+    //debug 
+    console.log(query);
+
     var collection = model.query('collection', query);
 
     model.subscribe(collection, function(err) {
@@ -43,7 +47,6 @@ module.exports = function(app, options) {
   function CollectionListAction() {}
 
   CollectionListAction.prototype.changeOrder = function () {
-    console.log('meuh');
     app.history.push('/p/collection/new');
   }
 
