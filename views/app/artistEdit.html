@@ -132,6 +132,41 @@
                 <textarea class="form-control" rows="3" id="awards">{{_page.artist.awards}}</textarea>
               </div>
             </div>
+            <div class="form-group">
+              <label for="exhibitions" class="col-sm-2 control-label">Exhibitions</label>
+              <div class="col-sm-4">
+                <textarea class="form-control" rows="3" id="exhibitions">{{_page.artist.exhibitions}}</textarea>
+              </div>
+
+              <label for="press" class="col-sm-2 control-label">Press</label>
+              <div class="col-sm-4">
+                <textarea class="form-control" rows="3" id="press">{{_page.artist.press}}</textarea>
+              </div>
+            </div>
+          </pane>
+          <pane title="Bibliography">
+            <p class="spacer" />
+            <div class="form-group">
+              <label for="bibliography" class="col-sm-2 control-label">Bibliography</label>
+              <div class="col-sm-4">
+                <textarea class="form-control" rows="3" id="bibliography">{{_page.artist.bibliography}}</textarea>
+              </div>
+            </div>
+          </pane>
+          <pane title="Links">
+            <p class="spacer" />
+            <div class="form-group">
+              <label for="url" class="col-sm-2 control-label">URL</label>
+              <div class="col-sm-4">
+                <input class="form-control" id="deathplace" value="{{_page.artist.url}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sikart" class="col-sm-2 control-label">Sikart</label>
+              <div class="col-sm-4">
+                <input class="form-control" id="sikart" value="{{_page.artist.sikart}}">
+              </div>
+            </div>
           </pane>
         </tabs>
       </div>
