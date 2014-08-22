@@ -24,8 +24,6 @@ module.exports = function(app, options) {
   function AdminPropertiesForm() {}
 
   AdminPropertiesForm.prototype.propertiesAdd = function () {
-    console.log(this.propertieNewName);
-    console.log('add');
     var newProperties = {
       name: this.model.get('_page.adminPropertiesNewName'),
       value: this.model.get('_page.adminPropertiesNewValue')
@@ -71,13 +69,12 @@ module.exports = function(app, options) {
         });
       }
       // transform optional languages
-      console.log('optionLanguage.get()', optionLanguage.get()[0].value);
+      // debug : console.log('optionLanguage.get()', optionLanguage.get()[0].value);
       var lang = optionLanguage.get()[0].value.split(',');
       var optionLang = [];
       for (var i = 0; i < lang.length; i++) {
         optionLang.push({content: lang[i]});
       }
-      console.log('optionLang', optionLang);
       model.set('_page.options.languages', optionLang);
       model.ref('_page.adminFields', adminFields);
       page.render('adminFields');
