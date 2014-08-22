@@ -111,7 +111,7 @@ module.exports = function(app, options) {
 
     var collectionObjectToSkip = (pageNumber-1) * model.get('_page.pagination.pageSize');
 
-    console.log('page changed');
+    // FIXME: use the order by and filter choosed by the user.
     var collectionQuery = model.query('collection', {
       $or: [
         {publish: 'Public'},
@@ -123,16 +123,11 @@ module.exports = function(app, options) {
     });
     console.log(model.get('_page.currentPage'));
     model.subscribe(collectionQuery, function(err, next) {
-      model.del('_page.collection');
+      // TODO: how to use model.ref() here after the main subscribtion done on load?!? 
+      // model.del('_page.collection');
       model.set('_page.collection', collectionQuery.get());
     });
 
-    /*var items = [];
-    for (var i = (pageNumber - 1) * 10; i < (pageNumber - 1) * 10 + 10; i++) {
-        var obj = {id: i, text: 'Item #' + i};
-        items.push(obj);
-    }
-    app.model.set('_page.pagerDemoData', items); */
 };
 
 }

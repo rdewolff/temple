@@ -22,11 +22,6 @@
       <view name="filter-link" href="/collection?sort=accessionNr">Accession #</view>
     </div>
 
-    <!-- order -->
-    <!-- FIXME: ideally, order with a dropbox. But the bootstrap dropbox component doesn't support multiple action
-    <label for='domain' class='col-sm-2 control-label'>Order</label>
-    <dropdown class='col-sm-2' on-click='toggle(), changeOrder()' value='{{_page.orderChoice}}' options='{{_page.order}}' id='filter'></dropdown> -->
-
   </div>
 
   <div class="row-spacer"></div>
@@ -55,13 +50,12 @@
   <div class="row-spacer"></div>
 
   <pager pageSize="{{_page.pagination.pageSize}}" total="{{_page.pagination.collectionCount}}" buttonsCount="{{_page.pagination.buttonsCount}}" on-pageChanged="pageChanged()" />
-  <!-- <pager pageSize="10" total="150" buttonsCount="10" on-pageChanged="pageChanged()"/> -->
+  <!-- Debug
   pageSize={{_page.pagination.pageSize}}
   count={{_page.pagination.collectionCount}}
-  buttonsCount={{_page.pagination.buttonsCount}}
+  buttonsCount={{_page.pagination.buttonsCount}} -->
   
   <div class="row-spacer"></div>
-
 
 <filter-link:>
   <a href="{{@href}}" class='btn btn-default {{if $render.url === @href}}active{{/}}'>{{@content}}</a>
