@@ -57,11 +57,12 @@ module.exports = function(app, options) {
   app.get('/p/admin/fields', function(page, model, params, next){
 
     var adminFields = model.query('adminFields', {});
-    model.subscribe(adminFields, function(err, next) {
+    var optionLanguage = model.query('adminProperties', {name: 'Languages'});
+    model.subscribe(adminFields, optionLanguage, function(err, next) {
       // if no data, add an example
       if (!adminFields.get().length) {
         model.add('adminFields', {
-          database: 'database',
+          database: 'database', // FIXME: wrong fields name now ^^
           table: 'table',
           field: 'field',
           label: 'label',
@@ -69,6 +70,15 @@ module.exports = function(app, options) {
           comment: 'comment'
         });
       }
+      // transform optional languages
+      console.log('optionLanguage.get()', optionLanguage.get()[0].value);
+      var lang = optionLanguage.get()[0].value.split(',');
+      var optionLang = [];
+      for (var i = 0; i < lang.length; i++) {
+        optionLang.push({content: lang[i]});
+      }
+      console.log('optionLang', optionLang);
+      model.set('_page.options.languages', optionLang);
       model.ref('_page.adminFields', adminFields);
       page.render('adminFields');
     });
@@ -141,8 +151,8 @@ module.exports = function(app, options) {
   app.get('/p/admin/fieldsViews', function(page, model, params, next){
 
     var fieldsViews = model.query('adminFieldsViews', {});
-    // get all the view names
 
+    // get all the view names
     model.subscribe(fieldsViews, function(err, next) {
       // if no data, add an example
       if (!fieldsViews.get().length) {

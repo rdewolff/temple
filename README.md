@@ -2,6 +2,12 @@
 
 ## Model
 
+### Admin Properties
+
+#### Required properties
+
+- Languages : 2 letter code separated by coma. Example : FR, DE, EN
+
 ### Mongodb structure
 
 to complete
