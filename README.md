@@ -168,6 +168,7 @@ To avoid collision with bootstrap in the left menu
 - Can we clone an object with object.at('col.'+id) and then change it's ID with new model.id() and add it? or can that cause strange behaviors?
 - Dropdown don't get selected when used in a loop (example in Admin Fields Views)
 - Problem converting db with Igor. Cf new thread started 20.8.2014 : https://groups.google.com/forum/#!topic/derbyjs/S4pPpk_Djik
+- What happen if you subscribe to one collection in one place, and then, on some user action, you want to update the data displayed and re-subscribe to the same collection with different criteria?? Does Derby handle this correctly or will the system crash at some point?
 
 
 ### Mail to Derby.js Google group
