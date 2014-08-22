@@ -25,6 +25,7 @@
         <view name='field' label='Biography' field='{{_page.artist.biography}}' />
         <view name='field' label='Awards' field='{{_page.artist.awards}}' />
         <view name='field' label='Notes' field='{{_page.artist.notes}}' />
+        <view name='fieldUrl' label='URL' field='{{_page.artist.url}}' />
 
       </div>
 
@@ -73,5 +74,13 @@
   <dl class='dl-horizontal'>
     <dt>{{@label}}</dt>
     <dd>{{@field}}</dd>
+  </dl>
+  {{/}}
+
+<fieldUrl:>
+  {{if @field}}
+  <dl class='dl-horizontal'>
+    <dt>{{@label}}</dt>
+    <dd><a href="{{@field}}">{{@field}}</a></dd>
   </dl>
   {{/}}
