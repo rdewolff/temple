@@ -5,9 +5,11 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>
-          <label for="lastname" class="control-label">Database</label>
-        </th>
+        <th colspan="2"><label class="glyphicon glyphicon-log-out"></label> Source (external)</th>
+        <th colspan="2"><label class="glyphicon glyphicon-log-in"></label> Destination (ineternal)</th>
+        <th colspan="4"></th>
+      </tr>
+      <tr>
         <th>
           <label for="lastname" class="control-label">Table</label>
         </th>
@@ -15,7 +17,13 @@
           <label for="lastname" class="control-label">Field</label>
         </th>
         <th>
-          <label for="lastname" class="control-label">Label</label>
+          <label for="lastname" class="control-label">Collection</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Field</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Internal Name</label>
         </th>
         <th>
           <label for="lastname" class="control-label">Function</label>
@@ -32,16 +40,19 @@
       {{each _page.adminFields as #field}}
       <tr>
         <td>
-          <input type="text" class="form-control" value="{{#field.database}}">
+          <input type="text" class="form-control" value="{{#field.sourceTable}}">
         </td>
         <td>
-          <input type="text" class="form-control" value="{{#field.table}}">
+          <input type="text" class="form-control" value="{{#field.sourceField}}">
         </td>
         <td>
-          <input type="text" class="form-control" value="{{#field.field}}">
+          <input type="text" class="form-control" value="{{#field.destinationCollection}}">
         </td>
         <td>
-          <input type="text" class="form-control" value="{{#field.label}}">
+          <input type="text" class="form-control" value="{{#field.destinationField}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#field.internalName}}">
         </td>
         <td>
           <textarea class='form-control' rows='1' id='notes'>{{#field.function}}</textarea>
@@ -62,16 +73,19 @@
       </tr>
       <tr>
         <td>
-          <input type="text" class="form-control" value="{{_page.adminFieldNew.database}}">
+          <input type="text" class="form-control" value="{{_page.adminFieldNew.sourceTable}}">
         </td>
         <td>
-          <input type="text" class="form-control" value="{{_page.adminFieldNew.table}}">
+          <input type="text" class="form-control" value="{{_page.adminFieldNew.sourceField}}">
         </td>
         <td>
-          <input type="text" class="form-control" value="{{_page.adminFieldNew.field}}">
+          <input type="text" class="form-control" value="{{_page.adminFieldNew.destinationCollection}}">
         </td>
         <td>
-          <input type="text" class="form-control" value="{{_page.adminFieldNew.label}}">
+          <input type="text" class="form-control" value="{{_page.adminFieldNew.destinationField}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminFieldNew.internalName}}">
         </td>
         <td>
           <textarea class='form-control' rows='1' id='notes'>{{_page.adminFieldNew.function}}</textarea>

@@ -21,9 +21,13 @@ module.exports = function (store, apps, error, cb){
 
   var handlers = highway(store, {session: session});
 
+ONE_YEAR = 1000 * 60 * 60 * 24 * 365
+
   var expressApp = express()
     .use(compression())
-    .use(serveStatic(process.cwd() + '/public'))
+    // new      : .use(serveStatic(publicDir, {dotfiles: 'deny', etag: true, index: '/', maxAge: ONE_YEAR}))
+    // original : .use(serveStatic(process.cwd() + '/public'))
+    .use(serveStatic(process.cwd() + '/public', {dotfiles: 'deny', etag: true, index: '/', maxAge: ONE_YEAR}))
     .use(store.modelMiddleware())
     .use(cookieParser())
     .use(session)

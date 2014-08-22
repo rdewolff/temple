@@ -22,6 +22,7 @@ for(var key in defaults) {
 
 derby.run(function(){
   var store = require('./server/store')(derby);
+
   express(store, apps, error, function(expressApp, upgrade){
     var server = http.createServer(expressApp);
 
@@ -31,8 +32,10 @@ derby.run(function(){
       console.log('%d listening. Go to: http://localhost:%d/', process.pid, process.env.PORT);
     });
 
+    var bundleOpts = {extensions: ['.js', '.coffee'], minify: false};
+
     apps.forEach(function(app){
-      app.writeScripts(store, publicDir, {extensions: ['.coffee']}, function(){
+      app.writeScripts(store, publicDir, bundleOpts, function(){
         console.log('Bundle created:', chalk.blue(app.name));
       });
     });

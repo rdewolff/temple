@@ -71,19 +71,26 @@ app.use(require('./admin'));
 
 app.use(require('../shared/shared.js'));
 
+// called both on client and server
+app.proto.init = function(model) {
+  // Language
+  model.set('_session.lang', 'EN');
+}
+
+// called only on client
 app.proto.create = function(model) {
 
   /**
    * Import scripts
    */
   // application wide jquery
-  require('../../public/vendor/jquery-1.9.1.min'); // the JQuery version from Derby example todos WORKS
+  //require('../../public/vendor/jquery-1.9.1.min'); // the JQuery version from Derby example todos WORKS
   // NOT WORKING : require('../../public/components/jquery/dist/jquery.min'); // the Bower JQuery version does NOT work
 
-  require('../../public/components/bootstrap/dist/js/bootstrap.min');
+  // require('../../public/components/bootstrap/dist/js/bootstrap.min');
   // use the corrected version - none minified
-  require('../../public/components/sidr/jquery.sidr');
-  require('../../public/components/Keypress/keypress-2.0.3.min');
+  // require('../../public/components/sidr/jquery.sidr');
+  // require('../../public/components/Keypress/keypress-2.0.3.min');
 
   /**
    * Search using the left temple-panel

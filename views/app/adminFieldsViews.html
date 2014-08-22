@@ -22,11 +22,15 @@
       </tr>
     </thead>
     <tbody>
+      <t-select label="String Array (single value)" single hr offset-lg="6" col-lg="6" items="{['Item1', 'Item2', 'Item3', 'Item4']}" value="{{_page.selectSingle}}"/>
       {{each _page.fieldsViews as #fieldView}}
       <tr>
         <td>
-          <dropdown class='col-sm-6' value='{{#fieldView.view}}' options='{{_page.adminViewsName}}'></dropdown>
-          ({{#fieldView.view}})
+          {{#fieldView.view}}<br />
+          data = {{_page.testData}} <br />
+          {{_page.testDataSelected}}<br />
+          <!-- FIXME: use the t-select module - clever boy! -->
+          <t-select single hr items="{{_page.testData}}" value="{{_page.testDataSelected}}"/>
         </td>
         <td>
           <input type="text" class="form-control" value="{{#fieldView.field}}">

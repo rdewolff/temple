@@ -13,7 +13,10 @@ module.exports = function(app, options) {
       // if no data, add an example
       if (!adminProperties.get().length) {
         model.add('adminProperties', {name: 'CustomerName', value: 'zetcom'});
-        model.add('adminProperties', {name: 'URL', value: 'http://'});
+        model.add('adminProperties', {name: 'Languages', value: 'EN, FR, DE'});
+        model.add('adminProperties', {name: 'DatabaseSourceConnectionString', value: '192.168.0.3'});
+        model.add('adminProperties', {name: 'DatabaseSourceUsername', value: ''});
+        model.add('adminProperties', {name: 'DatabaseSourcePassword', value: ''});
       }
       model.ref('_page.adminProperties', adminProperties);
       page.render('adminProperties');
@@ -134,6 +137,7 @@ module.exports = function(app, options) {
     this.model.root.add('adminViews', duplicateView);
   }
 
+  app.component(require('d-comp-palette/form/t-select/select'));
 
   /**
    * FIELDS - VIEWS
@@ -154,6 +158,7 @@ module.exports = function(app, options) {
         });
       }
       model.ref('_page.fieldsViews', fieldsViews);
+      model.set('_page.testData', ['Item1', 'Item2', 'Item3', 'Item4']);
       page.render('adminFieldsViews');
     });
 
@@ -176,6 +181,7 @@ module.exports = function(app, options) {
         viewList.push({content: responseJson[key]._id});
       }
       // component
+      console.log(viewList);
       model.root.set('_page.adminViewsName', viewList); // JSON.parse(this.responseText));
     }
     xhr.send();

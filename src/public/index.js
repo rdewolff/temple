@@ -29,6 +29,9 @@ app.proto.signIn = function(action, cancel) {
 // get called on server and client
 app.proto.init = function(model) {
 
+    // Language
+    model.set('_session.lang', 'EN');
+
     /**
      * Search
      */
