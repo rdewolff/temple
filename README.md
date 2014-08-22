@@ -4,6 +4,8 @@
 
 ### Mongodb structure
 
+to complete
+
 ```
 collection {
   id
