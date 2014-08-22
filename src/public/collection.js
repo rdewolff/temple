@@ -4,7 +4,22 @@
 
 module.exports = function(app, options) {
 
+  app.component(require('d-comp-palette/pager/pager'));
+
   app.get('/collection', function(page, model, params, next) {
+
+    var limitPerPage = 5;
+
+    // count the number of object for pagination
+    var collectionCount = model.query('collection', {
+      $count: true,
+      $query: {
+        $or: [
+          {publish: "Public"},
+          {publish: "Highlight"}
+        ]
+      }
+    });
 
     // filter
     var query = {
@@ -12,7 +27,8 @@ module.exports = function(app, options) {
         {publish: 'Public'},
         {publish: 'Highlight'}
       ],
-      $orderby: [{}]
+      $orderby: [{}],
+      $limit: limitPerPage
     };
     // add all query passed by parameter
     // FIXME: security disable other input
@@ -30,10 +46,16 @@ module.exports = function(app, options) {
 
     var collection = model.query('collection', query);
 
-    model.subscribe(collection, function(err) {
+    model.subscribe(collection, collectionCount, function(err) {
       if (err) return next(err);
 
       collection.ref('_page.collection');
+
+      // pagination
+      console.dir(collectionCount.get());
+      collectionCount.refExtra('_page.pagination.collectionCount');
+      model.set('_page.pagination.pageSize', limitPerPage);
+      model.set('_page.pagination.buttonsCount', 5);
 
       // FIXME: stored in the database and editable in the admin area
       model.set('_page.filter', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}]);
@@ -47,6 +69,7 @@ module.exports = function(app, options) {
   function CollectionListAction() {}
 
   CollectionListAction.prototype.changeOrder = function () {
+    console.log('changeOrder (TODO: remove?) is called');
     app.history.push('/p/collection/new');
   }
 
@@ -81,5 +104,35 @@ module.exports = function(app, options) {
       return Object.keys(ids);
     });
   });
+
+  // pages
+  CollectionListAction.prototype.pageChanged = function (pageNumber) {
+    var model = this.model;
+
+    var collectionObjectToSkip = (pageNumber-1) * model.get('_page.pagination.pageSize');
+
+    console.log('page changed');
+    var collectionQuery = model.query('collection', {
+      $or: [
+        {publish: 'Public'},
+        {publish: 'Highlight'}
+      ],
+      $orderby: [{}],
+      $limit: model.get('_page.pagination.pageSize'),
+      $skip: collectionObjectToSkip
+    });
+    console.log(model.get('_page.currentPage'));
+    model.subscribe(collectionQuery, function(err, next) {
+      model.del('_page.collection');
+      model.set('_page.collection', collectionQuery.get());
+    });
+
+    /*var items = [];
+    for (var i = (pageNumber - 1) * 10; i < (pageNumber - 1) * 10 + 10; i++) {
+        var obj = {id: i, text: 'Item #' + i};
+        items.push(obj);
+    }
+    app.model.set('_page.pagerDemoData', items); */
+};
 
 }

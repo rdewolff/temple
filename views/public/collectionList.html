@@ -54,23 +54,12 @@
 
   <div class="row-spacer"></div>
 
-  <!-- TODO: pages -->
-  <div class="btn-group">
-    <button type="button" class="btn btn-default">1</button>
-    <button type="button" class="btn btn-default">2</button>
-
-    <div class="btn-group">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        ...
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-      </ul>
-    </div>
-  </div>
-
+  <pager pageSize="{{_page.pagination.pageSize}}" total="{{_page.pagination.collectionCount}}" buttonsCount="{{_page.pagination.buttonsCount}}" on-pageChanged="pageChanged()" />
+  <!-- <pager pageSize="10" total="150" buttonsCount="10" on-pageChanged="pageChanged()"/> -->
+  pageSize={{_page.pagination.pageSize}}
+  count={{_page.pagination.collectionCount}}
+  buttonsCount={{_page.pagination.buttonsCount}}
+  
   <div class="row-spacer"></div>
 
 
