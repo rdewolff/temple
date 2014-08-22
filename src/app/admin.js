@@ -75,7 +75,7 @@ module.exports = function(app, options) {
       for (var i = 0; i < lang.length; i++) {
         optionLang.push({content: lang[i]});
       }
-      model.set('_page.options.languages', optionLang);
+      model.set('_page.optionsLanguages', optionLang);
       model.ref('_page.adminFields', adminFields);
       page.render('adminFields');
     });
@@ -98,6 +98,52 @@ module.exports = function(app, options) {
     duplicateField['id'] = this.model.id(); // new id
     delete duplicateField['__proto__']; // clean
     this.model.root.add('adminFields', duplicateField);
+  }
+
+  /**
+   * LABELS
+   */
+  app.get('/p/admin/labels', function(page, model, params, next){
+
+    var adminLabels = model.query('adminLabels', {});
+    var optionLanguage = model.query('adminProperties', {name: 'Languages'});
+    model.subscribe(adminLabels, optionLanguage, function(err, next) {
+      // if no data, add an example
+      if (!adminLabels.get().length) {
+        /*model.add('adminLabels', {
+          test: 'empty'
+        });*/
+      }
+      // transform optional languages
+      // debug : console.log('optionLanguage.get()', optionLanguage.get()[0].value);
+      var lang = optionLanguage.get()[0].value.split(',');
+      var optionLang = [];
+      for (var i = 0; i < lang.length; i++) {
+        optionLang.push({content: lang[i]});
+      }
+      model.set('_page.optionsLanguages', optionLang);
+      model.ref('_page.adminLabels', adminLabels);
+      page.render('adminLabels');
+    });
+
+  });
+
+  app.component('adminLabels', AdminLabelsForm);
+  function AdminLabelsForm() {}
+
+  AdminLabelsForm.prototype.labelsAdd = function () {
+    this.model.root.add('adminLabels', this.model.del('_page.adminLabelNew'));
+  }
+
+  AdminLabelsForm.prototype.labelsDelete = function (id) {
+    this.model.root.del('adminLabels.'+id);
+  }
+
+  AdminLabelsForm.prototype.labelsDuplicate = function (id) {
+    var duplicateLabel = this.model.root.get('adminLabels.'+id);
+    duplicateLabel['id'] = this.model.id(); // new id
+    delete duplicateLabel['__proto__']; // clean
+    this.model.root.add('adminLabels', duplicateLabel);
   }
 
   /**

@@ -1,0 +1,69 @@
+<index:>
+  <h1>Admin - labels</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          <label for="lastname" class="control-label">Field</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Language</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">View (optional)</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Value</label>
+        </th>
+        <th>
+          <label for="lastname" class="control-label">Action</label>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{each _page.adminLabels as #label}}
+      <tr>
+        <td>
+          <input type="text" class="form-control" value="{{#label.field}}">
+        </td>
+        <td>
+          <dropdown class='col-sm-6' value='{{#label.language}}' options='{{_page.optionsLanguages}}'></dropdown>
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#label.view}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{#label.value}}">
+        </td>
+        <td nowrap>
+          <button name="duplicate" title="Duplicate" class="btn btn-sm btn-success" on-click="labelsDuplicate(#label.id)"><span class="glyphicon glyphicon-plus"></span></button>
+          <button name="delete" class="btn btn-sm btn-danger" on-click="labelsDelete(#label.id)"><span class="glyphicon glyphicon-remove"></span></button>
+        </td>
+      </tr>
+      {{/}}
+      <tr>
+        <td colspan="7">
+          <label for="lastname" class="control-label">Add a new field</label>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminLabelNew.field}}">
+        </td>
+        <td>
+          <dropdown class='col-sm-6' value='{{_page.adminLabelNew.language}}' options='{{_page.options.languages}}'></dropdown>
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminLabelNew.view}}">
+        </td>
+        <td>
+          <input type="text" class="form-control" value="{{_page.adminLabelNew.value}}">
+        </td>
+        <td nowrap>
+          <button name="duplicate" class="btn btn-primary" on-click="labelsAdd()">Add</button>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>

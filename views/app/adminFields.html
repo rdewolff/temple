@@ -7,7 +7,7 @@
       <tr>
         <th colspan="2"><label class="glyphicon glyphicon-log-out"></label> Source (external)</th>
         <th colspan="3"><label class="glyphicon glyphicon-log-in"></label> Destination (internal)</th>
-        <th colspan="4"></th>
+        <th colspan="5"></th>
       </tr>
       <tr>
         <th>
@@ -61,7 +61,7 @@
           <input type="text" class="form-control" value="{{#field.destinationField}}">
         </td>
         <td>
-          <dropdown class='col-sm-6' value='{{#field.language}}' options='{{_page.options.languages}}'></dropdown>
+          <dropdown class='col-sm-6' value='{{#field.language}}' options='{{_page.optionsLanguages}}'></dropdown>
         </td>
         <td>
           <input type="text" class="form-control" value="{{#field.internalName}}">
@@ -79,7 +79,7 @@
       </tr>
       {{/}}
       <tr>
-        <td colspan="7">
+        <td colspan="10">
           <label for="lastname" class="control-label">Add a new field</label>
         </td>
       </tr>
@@ -100,7 +100,7 @@
           <input type="text" class="form-control" value="{{_page.adminFieldNew.destinationField}}">
         </td>
         <td>
-          <dropdown class='col-sm-6' value='{{_page.adminFieldNew.language}}' options='{{_page.options.languages}}'></dropdown>
+          <dropdown class='col-sm-6' value='{{_page.adminFieldNew.language}}' options='{{_page.optionsLanguages}}'></dropdown>
         </td>
         <td>
           <input type="text" class="form-control" value="{{_page.adminFieldNew.internalName}}">
