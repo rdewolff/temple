@@ -55,6 +55,7 @@ module.exports = function(app, options) {
   app.get('/p/admin/fields', function(page, model, params, next){
 
     var adminFields = model.query('adminFields', {});
+    // FIXME: checkAdminFieldsAndAddRequired(model);
     var optionLanguage = model.query('adminProperties', {name: 'Languages'});
     model.subscribe(adminFields, optionLanguage, function(err, next) {
       // if no data, add an example
@@ -251,5 +252,49 @@ module.exports = function(app, options) {
     delete duplicateFieldsView['__proto__']; // clean
     this.model.root.add('adminFieldsViews', duplicateFieldsView);
   }
+
+  /*
+  FIXME: create function that is flexible and add all the required parameters to the
+  app database if required. It could be checked on app launch.
+
+  function checkAdminFieldsAndAddRequired (model) {
+    console.log('checkAdminFieldsAndAddRequired');
+
+    // list of colleciton and fields that should exist in there
+    // each field has a default value that will be set if missing
+    var requiredFields = {
+      'adminProperties' : {
+        'Languages' : 'EN'
+      },
+      'adminFields' : {
+        'lapin' : 'blanc'
+      }
+    };
+
+    var models = [];
+    var queries = {};
+    var queriesTxt;
+    for (key in requiredFields) {
+      console.log(key);
+      queriesTxt = "{"; // reset
+      for (field in requiredFields[key]) {
+        queriesTxt += '"name": "' + field + '"';
+        // queries.add({name: field});
+      }
+      queriesTxt += '}';
+      // debug console.log('queries', queriesTxt);
+      queries = JSON.parse(queriesTxt);
+      // debug
+      console.log('queries', queries);
+      models[key] = model.query(key, queries);
+      models[key].subscribe(function() {
+        console.log('models['+key+'].get()', models[key].get());
+      });
+    }
+
+
+    // model.query()
+  }
+  */
 
 }
