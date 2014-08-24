@@ -35,6 +35,12 @@ router.get('/api/v1/admin/views', function(req, res, next) {
   });
 });
 
+router.get('/api/v1/admin/fields', function(req, res, next) {
+  db.collection('adminFields').aggregate({$group: {_id: "$internalName"}}, function(err, result) {
+    res.json(result);
+  });
+});
+
 // file upload
 router.post('/p/collection/upload', function(req, res, next) {
   var form, model, fileUploaded;
