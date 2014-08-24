@@ -59,6 +59,23 @@ collectionArtist {
 
 ## TODO
 
+- dynamic page loading. Pseudo code :
+
+```
+controller
+
+for each view
+  app.get(/auto/{view.location})
+  subscribe to {view.data}
+  todo: filter, paging
+
+function label(field)
+
+view
+  label('fieldname')
+  data('fieldname')
+```
+
 - remove delete button on edit form when adding new object
 - build guided tour of temple
 - improve collection - artist link (on private collection edit page) to work with reactive function. Or better way?
