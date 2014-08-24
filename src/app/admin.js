@@ -5,6 +5,16 @@
 module.exports = function(app, options) {
 
   /**
+   * General
+   */
+  app.component('adminShared', AdminSharedForm);
+  function AdminSharedForm() {}
+
+  AdminSharedForm.prototype.create = function() {
+    
+  }
+
+  /**
    * PROPERTIES
    */
   app.get('/p/admin/properties', function(page, model, params, next) {
@@ -132,6 +142,12 @@ module.exports = function(app, options) {
   app.component('adminLabels', AdminLabelsForm);
   function AdminLabelsForm() {}
 
+  // client side only
+  AdminLabelsForm.prototype.create = function(model) {
+    getXhrUrlToModel('/api/v1/admin/fields', '_page.adminFieldsName', model)
+    getXhrUrlToModel('/api/v1/admin/views', '_page.adminViewsName', model)
+  }
+
   AdminLabelsForm.prototype.labelsAdd = function () {
     this.model.root.add('adminLabels', this.model.del('_page.adminLabelNew'));
   }
@@ -189,68 +205,22 @@ module.exports = function(app, options) {
   }
 
 
-  /**
-   * FIELDS - VIEWS
-   */
-  app.get('/p/admin/fieldsViews', function(page, model, params, next){
-
-    var fieldsViews = model.query('adminFieldsViews', {});
-
-    // get all the view names
-    model.subscribe(fieldsViews, function(err, next) {
-      // if no data, add an example
-      if (!fieldsViews.get().length) {
-        model.add('adminFieldsViews', {
-          view: 'view',
-          field: 'field',
-          label: 'label',
-          comment: 'comment'
-        });
-      }
-      model.ref('_page.fieldsViews', fieldsViews);
-      page.render('adminFieldsViews');
-    });
-
-  });
-
-  app.component('adminFieldsViews', adminFieldsViewsForm);
-  function adminFieldsViewsForm() {}
-
-  // client side only
-  adminFieldsViewsForm.prototype.create = function(model) {
-    // retrieve the material techniques
+  function getXhrUrlToModel(XhrUrl, modelPathToSet, model) {
     xhr = new XMLHttpRequest();
-    xhr.open('GET', '/api/v1/admin/views', true);
+    xhr.open('GET', XhrUrl, true);
     xhr.onload = function() {
       // debug
       // FIXME: change the key name from '_id' to 'content' so it can be used directly in the view
+      // by the d-bootstrap/dropdown component
       var viewList = [];
       var responseJson = JSON.parse(this.responseText);
       for (var key in responseJson) {
         viewList.push({content: responseJson[key]._id});
       }
       // component
-      model.root.set('_page.adminViewsName', viewList); // JSON.parse(this.responseText));
+      model.root.set(modelPathToSet, viewList); // JSON.parse(this.responseText));
     }
     xhr.send();
-  }
-
-  adminFieldsViewsForm.prototype.fieldsViewsAdd = function () {
-    console.log('add');
-    this.model.root.add('adminFieldsViews', this.model.del('_page.fieldViewNew'));
-  }
-
-  adminFieldsViewsForm.prototype.fieldsViewsDelete = function (id) {
-    console.log('del', id);
-    this.model.root.del('adminFieldsViews.'+id);
-  }
-
-  adminFieldsViewsForm.prototype.fieldsViewsDuplicate = function (id) {
-    console.log('dup', id);
-    var duplicateFieldsView = this.model.root.get('adminFieldsViews.'+id);
-    duplicateFieldsView['id'] = this.model.id(); // new id
-    delete duplicateFieldsView['__proto__']; // clean
-    this.model.root.add('adminFieldsViews', duplicateFieldsView);
   }
 
   /*

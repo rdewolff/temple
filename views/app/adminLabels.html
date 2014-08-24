@@ -1,4 +1,3 @@
-<import: src='./adminShared'>
 <index:>
   <h1>Admin - Labels</h1>
   <view name="adminShared"></view>
@@ -27,13 +26,13 @@
       {{each _page.adminLabels as #label}}
       <tr>
         <td>
-          <input type="text" class="form-control" value="{{#label.field}}">
+          <dropdown value='{{#label.field}}' options='{{_page.adminFieldsName}}'></dropdown>
         </td>
         <td>
-          <dropdown class='col-sm-6' value='{{#label.language}}' options='{{_page.optionsLanguages}}'></dropdown>
+          <dropdown value='{{#label.language}}' options='{{_page.optionsLanguages}}'></dropdown>
         </td>
         <td>
-          <input type="text" class="form-control" value="{{#label.view}}">
+          <dropdown value='{{#label.view}}' options='{{_page.adminViewsName}}'></dropdown>
         </td>
         <td>
           <input type="text" class="form-control" value="{{#label.value}}">
@@ -51,13 +50,13 @@
       </tr>
       <tr>
         <td>
-          <input type="text" class="form-control" value="{{_page.adminLabelNew.field}}">
+          <dropdown value='{{_page.adminLabelNew.field}}' options='{{_page.adminFieldsName}}'></dropdown>
         </td>
         <td>
-          <dropdown class='col-sm-6' value='{{_page.adminLabelNew.language}}' options='{{_page.options.languages}}'></dropdown>
+          <dropdown value='{{_page.adminLabelNew.language}}' options='{{_page.optionsLanguages}}'></dropdown>
         </td>
         <td>
-          <input type="text" class="form-control" value="{{_page.adminLabelNew.view}}">
+          <dropdown value='{{_page.adminLabelNew.view}}' options='{{_page.adminViewsName}}'></dropdown>
         </td>
         <td>
           <input type="text" class="form-control" value="{{_page.adminLabelNew.value}}">
