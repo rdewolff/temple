@@ -7,13 +7,12 @@ if (!derby.util.isProduction) global.app = app;
 app.serverUse(module, 'derby-stylus');
 
 app.use(require('d-bootstrap'));
+app.use(require('../../components/d-select2'));
 app.component(require('d-connection-alert'));
 app.component(require('d-before-unload'));
-
+// app.component(require('derby-ui-select2')); // FIXME: update to Derby 0.6
 app.component(require('l-upload')); // lever file-upload
-
 //app.use(require('../../components/zetcom-derby-ui-forms'));
-
 app.component(require('../../components/temple-panel'));
 
 app.loadViews(__dirname + '/../../views/app');

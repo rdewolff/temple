@@ -15,6 +15,15 @@ function store(derby) {
 
     browserify.transform({global: true}, coffeeify);
 
+    browserify.require(process.cwd() + '/public/components/jquery/dist/jquery.min.js');
+    browserify.require(process.cwd() + '/public/components/select2/select2.min.js');
+
+    /*
+    browserify.add([
+        './public/components/jquery/dist/jquery.js',
+        './public/components/select2/select2.min.js'
+    ]); */
+
     var pack = browserify.pack;
     browserify.pack = function(opts) {
       var detectTransform = opts.globalTransform.shift();
