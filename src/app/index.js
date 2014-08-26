@@ -7,7 +7,7 @@ if (!derby.util.isProduction) global.app = app;
 app.serverUse(module, 'derby-stylus');
 
 app.use(require('d-bootstrap'));
-app.use(require('../../components/d-select2'));
+// app.use(require('../../components/d-select2'));
 app.component(require('d-connection-alert'));
 app.component(require('d-before-unload'));
 // app.component(require('derby-ui-select2')); // FIXME: update to Derby 0.6
