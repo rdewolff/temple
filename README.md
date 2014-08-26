@@ -123,7 +123,17 @@ Temple use NPM for it's npm dependencies and bower.
 
 ### Node.js NPM
 
-- Cf. package.json file
+Actual version :
+
+- node v0.10.31
+- npm v1.4.24
+
+Mac OS X : to update node and npm to last stable version, run :
+```
+brew update && brew upgrade node && npm update npm -g
+```
+
+For more info, refer to the ```package.json``` file.
 
 ### Bower
 
