@@ -5,7 +5,12 @@ var router = express.Router();
 var multiparty = require('multiparty');
 var fs = require('fs');
 
+// used to do some mongodb query like aggregate/group by
 var db = require('mongoskin').db(process.env.MONGO_URL);
+
+var sshTunnel = require('tunnel-ssh');
+var postgresql = require('pg');
+
 
 // get the collection passed in param and return the result in JSON
 router.get('/api/v1/:collection', function(req, res){
@@ -39,6 +44,41 @@ router.get('/api/v1/admin/fields', function(req, res, next) {
   db.collection('adminFields').aggregate({$group: {_id: "$internalName"}}, function(err, result) {
     res.json(result);
   });
+});
+
+// synchronizer
+router.get('/api/v1/admin/sync', function(req, res, next) {
+
+  console.log('synchronization start');
+
+  var model = req.getModel();
+
+  var config = {
+    remotePort: 27017, //localport
+    localPort: 27017, //remoteport
+    verbose: true, // dump information to stdout
+    disabled: false, //set this to true to disable tunnel (useful to keep architecture for local connections)
+    sshConfig: { //ssh2 configuration (https://github.com/mscdex/ssh2)
+        host: '<yourRemoteIp>',
+        port: 22,
+        username: 'root',
+        // privateKey: require('fs').readFileSync('<pathToKeyFile>'),
+        // passphrase: 'verySecretString' // option see ssh2 config
+    }
+  };
+
+  var tunnel = new Tunnel(config);
+  tunnel.connect(function (error) {
+    console.log(error);
+    //or start your remote connection here ....
+    //mongoose.connect(...);
+    // TODO sync start here :)
+
+    //close tunnel to exit script
+    tunnel.close();
+  });
+
+
 });
 
 // file upload

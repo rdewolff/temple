@@ -27,10 +27,12 @@
     "livedb-mongo": "^0.3",
     "mongoskin": "^1.4.4",
     "multiparty": "*",
+    "pg": "^3.4.1",
     "racer-bundle": "^0.1",
     "racer-highway": "~1.1.0",
     "serve-favicon": "^2.0",
-    "serve-static": "^1.2"
+    "serve-static": "^1.2",
+    "tunnel-ssh": "0.0.4"
   },
   "author": {
     "name": "Romain de Wolff",

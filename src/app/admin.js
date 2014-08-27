@@ -11,7 +11,7 @@ module.exports = function(app, options) {
   function AdminSharedForm() {}
 
   AdminSharedForm.prototype.create = function() {
-    
+
   }
 
   /**
@@ -221,6 +221,20 @@ module.exports = function(app, options) {
       model.root.set(modelPathToSet, viewList); // JSON.parse(this.responseText));
     }
     xhr.send();
+  }
+
+  /**
+   * Sync
+   */
+  app.get('/p/admin/sync', function(page, model, params, next){
+    page.render('adminSync');
+  });
+  app.component('adminSync', adminSyncForm);
+
+  function adminSyncForm() {}
+
+  adminSyncForm.prototype.sync = function() {
+    getXhrUrlToModel('/api/v1/admin/sync', '_page.sync', this.model);
   }
 
   /*
