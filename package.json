@@ -19,7 +19,6 @@
     "d-comp-palette": "0.0.2",
     "d-connection-alert": "~0.1.0",
     "derby": "0.6.0-alpha23",
-    "derby-parsing": "^0.1.5",
     "derby-stylus": "^0.1",
     "derby-ui-select2": "^0.1.0",
     "express": "^4.4",
