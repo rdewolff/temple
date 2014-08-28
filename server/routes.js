@@ -9,7 +9,8 @@ var fs = require('fs');
 var db = require('mongoskin').db(process.env.MONGO_URL);
 
 var sshTunnel = require('tunnel-ssh');
-var postgresql = require('pg');
+
+var pg = require('pg');
 
 
 // get the collection passed in param and return the result in JSON
@@ -53,31 +54,57 @@ router.get('/api/v1/admin/sync', function(req, res, next) {
 
   var model = req.getModel();
 
+  // DATABASE
+  /*
+  var conString = "postgres://emp-zetcom-55:wkw8BDcaJxzfTWCt@emp-sql-01.zetcom.ch:5432/emp-zetcom-55";
+
+  pg.connect(conString, function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    console.log('here');
+    client.query('SELECT $1::int AS number', ['1'], function(err, result) {
+      //call `done()` to release the client back to the pool
+      done();
+
+      if(err) {
+        return console.error('error running query', err);
+      }
+      console.log(result.rows[0].number);
+      //output: 1
+    });
+  });
+  */
+  
+  // SSH TUNNEL
+  /*
   var config = {
-    remotePort: 27017, //localport
-    localPort: 27017, //remoteport
+    remotePort: 5432, //localport
+    localPort: 5432, //remoteport
     verbose: true, // dump information to stdout
     disabled: false, //set this to true to disable tunnel (useful to keep architecture for local connections)
     sshConfig: { //ssh2 configuration (https://github.com/mscdex/ssh2)
-        host: '<yourRemoteIp>',
+        host: 'emp-web-55.zetcom.ch',
         port: 22,
-        username: 'root',
+        username: 'emp-admin',
+        password: 'RV4RRLmgsCq3zSLe'
         // privateKey: require('fs').readFileSync('<pathToKeyFile>'),
         // passphrase: 'verySecretString' // option see ssh2 config
     }
   };
 
-  var tunnel = new Tunnel(config);
+  var tunnel = new sshTunnel(config);
   tunnel.connect(function (error) {
-    console.log(error);
+    console.log('error:', error);
     //or start your remote connection here ....
     //mongoose.connect(...);
     // TODO sync start here :)
 
+
     //close tunnel to exit script
     tunnel.close();
   });
-
+  */
 
 });
 
