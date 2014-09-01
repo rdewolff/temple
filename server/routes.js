@@ -1,17 +1,11 @@
 var express = require('express');
-
 var router = express.Router();
-
 var multiparty = require('multiparty');
 var fs = require('fs');
-
 // used to do some mongodb query like aggregate/group by
 var db = require('mongoskin').db(process.env.MONGO_URL);
-
 var sshTunnel = require('tunnel-ssh');
-
 var pg = require('pg');
-
 
 // get the collection passed in param and return the result in JSON
 router.get('/api/v1/:collection', function(req, res){
@@ -50,32 +44,86 @@ router.get('/api/v1/admin/fields', function(req, res, next) {
 // synchronizer
 router.get('/api/v1/admin/sync', function(req, res, next) {
 
-  console.log('synchronization start');
-
-  var model = req.getModel();
-
-  // DATABASE
-  /*
-  var conString = "postgres://emp-zetcom-55:wkw8BDcaJxzfTWCt@emp-sql-01.zetcom.ch:5432/emp-zetcom-55";
-
-  pg.connect(conString, function(err, client, done) {
-    if(err) {
-      return console.error('error fetching client from pool', err);
-    }
-    console.log('here');
-    client.query('SELECT $1::int AS number', ['1'], function(err, result) {
-      //call `done()` to release the client back to the pool
-      done();
-
-      if(err) {
-        return console.error('error running query', err);
-      }
-      console.log(result.rows[0].number);
-      //output: 1
-    });
-  });
-  */
+  console.log('*** sync start ***');
+  var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  console.log('date & ip:', Date(), ip);
   
+  // Query builder from the admin fields selection
+  var model = req.getModel();
+  var adminFields = model.query('adminFields', {});
+  var tableFieldsSrc = [];
+  var tableFieldsDest = [];
+  var queriesSql = [];
+
+  // Source DATABASE
+  var conString = "postgres://rdewolff@localhost:5432/rdewolff";
+
+  model.fetch(adminFields, function(err, next) {
+    if (err) next(err);
+    var adminFieldsData = adminFields.get();
+    console.log('adminFieldsData', adminFieldsData);
+    // create an array like where fields are groupped by table : 
+    // [ table : ['field1', 'field2'], table2: ['fieldA', 'fieldB'] ]
+    // example : 
+    // [ dom_obj: [ 'obj_title1_s', 'obj_id' ], dom_artist: [ 'art_namedetail_s', 'art_id' ] ]    
+    for (var i = adminFieldsData.length - 1; i >= 0; i--) {
+      // sources
+      if (tableFieldsSrc[adminFieldsData[i].sourceTable])
+        tableFieldsSrc[adminFieldsData[i].sourceTable] = tableFieldsSrc[adminFieldsData[i].sourceTable].concat(adminFieldsData[i].sourceField);
+      else
+        tableFieldsSrc[adminFieldsData[i].sourceTable] = [adminFieldsData[i].sourceField];
+      // destination 
+      if (tableFieldsDest[adminFieldsData[i].destinationCollection])
+        tableFieldsDest[adminFieldsData[i].destinationCollection] = tableFieldsDest[adminFieldsData[i].destinationCollection].concat(adminFieldsData[i].destinationField);
+      else
+        tableFieldsDest[adminFieldsData[i].destinationCollection] = [adminFieldsData[i].destinationField];
+    };
+    for (table in tableFieldsSrc) {
+      // source queries
+      queriesSql[table] = 'SELECT ' + tableFieldsSrc[table].join(', ') + ' FROM ' + table;
+      console.log(queriesSql[table]);
+    }
+    // debug
+    console.log('tableFieldsSrc', tableFieldsSrc);
+    console.log('tableFieldsDest', tableFieldsDest);
+    console.log(queriesSql);
+
+    // query the source database
+    pg.connect(conString, function(err, client, done) {
+      if (err) { 
+        return console.error('error fetching client from pool', err);
+      }
+
+      // get all the data from the sources
+      for (query in queriesSql) {
+
+        client.query(queriesSql[query], function(err, result) {
+          done(); //call `done()` to release the client back to the pool
+          if(err) {
+            return console.error('error running query', err);
+          }
+          // query results
+          // result is an object like this : 
+          // { fieldName: 'Value', fieldName2: 'Value2' }
+          console.log('Number of result : ', result.rows.length);
+          for (field in result.rows[0]) {
+            console.log(field);
+          }
+          console.log(result.rows[0]);
+          console.log(result.rows[0]);
+        });
+      }      
+    });
+
+  }); 
+
+  function getDestination(srcTable, srcField, adminFieldsDataResult) {
+
+    return adminFieldsDataResult
+
+  }
+
+
   // SSH TUNNEL
   /*
   var config = {
