@@ -58,7 +58,7 @@ module.exports = function(app, options) {
       model.set('_page.pagination.buttonsCount', 5);
 
       // FIXME: stored in the database and editable in the admin area
-      model.set('_page.filter', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}]);
+      model.set('_page.filter', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}, {content: 'Blue'}]);
       model.set('_page.order', [{content: 'Title'}]);
 
       page.render('collectionList');
