@@ -234,7 +234,7 @@ module.exports = function(app, options) {
   function adminSyncForm() {}
 
   adminSyncForm.prototype.sync = function() {
-    getXhrUrlToModel('/api/v1/admin/sync', '_page.sync', this.model);
+    getXhrUrlToModel('/api/v1/admin/sync', '_page.syncLog', this.model);
   }
 
   /*

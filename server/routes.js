@@ -88,6 +88,8 @@ router.get('/api/v1/admin/sync', function(req, res, next) {
     console.log('tableFieldsDest', tableFieldsDest);
     console.log(queriesSql);
 
+    var totalInsert = 0;
+    var data;
     // query the source database
     pg.connect(conString, function(err, client, done) {
       if (err) { 
@@ -95,24 +97,57 @@ router.get('/api/v1/admin/sync', function(req, res, next) {
       }
 
       // get all the data from the sources
-      for (query in queriesSql) {
+      for (table in queriesSql) {
+        console.log('table1', table);
+        function encapsulateQuery(table) {
+          client.query(queriesSql[table], function(err, result) {
 
-        client.query(queriesSql[query], function(err, result) {
-          done(); //call `done()` to release the client back to the pool
-          if(err) {
-            return console.error('error running query', err);
-          }
-          // query results
-          // result is an object like this : 
-          // { fieldName: 'Value', fieldName2: 'Value2' }
-          console.log('Number of result : ', result.rows.length);
-          for (field in result.rows[0]) {
-            console.log(field);
-          }
-          console.log(result.rows[0]);
-          console.log(result.rows[0]);
-        });
-      }      
+            done(); //call `done()` to release the client back to the pool
+            if(err) {
+              return console.error('error running query', err);
+            }
+            // query results
+            // result is an object like this : 
+            // { fieldName: 'Value', fieldName2: 'Value2' }
+            console.log('Number of result : ', result.rows.length);    
+            
+            for (var i = result.rows.length - 1; i >= 0; i--) {
+              data = {}; // reset the temp data holder
+              // debug
+              // console.log(i, result.rows[i], typeof result.rows[i]); // log all the data
+              
+              // normalize data as we cannot directly insert the object via result.rows[i] (TODO: understand why?)
+              for (field in result.rows[i]) {
+                data[field] = result.rows[i][field];
+              }
+              // debug
+              // console.log(i, data); // log all the data
+              console.log('table2', table);
+              // insert into mongodb via Derby model
+              console.log(i, table, data);
+              model.add(table, data); // TODO ain't working?!?! Need to make the fix visibile underneaths after loop!
+              console.log('table3', table);
+
+              totalInsert++;
+              
+            };
+          });
+          return true; // end of encapsulateQuery()
+        };
+        encapsulateQuery(table);
+      }
+
+      // FIXME: bug after the loop the data do not get inserted as long as we don't do another model.add()
+      //var id = model.add('artist2', {final: 'insert ' + Date()}); // THIS MAKE THE LOOP INSERT WORK!
+      // model.del('artist2.'+id); // deleting after insert does NOT work to fix the bug
+      //console.log('id', id);
+      for (table in queriesSql) {
+        model.add(table, {final: 'insert '+Date()});
+        totalInsert++;
+      }
+      console.log('totalInsert', totalInsert);
+      
+      res.json(totalInsert);
     });
 
   }); 
