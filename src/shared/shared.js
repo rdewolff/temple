@@ -14,11 +14,21 @@ module.exports = function(app, options) {
     	console.log('getValue()');
     	// return 'getValue();'
     }
-    
+
     // dynamic module system
+    app.get('/:module/:view/:options?*', function(page, model, params, next) {
+      var module = params.module;
+      var view = params.view;
+      var options = params.options;
+      console.dir(module, view, options);
+      console.dir(page);
+      return 0;
+    });
+
     app.get('/:module', function(page, model, params, next) {
 
       var module = params.module;
+      console.log('Dynamic route : ' + module);
 
       var query = model.query(module, {});
 
@@ -27,7 +37,7 @@ module.exports = function(app, options) {
           if (err) return next(err);
 
           query.ref('_page.' + module); // create _page name of the module name
-          // debug data 
+          // debug data
           // console.log(query.get());
           page.render(module);
 
@@ -61,6 +71,6 @@ module.exports = function(app, options) {
     // })(modules[i]); // block function remind data
     // };
 
-  	
+
 
 }
