@@ -67,8 +67,11 @@ app.use(require('./admin'));
 /**
  * Controller function
  */
-
 app.use(require('../shared/shared.js'));
+
+// that's where all the magic happens
+// centralized and easily updateable
+app.use(require('../temple'));
 
 app.proto.create = function(model) {
 
