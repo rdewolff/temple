@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 module.exports = function(app, options) {
 
     // TODO: move to component?
@@ -16,32 +18,54 @@ module.exports = function(app, options) {
     }
 
     // dynamic module system
-    app.get('/:module/:view/:options?*', function(page, model, params, next) {
+    /* app.get('/:module/:view/:options?*', function(page, model, params, next) {});
+    */
+    /**
+     * Module : define the data
+     */
+    app.get('/:module/:action?/:option?', function(page, model, params, next) {
+
+      // dynamic module name coming from URL
       var module = params.module;
-      var view = params.view;
-      var options = params.options;
-      console.dir(module, view, options);
-      console.dir(page);
-      return 0;
-    });
+      var action = params.action;
+      var option = params.option;
 
-    app.get('/:module', function(page, model, params, next) {
+      // debug
+      console.log('module:', module);
+      console.log('action:', action);
+      console.log('option:', option);
 
-      var module = params.module;
-      console.log('Dynamic route : ' + module);
-
-      var query = model.query(module, {});
-
+      if (action) {
+        switch (action) {
+        case 'view':
+          console.log('view');
+          break;
+        case 'list':
+          console.log('list');
+          break;
+        case 'search':
+          console.log('search');
+          break;
+        default:
+          console.log('invalid');
+        }
+      }
+      // check prerequisits
+      // check if the view exists for the dynamic module
+      if (fs.existsSync(__dirname + '/../../views/app/'+module+'.html')) {
+        // get the data from module
+        var query = model.query(module, {});
         model.subscribe(query, function done(err, next){
-
           if (err) return next(err);
-
-          query.ref('_page.' + module); // create _page name of the module name
-          // debug data
-          // console.log(query.get());
+          query.ref('_page.' + module);
+          // render the specific view
           page.render(module);
-
         });
+      } else {
+        // render the default view
+        page.render('default');
+      }
+
     });
 
     // app.proto.getModule = function(model) {
