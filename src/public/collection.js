@@ -41,7 +41,7 @@ module.exports = function(app, options) {
 
     query.$orderby[0][params.query.sort] = 1; // use the parameters for the order by
 
-    //debug 
+    //debug
     console.log(query);
 
     var collection = model.query('collection', query);
@@ -72,6 +72,30 @@ module.exports = function(app, options) {
     console.log('changeOrder (TODO: remove?) is called');
     app.history.push('/p/collection/new');
   }
+
+  // pages
+  CollectionListAction.prototype.pageChanged = function (pageNumber) {
+    var model = this.model;
+
+    var collectionObjectToSkip = (pageNumber-1) * model.get('_page.pagination.pageSize');
+
+    // FIXME: use the order by and filter choosed by the user.
+    var collectionQuery = model.query('collection', {
+      $or: [
+        {publish: 'Public'},
+        {publish: 'Highlight'}
+      ],
+      $orderby: [{}],
+      $limit: model.get('_page.pagination.pageSize'),
+      $skip: collectionObjectToSkip
+    });
+    console.log(model.get('_page.currentPage'));
+    model.subscribe(collectionQuery, function(err, next) {
+      // TODO: how to use model.ref() here after the main subscribtion done on load?!?
+      // model.del('_page.collection');
+      model.set('_page.collection', collectionQuery.get());
+    });
+  };
 
   app.get('/collection/:id', function(page, model, params, next) {
 
@@ -104,30 +128,5 @@ module.exports = function(app, options) {
       return Object.keys(ids);
     });
   });
-
-  // pages
-  CollectionListAction.prototype.pageChanged = function (pageNumber) {
-    var model = this.model;
-
-    var collectionObjectToSkip = (pageNumber-1) * model.get('_page.pagination.pageSize');
-
-    // FIXME: use the order by and filter choosed by the user.
-    var collectionQuery = model.query('collection', {
-      $or: [
-        {publish: 'Public'},
-        {publish: 'Highlight'}
-      ],
-      $orderby: [{}],
-      $limit: model.get('_page.pagination.pageSize'),
-      $skip: collectionObjectToSkip
-    });
-    console.log(model.get('_page.currentPage'));
-    model.subscribe(collectionQuery, function(err, next) {
-      // TODO: how to use model.ref() here after the main subscribtion done on load?!? 
-      // model.del('_page.collection');
-      model.set('_page.collection', collectionQuery.get());
-    });
-
-};
 
 }
