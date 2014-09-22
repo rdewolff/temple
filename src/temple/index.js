@@ -9,7 +9,6 @@ module.exports = function(app, options) {
     // required by the list view
     app.component(require('d-comp-palette/pager/pager'));
 
-
     // dynamic module system
     /* app.get('/:module/:view/:options?*', function(page, model, params, next) {});
     */
@@ -67,19 +66,47 @@ module.exports = function(app, options) {
 
     });
 
-    // FIXME: delete this and the used button (testing)
-    app.proto.test = function(model) {
-      console.log('CREATED '+Date());
+    app.proto.doFilter = function (filter) {
+      // debug
+      console.log('doFilter()');
+
+      this.model.set('_page.filter', filter);
+
+      // requery the data
+      this.reQuery();
+
     }
 
-    // pages
-    app.proto.pageChanged = function (pageNumber) {
+    app.proto.reQuery = function () {
       var model = this.model;
 
-      var collectionObjectToSkip = (pageNumber-1) * model.get('_page.pagination.pageSize');
+      console.log('reQuery()');
+      var filter = this.model.get('_page.filter');
 
+      var collectionQuery = model.query(module, {
+        $or: [
+          {}
+          //{publish: 'Public'},
+          //{publish: 'Highlight'}
+        ],
+        $orderby: [{}],
+        $limit: model.get('_page.pagination.pageSize'),
+        $skip: collectionObjectToSkip
+      });
+      model.subscribe(collectionQuery, function(err, next) {
+        // TODO: how to use model.ref() here after the main subscribtion done on load?!?
+        // model.del('_page.collection');
+        model.set('_page.'+module, collectionQuery.get());
+      });
+
+    }
+
+    // list pagination
+    app.proto.pageChanged = function (pageNumber) {
+      var model = this.model;
       var module = model.get('_page.module');
-      console.log('module:', module);
+
+      var collectionObjectToSkip = (pageNumber-1) * model.get('_page.pagination.pageSize');
 
       // FIXME: use the order by and filter choosed by the user.
       var collectionQuery = model.query(module, {
@@ -92,7 +119,6 @@ module.exports = function(app, options) {
         $limit: model.get('_page.pagination.pageSize'),
         $skip: collectionObjectToSkip
       });
-      console.log(model.get('_page.currentPage'));
       model.subscribe(collectionQuery, function(err, next) {
         // TODO: how to use model.ref() here after the main subscribtion done on load?!?
         // model.del('_page.collection');

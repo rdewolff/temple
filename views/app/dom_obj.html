@@ -1,17 +1,46 @@
 <index:>
   <h1>dom_obj</h1>
 
-  <br />
+  <div class="row">
 
-  <view name="testlist"></view>
+    <div class="btn-group col-sm-6">
+      <a href="#" class='btn btn-default disabled'>Filter :</a>
+      <a href="#" class='btn btn-default' on-click="doFilter({obj_dating_s: 2008})">2008</a>
+    </div>
 
-  <button on-click="test()">Test</button><br />
+    <!-- filter -->
+    <!-- TODO: make dynamic -->
+    <div class="btn-group col-sm-6">
+      <a href="#" class='btn btn-default disabled'>Filter :</a>
+      <view name="filter-link" href="#">All</view>
+      <view name="filter-link" href="?obj_dating_s=2008">2008</view>
+      <view name="filter-link" href="?obj_dating_s=2011">2011</view>
+      <view name="filter-link" href="?obj_dating_s=2012">2012</view>
+    </div>
+
+    <!-- sorting -->
+    <div class="btn-group col-sm-6">
+      <a href="#" class='btn btn-default disabled'>Sorty by :</a>
+      <view name="filter-link" href="/">No</view>
+      <view name="filter-link" href="?sort=obj_title1_s">Title</view>
+      <view name="filter-link" href="?sort=obj_dating_s">Dating</view>
+      <view name="filter-link" href="?sort=obj_material_s">Material</view>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <b>obj_id - obj_title1_s - obj_dating_s - obj_material_s</b>
+    </div>
+  </div>
 
   {{each _page.dom_obj}}
-  	{{this.obj_title1_s}} - {{this.obj_id}}<br />
+  	{{this.obj_id}} - {{this.obj_title1_s}} - {{this.obj_dating_s}} - {{this.obj_material_s}}<br />
   {{/}}
 
   <pager pageSize="{{_page.pagination.pageSize}}" total="{{_page.pagination.collectionCount}}" buttonsCount="{{_page.pagination.buttonsCount}}" on-pageChanged="pageChanged()" />
 
-<testlist:>
-  List view<br />
+
+<filter-link:>
+  <a href="{{@href}}" class='btn btn-default {{if $render.url === @href}}active{{/}}'>{{@content}}</a>
