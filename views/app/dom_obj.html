@@ -1,6 +1,17 @@
 <index:>
   <h1>dom_obj</h1>
 
+  <br />
+
+  <view name="testlist"></view>
+
+  <button on-click="test()">Test</button><br />
+
   {{each _page.dom_obj}}
   	{{this.obj_title1_s}} - {{this.obj_id}}<br />
   {{/}}
+
+  <pager pageSize="{{_page.pagination.pageSize}}" total="{{_page.pagination.collectionCount}}" buttonsCount="{{_page.pagination.buttonsCount}}" on-pageChanged="pageChanged()" />
+
+<testlist:>
+  List view<br />

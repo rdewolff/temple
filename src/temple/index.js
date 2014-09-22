@@ -2,40 +2,52 @@ var fs = require('fs');
 // var view = require('view.list');
 // app.use();
 var detail = require('./detail');
+var list = require('./list');
 
 module.exports = function(app, options) {
+
+    // required by the list view
+    app.component(require('d-comp-palette/pager/pager'));
+
 
     // dynamic module system
     /* app.get('/:module/:view/:options?*', function(page, model, params, next) {});
     */
-    app.get('/:module/:action?/:option?', function(page, model, params, next) {
+    // TODO : dev in progress - disabled
+    //app.get('/:module/:action?/:option?', function(page, model, params, next) {
+    app.get('/t/:module/:action?/:option?', function(page, model, params, next) {
 
       // dynamic module name coming from URL
       var module = params.module;
       var action = params.action;
       var option = params.option;
+      var query  = params.query; // URL query, &amp=2234&var=data etc...
 
       // debug
       console.log('module:', module);
       console.log('action:', action);
       console.log('option:', option);
 
-      if (action) {
-        switch (action) {
-        case 'detail':
-          console.log('detail');
-          detail(model);
-          break;
-        case 'list':
-          console.log('list');
-          break;
-        case 'search':
-          console.log('search');
-          break;
-        default:
-          console.log('invalid');
-        }
+      // determine action and take appropriate action
+      switch (action) {
+      case 'detail':
+        console.log('detail');
+        detail(model, page, module, option, next);
+        break;
+      case 'list':
+        console.log('list');
+        list(model, page, module, option, query, next);
+        break;
+      case 'search':
+        console.log('search');
+        break;
+      default:
+        console.log('action invalid');
       }
+
+      return;
+
+      // FIXME : DATA GET RENDERED BEFORE
       // check prerequisits
       // check if the view exists for the dynamic module
       if (fs.existsSync(__dirname + '/../../views/app/'+module+'.html')) {
@@ -45,6 +57,7 @@ module.exports = function(app, options) {
           if (err) return next(err);
           query.ref('_page.' + module);
           // render the specific view
+          console.log('render 152');
           page.render(module);
         });
       } else {
@@ -54,6 +67,38 @@ module.exports = function(app, options) {
 
     });
 
+    // FIXME: delete this and the used button (testing)
+    app.proto.test = function(model) {
+      console.log('CREATED '+Date());
+    }
+
+    // pages
+    app.proto.pageChanged = function (pageNumber) {
+      var model = this.model;
+
+      var collectionObjectToSkip = (pageNumber-1) * model.get('_page.pagination.pageSize');
+
+      var module = model.get('_page.module');
+      console.log('module:', module);
+
+      // FIXME: use the order by and filter choosed by the user.
+      var collectionQuery = model.query(module, {
+        $or: [
+          {}
+          //{publish: 'Public'},
+          //{publish: 'Highlight'}
+        ],
+        $orderby: [{}],
+        $limit: model.get('_page.pagination.pageSize'),
+        $skip: collectionObjectToSkip
+      });
+      console.log(model.get('_page.currentPage'));
+      model.subscribe(collectionQuery, function(err, next) {
+        // TODO: how to use model.ref() here after the main subscribtion done on load?!?
+        // model.del('_page.collection');
+        model.set('_page.'+module, collectionQuery.get());
+      });
+    };
 
     // app.proto.getModule = function(model) {
     //   // TODO: this should come from the database

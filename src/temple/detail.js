@@ -1,5 +1,5 @@
 
-module.exports = function(model, module, option) {
+module.exports = function(model, page, module, option, next) {
 
   console.log('***** called me!');
 
