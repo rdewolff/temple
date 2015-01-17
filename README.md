@@ -96,6 +96,10 @@ Cf. specification document [https://docs.google.com/document/d/1LaTlhE7MRqVQabxx
 
 ## Mongodb
 
+### Chambook startup
+
+```mongod --dbpath /Users/rdewolff/Data/mongodb```
+
 ### Backup
 
 Backup the wanted database in specific directory :
