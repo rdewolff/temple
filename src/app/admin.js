@@ -24,6 +24,7 @@ module.exports = function(app, options) {
       if (!adminProperties.get().length) {
         model.add('adminProperties', {name: 'CustomerName', value: 'zetcom'});
         model.add('adminProperties', {name: 'URL', value: 'http://'});
+        model.add('adminProperties', {name: 'Languages', value: 'EN, FR, DE, ES'});
       }
       model.ref('_page.adminProperties', adminProperties);
       page.render('adminProperties');
