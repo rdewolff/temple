@@ -6,6 +6,67 @@ var fs = require('fs');
 var db = require('mongoskin').db(process.env.MONGO_URL);
 var sshTunnel = require('tunnel-ssh');
 var pg = require('pg');
+var fake = require('Faker');
+
+router.get('/fakeArtist', function(req, res) {
+  var model = req.getModel();
+  for (var i = 0; i < 1000; i++) {
+    model.add('artist', {
+      "firstname" : fake.Name.firstName(),
+      "lastname" : fake.Name.lastName(),
+      "birthday" : fake.Date.past(150).substr(0, 10),
+      "deathday" : fake.Date.past(80).substr(0, 10),
+      "birthcountry" : fake.Address.ukCountry(),
+      "deathcountry" : fake.Address.ukCountry(),
+      "birthplace" : fake.Address.city(),
+      "deathplace" : fake.Address.city(),
+      "address" : fake.Address.streetName(),
+      "domain" : "Red",
+      "gender" : "Male"
+      });
+  }
+  res.json({
+    status :'done'
+  });
+});
+
+router.get('/fakeObject', function(req, res) {
+
+  function makeId() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for( var i=0; i < 3; i++ )
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    text += '-'
+    possible = "0123456789";
+    for( var i=0; i < 4; i++ )
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+  }
+
+  var model = req.getModel();
+  for (var i = 0; i < 1000; i++) {
+    model.add('collection', {
+      "accessionNr" : makeId(), // "ABC-1234",
+      "domain" : "Purple",
+      "publish" : "Public",
+      "systematics" : "test",
+      "title" : fake.Lorem.words().join(' '),
+      "yearFrom" : fake.Date.past(150).substr(0, 4),
+      "yearTo" : fake.Date.past(150).substr(0, 4),
+      "period" : "AD",
+      "description" : fake.Lorem.sentence(),
+      "materialTechnique" : "Paper",
+      "creditLine" : fake.Lorem.sentence(),
+      "notes" : fake.Lorem.sentence(),
+      "location" : fake.Address.usState() + ", USA",
+
+      });
+  }
+  res.json({
+    status :'done'
+  });
+});
 
 // get the collection passed in param and return the result in JSON
 router.get('/api/v1/:collection', function(req, res){
@@ -47,7 +108,7 @@ router.get('/api/v1/admin/sync', function(req, res, next) {
   console.log('*** sync start ***');
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
   console.log('date & ip:', Date(), ip);
-  
+
   // Query builder from the admin fields selection
   var model = req.getModel();
   var adminFields = model.query('adminFields', {});
@@ -62,17 +123,17 @@ router.get('/api/v1/admin/sync', function(req, res, next) {
     if (err) next(err);
     var adminFieldsData = adminFields.get();
     console.log('adminFieldsData', adminFieldsData);
-    // create an array like where fields are groupped by table : 
+    // create an array like where fields are groupped by table :
     // [ table : ['field1', 'field2'], table2: ['fieldA', 'fieldB'] ]
-    // example : 
-    // [ dom_obj: [ 'obj_title1_s', 'obj_id' ], dom_artist: [ 'art_namedetail_s', 'art_id' ] ]    
+    // example :
+    // [ dom_obj: [ 'obj_title1_s', 'obj_id' ], dom_artist: [ 'art_namedetail_s', 'art_id' ] ]
     for (var i = adminFieldsData.length - 1; i >= 0; i--) {
       // sources
       if (tableFieldsSrc[adminFieldsData[i].sourceTable])
         tableFieldsSrc[adminFieldsData[i].sourceTable] = tableFieldsSrc[adminFieldsData[i].sourceTable].concat(adminFieldsData[i].sourceField);
       else
         tableFieldsSrc[adminFieldsData[i].sourceTable] = [adminFieldsData[i].sourceField];
-      // destination 
+      // destination
       if (tableFieldsDest[adminFieldsData[i].destinationCollection])
         tableFieldsDest[adminFieldsData[i].destinationCollection] = tableFieldsDest[adminFieldsData[i].destinationCollection].concat(adminFieldsData[i].destinationField);
       else
@@ -92,7 +153,7 @@ router.get('/api/v1/admin/sync', function(req, res, next) {
     var data;
     // query the source database
     pg.connect(conString, function(err, client, done) {
-      if (err) { 
+      if (err) {
         return console.error('error fetching client from pool', err);
       }
 
@@ -107,15 +168,15 @@ router.get('/api/v1/admin/sync', function(req, res, next) {
               return console.error('error running query', err);
             }
             // query results
-            // result is an object like this : 
+            // result is an object like this :
             // { fieldName: 'Value', fieldName2: 'Value2' }
-            console.log('Number of result : ', result.rows.length);    
-            
+            console.log('Number of result : ', result.rows.length);
+
             for (var i = result.rows.length - 1; i >= 0; i--) {
               data = {}; // reset the temp data holder
               // debug
               // console.log(i, result.rows[i], typeof result.rows[i]); // log all the data
-              
+
               // normalize data as we cannot directly insert the object via result.rows[i] (TODO: understand why?)
               for (field in result.rows[i]) {
                 data[field] = result.rows[i][field];
@@ -129,7 +190,7 @@ router.get('/api/v1/admin/sync', function(req, res, next) {
               console.log('table3', table);
 
               totalInsert++;
-              
+
             };
           });
           return true; // end of encapsulateQuery()
@@ -146,11 +207,11 @@ router.get('/api/v1/admin/sync', function(req, res, next) {
         totalInsert++;
       }
       console.log('totalInsert', totalInsert);
-      
+
       res.json(totalInsert);
     });
 
-  }); 
+  });
 
   function getDestination(srcTable, srcField, adminFieldsDataResult) {
 
