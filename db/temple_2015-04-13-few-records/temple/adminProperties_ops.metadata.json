@@ -1,0 +1,1 @@
+{ "indexes" : [ { "v" : 1, "key" : { "_id" : 1 }, "name" : "_id_", "ns" : "temple.adminProperties_ops" }, { "v" : 1, "unique" : true, "key" : { "name" : 1, "v" : 1 }, "name" : "name_1_v_1", "ns" : "temple.adminProperties_ops" } ] }
