@@ -111,8 +111,10 @@ mongodump -d <our database name> -o <directory_backup>
 
 Restore the backed up database from specific directory :
 ```
-mongorestore <our database name>
+mongorestore <our database directory> --drop
 ```
+
+Note: the ```--drop``` option will empty the database first.
 
 ### Via JSON files
 
