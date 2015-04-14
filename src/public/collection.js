@@ -8,7 +8,8 @@ module.exports = function(app, options) {
 
   app.get('/collection', function(page, model, params, next) {
 
-    var limitPerPage = 5;
+    var limitPerPage = 25;
+    var limitButtons = 10;
 
     // count the number of object for pagination
     var collectionCount = model.query('collection', {
@@ -55,7 +56,7 @@ module.exports = function(app, options) {
       console.dir(collectionCount.get());
       collectionCount.refExtra('_page.pagination.collectionCount');
       model.set('_page.pagination.pageSize', limitPerPage);
-      model.set('_page.pagination.buttonsCount', 5);
+      model.set('_page.pagination.buttonsCount', limitButtons);
 
       // FIXME: stored in the database and editable in the admin area
       model.set('_page.filter', [{content: 'Red'}, {content: 'Orange'}, {content: 'Purple'}, {content: 'Blue'}]);
