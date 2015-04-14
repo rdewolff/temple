@@ -10,7 +10,7 @@ var fake = require('Faker');
 
 router.get('/fakeArtist', function(req, res) {
   var model = req.getModel();
-  for (var i = 0; i < 1000; i++) {
+  for (var i = 0; i < 5; i++) {
     model.add('artist', {
       "firstname" : fake.Name.firstName(),
       "lastname" : fake.Name.lastName(),
@@ -45,7 +45,7 @@ router.get('/fakeObject', function(req, res) {
   }
 
   var model = req.getModel();
-  for (var i = 0; i < 1000; i++) {
+  for (var i = 0; i < 10; i++) {
     model.add('collection', {
       "accessionNr" : makeId(), // "ABC-1234",
       "domain" : "Purple",
